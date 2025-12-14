@@ -174,10 +174,10 @@ export default function PrivacyPolicyPage() {
           </p>
           <p className="leading-relaxed">
             <a
-              href="/contact"
+              href="mailto:questions@steadyspend.com"
               className="text-emerald-700 hover:text-emerald-800 underline"
             >
-              Visit our contact page
+              questions@steadyspend.com
             </a>
           </p>
         </section>

@@ -227,7 +227,10 @@ export default function CookiePolicyPage() {
           <h2>Contact</h2>
           <p>
             If you have questions about this Cookie Policy, please{' '}
-            <a href="/contact">contact us</a>.
+            <a href="mailto:questions@steadyspend.com" className="text-emerald-700 hover:text-emerald-800 underline">
+              questions@steadyspend.com
+            </a>
+            .
           </p>
         </section>
       </div>

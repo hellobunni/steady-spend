@@ -168,9 +168,9 @@ export default function DisclaimerPage() {
           <h2 className="text-2xl font-semibold text-gray-900 mb-3">Contact</h2>
           <p className="leading-relaxed">
             If you have questions about this Disclaimer, please{' '}
-            <Link href="/contact" className="text-emerald-600 hover:text-emerald-700 underline">
-              contact us
-            </Link>
+            <a href="mailto:questions@steadyspend.com" className="text-emerald-600 hover:text-emerald-700 underline">
+              questions@steadyspend.com
+            </a>
             .
           </p>
         </section>
