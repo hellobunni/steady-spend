@@ -1,10 +1,8 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Update this with your actual domain when you have it
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com'
 
-  // Static pages
   const routes = [
     '',
     '/tools',
@@ -14,12 +12,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/privacy-policy',
     '/cookie-policy',
     '/disclaimer',
-  ].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: route === '' ? 1.0 : route === '/tools/monthly-budget' ? 0.9 : 0.7,
-  }))
+  ].map((route) => {
+    let priority = 0.7
+
+    if (route === '/tools/monthly-budget') {
+      priority = 1.0
+    } else if (route === '') {
+      priority = 0.8
+    } else if (
+      route === '/privacy-policy' ||
+      route === '/cookie-policy' ||
+      route === '/disclaimer'
+    ) {
+      priority = 0.3
+    }
+
+    return {
+      url: `${baseUrl}${route}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority,
+    }
+  })
 
   return routes
 }
