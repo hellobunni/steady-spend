@@ -65,6 +65,25 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/blog/tracking-spending',
+        destination: '/blog/how-to-track-your-spending',
+        permanent: true,
+      },
+      {
+        source: '/blog/budget-mistakes',
+        destination: '/blog/common-budget-mistakes',
+        permanent: true,
+      },
+      {
+        source: '/blog/50-30-20-rule',
+        destination: '/blog/50-30-20-budget-rule',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
