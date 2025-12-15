@@ -7,6 +7,7 @@ import { getBlogPostSlugs } from '@/lib/blog/getBlogPosts';
 import { getRelatedPosts } from '@/lib/blog/getRelatedPosts';
 import BlogPostMeta from '@/components/blog/BlogPostMeta';
 import RelatedPosts from '@/components/blog/RelatedPosts';
+import Breadcrumbs from '@/components/layout/Breadcrumbs';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -29,13 +30,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com';
+  const canonicalUrl = `${baseUrl}/blog/${slug}`;
+
   return {
     title: `${post.title} | SteadySpend Blog`,
     description: post.description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: post.title,
       description: post.description,
       type: 'article',
+      url: canonicalUrl,
       publishedTime: post.date,
       modifiedTime: post.lastModified || post.date,
       images: post.featuredImage ? [post.featuredImage] : [],
@@ -67,6 +75,13 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <article className="py-8 sm:py-10 lg:py-12">
       <div className="mx-auto max-w-4xl px-2 sm:px-4">
+        {/* Breadcrumbs */}
+        <Breadcrumbs
+          items={[
+            { label: 'Blog', href: '/blog' },
+            { label: post.title, href: `/blog/${slug}` },
+          ]}
+        />
         {/* Header */}
         <header className="mb-8">
           <div className="mb-4 inline-flex rounded-full bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-800">

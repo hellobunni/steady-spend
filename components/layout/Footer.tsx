@@ -6,8 +6,17 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col items-center gap-4">
           <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+            <Link href="/" className="text-gray-600 hover:text-emerald-600 transition-colors">
+              Home
+            </Link>
             <Link href="/tools" className="text-gray-600 hover:text-emerald-600 transition-colors">
               Tools
+            </Link>
+            <Link href="/blog" className="text-gray-600 hover:text-emerald-600 transition-colors">
+              Blog
+            </Link>
+            <Link href="/guides" className="text-gray-600 hover:text-emerald-600 transition-colors">
+              Guides
             </Link>
             <Link href="/privacy-policy" className="text-gray-600 hover:text-emerald-600 transition-colors">
               Privacy
