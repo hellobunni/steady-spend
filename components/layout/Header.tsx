@@ -21,8 +21,8 @@ export default function Header() {
             <Image
               alt="Steady Spend"
               src="/logo-vertical.png"
-              className="object-cover h-20 w-auto"
-              width={150}
+              className="object-cover h-12 w-auto"
+              width={180}
               height={20}
               priority
             />
