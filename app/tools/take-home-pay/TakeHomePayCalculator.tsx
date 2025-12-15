@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -20,6 +21,7 @@ import {
   ChevronUp,
   TrendingDown,
 } from 'lucide-react'
+import { Tooltip } from '@/components/ui/tooltip'
 import {
   calculateTakeHomePay,
   STATE_TAX_RATES,
@@ -118,8 +120,9 @@ export default function TakeHomePayCalculator() {
         <CardContent className="space-y-4">
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                 Gross Income
+                <Tooltip content="Your total income before any taxes or deductions are taken out. This is your salary or wages before anything is withheld." />
               </label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
@@ -136,8 +139,9 @@ export default function TakeHomePayCalculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                 Pay Period
+                <Tooltip content="How often you get paid. Select yearly if you know your annual salary, monthly for monthly paychecks, or bi-weekly if you're paid every two weeks." />
               </label>
               <Select
                 value={inputs.payPeriod}
@@ -159,8 +163,9 @@ export default function TakeHomePayCalculator() {
 
           <div className="grid md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                 Filing Status
+                <Tooltip content="Your tax filing status affects your tax brackets and standard deduction. Single is for unmarried individuals, Married is for married couples filing jointly." />
               </label>
               <Select
                 value={inputs.filingStatus}
@@ -182,8 +187,9 @@ export default function TakeHomePayCalculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                 State
+                <Tooltip content="The state where you work and pay taxes. State income tax rates vary, and some states (like Florida, Texas, and Nevada) don't have state income tax." />
               </label>
               <Select
                 value={inputs.state}
@@ -205,8 +211,9 @@ export default function TakeHomePayCalculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                 Dependents
+                <Tooltip content="The number of qualifying children or dependents you claim on your tax return. Each dependent can reduce your tax liability through the child tax credit." />
               </label>
               <Input
                 type="number"
@@ -229,9 +236,10 @@ export default function TakeHomePayCalculator() {
               />
               <label
                 htmlFor="social-security"
-                className="text-sm text-gray-700 cursor-pointer"
+                className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer"
               >
                 Include Social Security Tax (6.2%)
+                <Tooltip content="Social Security tax is 6.2% of your income up to $168,600 (2025 limit). Most employees pay this, but some government workers and certain other groups are exempt." />
               </label>
             </div>
             <div className="flex items-center gap-3">
@@ -244,9 +252,10 @@ export default function TakeHomePayCalculator() {
               />
               <label
                 htmlFor="medicare"
-                className="text-sm text-gray-700 cursor-pointer"
+                className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer"
               >
                 Include Medicare Tax (1.45% + 0.9% over $200k)
+                <Tooltip content="Medicare tax is 1.45% of all your income. If you earn over $200,000 (single) or $250,000 (married), you pay an additional 0.9% on income above that threshold." />
               </label>
             </div>
           </div>
@@ -261,20 +270,34 @@ export default function TakeHomePayCalculator() {
         >
           <div className="flex items-center justify-between">
             <CardTitle>Pre-Tax Deductions</CardTitle>
-            {expandedSections.preTax ? (
-              <ChevronUp className="w-5 h-5 text-gray-500" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-gray-500" />
-            )}
+            <motion.div
+              animate={{ rotate: expandedSections.preTax ? 180 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {expandedSections.preTax ? (
+                <ChevronUp className="w-5 h-5 text-gray-500" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-gray-500" />
+              )}
+            </motion.div>
           </div>
           <p className="text-sm text-gray-600 mt-1">Reduce your taxable income</p>
         </CardHeader>
-        {expandedSections.preTax && (
-          <CardContent className="space-y-4">
+        <AnimatePresence>
+          {expandedSections.preTax && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              style={{ overflow: 'hidden' }}
+            >
+              <CardContent className="space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                   401(k) / 403(b) Contribution
+                  <Tooltip content="The amount you contribute to your retirement account each pay period. This reduces your taxable income, so you pay less in taxes now. Enter the amount per pay period (not annual)." />
                 </label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
@@ -293,8 +316,9 @@ export default function TakeHomePayCalculator() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                   HSA / FSA Contribution
+                  <Tooltip content="Health Savings Account (HSA) or Flexible Spending Account (FSA) contributions. These are pre-tax deductions used for medical expenses. Enter the amount per pay period." />
                 </label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
@@ -314,8 +338,9 @@ export default function TakeHomePayCalculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                 Pre-Tax Health Insurance Premium
+                <Tooltip content="Health insurance premiums that are deducted from your paycheck before taxes. This reduces your taxable income. Enter the amount per pay period." />
               </label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
@@ -332,8 +357,10 @@ export default function TakeHomePayCalculator() {
                 />
               </div>
             </div>
-          </CardContent>
-        )}
+              </CardContent>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Card>
 
       {/* Post-Tax Deductions */}
@@ -344,20 +371,34 @@ export default function TakeHomePayCalculator() {
         >
           <div className="flex items-center justify-between">
             <CardTitle>Post-Tax Deductions</CardTitle>
-            {expandedSections.postTax ? (
-              <ChevronUp className="w-5 h-5 text-gray-500" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-gray-500" />
-            )}
+            <motion.div
+              animate={{ rotate: expandedSections.postTax ? 180 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {expandedSections.postTax ? (
+                <ChevronUp className="w-5 h-5 text-gray-500" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-gray-500" />
+              )}
+            </motion.div>
           </div>
           <p className="text-sm text-gray-600 mt-1">Deductions after taxes</p>
         </CardHeader>
-        {expandedSections.postTax && (
-          <CardContent className="space-y-4">
+        <AnimatePresence>
+          {expandedSections.postTax && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              style={{ overflow: 'hidden' }}
+            >
+              <CardContent className="space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                   Post-Tax Health/Dental/Vision
+                  <Tooltip content="Health, dental, or vision insurance premiums that are deducted after taxes are calculated. These don't reduce your taxable income. Enter the amount per pay period." />
                 </label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
@@ -376,8 +417,9 @@ export default function TakeHomePayCalculator() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                   Life/Disability Insurance
+                  <Tooltip content="Life insurance or disability insurance premiums deducted from your paycheck. These are typically post-tax deductions. Enter the amount per pay period." />
                 </label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
@@ -397,8 +439,9 @@ export default function TakeHomePayCalculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                 Other Deductions (Union Dues, Garnishments, etc.)
+                <Tooltip content="Any other deductions from your paycheck, like union dues, wage garnishments, or other post-tax deductions. Enter the total amount per pay period." />
               </label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
@@ -415,8 +458,10 @@ export default function TakeHomePayCalculator() {
                 />
               </div>
             </div>
-          </CardContent>
-        )}
+              </CardContent>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Card>
 
       {/* Advanced Settings */}
@@ -427,18 +472,32 @@ export default function TakeHomePayCalculator() {
         >
           <div className="flex items-center justify-between">
             <CardTitle>Advanced Settings</CardTitle>
-            {expandedSections.advanced ? (
-              <ChevronUp className="w-5 h-5 text-gray-500" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-gray-500" />
-            )}
+            <motion.div
+              animate={{ rotate: expandedSections.advanced ? 180 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {expandedSections.advanced ? (
+                <ChevronUp className="w-5 h-5 text-gray-500" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-gray-500" />
+              )}
+            </motion.div>
           </div>
         </CardHeader>
-        {expandedSections.advanced && (
-          <CardContent className="space-y-4">
+        <AnimatePresence>
+          {expandedSections.advanced && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              style={{ overflow: 'hidden' }}
+            >
+              <CardContent className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                 Additional Withholding per Period
+                <Tooltip content="Extra federal tax you want withheld from each paycheck. You might do this if you expect to owe taxes at the end of the year or want a larger refund. Enter the amount per pay period." />
               </label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
@@ -467,30 +526,44 @@ export default function TakeHomePayCalculator() {
                 />
                 <label
                   htmlFor="local-tax"
-                  className="text-sm text-gray-700 cursor-pointer"
+                  className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer"
                 >
                   I pay local/city income tax
+                  <Tooltip content="Some cities and local jurisdictions charge income tax in addition to state and federal taxes. Check your pay stub or local tax office to see if this applies to you." />
                 </label>
               </div>
 
-              {inputs.hasLocalTax && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Local Tax Rate (%)
-                  </label>
-                  <Input
-                    type="text"
-                    value={inputs.localTaxRate}
-                    onChange={(e) =>
-                      handleNumberInput('localTaxRate', e.target.value)
-                    }
-                    placeholder="2.5"
-                  />
-                </div>
-              )}
+              <AnimatePresence>
+                {inputs.hasLocalTax && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ overflow: 'hidden' }}
+                  >
+                    <div>
+                      <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                        Local Tax Rate (%)
+                        <Tooltip content="The percentage rate for your local or city income tax. This is usually a flat percentage of your taxable income. You can find this on your pay stub or by contacting your local tax office." />
+                      </label>
+                      <Input
+                        type="text"
+                        value={inputs.localTaxRate}
+                        onChange={(e) =>
+                          handleNumberInput('localTaxRate', e.target.value)
+                        }
+                        placeholder="2.5"
+                      />
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-          </CardContent>
-        )}
+              </CardContent>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Card>
 
       {/* Action Buttons */}
@@ -519,8 +592,15 @@ export default function TakeHomePayCalculator() {
       </div>
 
       {/* Results Section */}
-      {showResults && results && results.annualGross > 0 && (
-        <div className="space-y-6 pt-6 border-t border-gray-200">
+      <AnimatePresence>
+        {showResults && results && results.annualGross > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="space-y-6 pt-6 border-t border-gray-200"
+          >
           <div className="flex items-center gap-3 mb-2">
             <div className="h-px flex-1 bg-gray-200" />
             <h2 className="text-xl font-semibold text-gray-900">
@@ -556,8 +636,13 @@ export default function TakeHomePayCalculator() {
           </div>
 
           {/* Main Results */}
-          <Card className="bg-emerald-50 border-emerald-200">
-            <CardContent className="p-6">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
+          >
+            <Card className="bg-emerald-50 border-emerald-200">
+              <CardContent className="p-6">
               <div className="text-center">
                 <p className="text-sm text-gray-600 mb-2">
                   {viewMode === 'annual'
@@ -612,12 +697,18 @@ export default function TakeHomePayCalculator() {
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </motion.div>
 
           {/* Detailed Breakdown */}
-          <Card>
-            <CardContent className="p-6">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
+          >
+            <Card>
+              <CardContent className="p-6">
               <div className="flex items-center gap-2 mb-4">
                 <TrendingDown className="w-5 h-5 text-gray-600" />
                 <h3 className="text-lg font-semibold text-gray-900">
@@ -782,10 +873,12 @@ export default function TakeHomePayCalculator() {
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
+              </CardContent>
+            </Card>
+          </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

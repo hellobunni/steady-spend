@@ -7,8 +7,8 @@ import { useState, useRef, useEffect } from 'react'
 import { ChevronDown } from 'lucide-react'
 
 const navItems = [
+  { name: 'Home', path: '/' },
   { name: 'Blog', path: '/blog' },
-  { name: 'Contact', path: '/contact' },
 ]
 
 const tools = [
@@ -18,7 +18,7 @@ const tools = [
   },
   {
     name: 'Take Home Pay Calculator',
-    path: '/tools/take-home-pay-calculator',
+    path: '/tools/take-home-pay',
   },
   // Add more tools here as they're created
 ]
@@ -26,18 +26,13 @@ const tools = [
 export default function Header() {
   const pathname = usePathname()
   const [isToolsOpen, setIsToolsOpen] = useState(false)
-  const [focusedIndex, setFocusedIndex] = useState(-1)
   const toolsRef = useRef<HTMLDivElement>(null)
-  const buttonRef = useRef<HTMLAnchorElement>(null)
-  const menuRef = useRef<HTMLDivElement>(null)
-  const menuItemRefs = useRef<(HTMLAnchorElement | null)[]>([])
 
   // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (toolsRef.current && !toolsRef.current.contains(event.target as Node)) {
         setIsToolsOpen(false)
-        setFocusedIndex(-1)
       }
     }
 
@@ -47,96 +42,17 @@ export default function Header() {
     }
   }, [])
 
-  // Keyboard navigation for dropdown
-  useEffect(() => {
-    if (!isToolsOpen) return
-
-    function handleKeyDown(event: KeyboardEvent) {
-      if (!isToolsOpen) return
-
-      const toolsCount = tools.length
-
-      switch (event.key) {
-        case 'Escape':
-          event.preventDefault()
-          setIsToolsOpen(false)
-          setFocusedIndex(-1)
-          buttonRef.current?.focus()
-          break
-
-        case 'ArrowDown':
-          event.preventDefault()
-          setFocusedIndex((prev) => {
-            const next = prev < toolsCount - 1 ? prev + 1 : 0
-            menuItemRefs.current[next]?.focus()
-            return next
-          })
-          break
-
-        case 'ArrowUp':
-          event.preventDefault()
-          setFocusedIndex((prev) => {
-            const next = prev > 0 ? prev - 1 : toolsCount - 1
-            menuItemRefs.current[next]?.focus()
-            return next
-          })
-          break
-
-        case 'Home':
-          event.preventDefault()
-          setFocusedIndex(0)
-          menuItemRefs.current[0]?.focus()
-          break
-
-        case 'End':
-          event.preventDefault()
-          const lastIndex = toolsCount - 1
-          setFocusedIndex(lastIndex)
-          menuItemRefs.current[lastIndex]?.focus()
-          break
-
-        case 'Tab':
-          // Allow Tab to work normally, but close dropdown
-          setIsToolsOpen(false)
-          setFocusedIndex(-1)
-          break
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown)
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [isToolsOpen])
-
-  // Focus first item when menu opens
-  useEffect(() => {
-    if (isToolsOpen && menuItemRefs.current[0]) {
-      // Small delay to ensure menu is rendered
-      setTimeout(() => {
-        menuItemRefs.current[0]?.focus()
-        setFocusedIndex(0)
-      }, 0)
-    }
-  }, [isToolsOpen])
-
   // Check if current path is a tool
   const isToolsActive = pathname.startsWith('/tools')
-
-  const menuId = 'tools-menu'
 
   return (
     <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link 
-            href="/" 
-            className="flex items-center gap-2 hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded"
-            aria-label="SteadySpend Home"
-          >
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <Image
-              alt="SteadySpend Logo"
+              alt="Steady Spend"
               src="/logo-vertical.png"
               className="object-cover h-12 w-auto"
               width={180}
@@ -146,7 +62,24 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav aria-label="Main navigation" className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => {
+              const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(item.path))
+              return (
+                <Link
+                  key={item.path}
+                  href={item.path}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'bg-emerald-100 text-emerald-700'
+                      : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              )
+            })}
+
             {/* Tools Dropdown */}
             <div
               ref={toolsRef}
@@ -154,106 +87,50 @@ export default function Header() {
               onMouseEnter={() => setIsToolsOpen(true)}
               onMouseLeave={() => setIsToolsOpen(false)}
             >
-              <Link
-                ref={buttonRef}
-                href="/tools"
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 ${
+              <button
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1 ${
                   isToolsActive
                     ? 'bg-emerald-100 text-emerald-700'
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
-                onKeyDown={(e) => {
-                  if (e.key === 'ArrowDown' && !isToolsOpen) {
-                    e.preventDefault()
-                    setIsToolsOpen(true)
-                  }
-                }}
-                aria-expanded={isToolsOpen}
-                aria-haspopup="true"
-                aria-controls={menuId}
+                onClick={() => setIsToolsOpen(!isToolsOpen)}
               >
                 Tools
-                <ChevronDown 
-                  className={`w-4 h-4 transition-transform ${isToolsOpen ? 'rotate-180' : ''}`}
-                  aria-hidden="true"
-                />
-              </Link>
+                <ChevronDown className={`w-4 h-4 transition-transform ${isToolsOpen ? 'rotate-180' : ''}`} />
+              </button>
 
               {isToolsOpen && (
-                <div 
-                  ref={menuRef}
-                  id={menuId}
-                  className="absolute top-full left-0 pt-1 w-56 z-50"
-                  role="menu"
-                  aria-label="Tools submenu"
-                  aria-activedescendant={focusedIndex >= 0 ? `tool-${focusedIndex}` : undefined}
-                >
-                  <div className="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
-                  {tools.map((tool, index) => {
+                <div className="absolute top-full left-0 mt-1 w-56 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
+                  {tools.map((tool) => {
                     const isToolActive = pathname === tool.path
                     return (
                       <Link
                         key={tool.path}
-                        id={`tool-${index}`}
-                        ref={(el) => {
-                          menuItemRefs.current[index] = el
-                        }}
                         href={tool.path}
-                        className={`block px-4 py-2 text-sm transition-colors focus:outline-none ${
+                        className={`block px-4 py-2 text-sm transition-colors ${
                           isToolActive
                             ? 'bg-emerald-100 text-emerald-700 font-medium'
                             : 'text-gray-600 hover:bg-gray-100'
                         }`}
-                        onClick={() => {
-                          setIsToolsOpen(false)
-                          setFocusedIndex(-1)
-                        }}
-                        onFocus={() => setFocusedIndex(index)}
-                        role="menuitem"
-                        aria-current={isToolActive ? 'page' : undefined}
-                        tabIndex={-1}
+                        onClick={() => setIsToolsOpen(false)}
                       >
                         {tool.name}
                       </Link>
                     )
                   })}
-                  </div>
                 </div>
               )}
             </div>
-
-            {navItems.map((item) => {
-              const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(item.path))
-              return (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 ${
-                    isActive
-                      ? 'bg-emerald-100 text-emerald-700'
-                      : 'text-gray-600 hover:bg-gray-100'
-                  }`}
-                  aria-current={isActive ? 'page' : undefined}
-                >
-                  {item.name}
-                </Link>
-              )
-            })}
           </nav>
 
           {/* Mobile Menu - Simple version */}
-          <nav className="md:hidden" aria-label="Mobile navigation">
-            <label htmlFor="mobile-nav-select" className="sr-only">
-              Navigate to page
-            </label>
+          <div className="md:hidden">
             <select
-              id="mobile-nav-select"
               value={pathname}
               onChange={(e) => {
                 window.location.href = e.target.value
               }}
-              className="px-3 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-              aria-label="Mobile navigation menu"
+              className="px-3 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 bg-white"
             >
               {navItems.map((item) => (
                 <option key={item.path} value={item.path}>
@@ -261,7 +138,6 @@ export default function Header() {
                 </option>
               ))}
               <optgroup label="Tools">
-                <option value="/tools">Tools Home</option>
                 {tools.map((tool) => (
                   <option key={tool.path} value={tool.path}>
                     {tool.name}
@@ -269,7 +145,7 @@ export default function Header() {
                 ))}
               </optgroup>
             </select>
-          </nav>
+          </div>
         </div>
       </div>
     </header>

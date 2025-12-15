@@ -1,25 +1,25 @@
 /**
  * Take-home pay calculation utilities
- * Based on 2024 federal tax brackets and standard state tax rates
+ * Based on 2025 federal tax brackets and standard state tax rates
  */
 
-// State tax rates (2024 estimates)
+// State tax rates (2025 estimates – top marginal / flat equivalents)
 export const STATE_TAX_RATES: Record<string, number> = {
   AL: 0.05,
   AK: 0,
   AZ: 0.025,
   AR: 0.055,
-  CA: 0.093,
-  CO: 0.044,
+  CA: 0.133,
+  CO: 0.0425,
   CT: 0.0699,
   DE: 0.066,
   FL: 0,
-  GA: 0.0575,
+  GA: 0.0549,
   HI: 0.11,
-  ID: 0.06,
+  ID: 0.058,
   IL: 0.0495,
-  IN: 0.0323,
-  IA: 0.06,
+  IN: 0.0315,
+  IA: 0.039,
   KS: 0.057,
   KY: 0.045,
   LA: 0.0425,
@@ -28,8 +28,8 @@ export const STATE_TAX_RATES: Record<string, number> = {
   MA: 0.05,
   MI: 0.0425,
   MN: 0.0985,
-  MS: 0.05,
-  MO: 0.054,
+  MS: 0.044,
+  MO: 0.0495,
   MT: 0.069,
   NE: 0.0684,
   NV: 0,
@@ -37,18 +37,18 @@ export const STATE_TAX_RATES: Record<string, number> = {
   NJ: 0.1075,
   NM: 0.059,
   NY: 0.109,
-  NC: 0.0475,
+  NC: 0.0425,
   ND: 0.029,
   OH: 0.0399,
-  OK: 0.05,
+  OK: 0.0475,
   OR: 0.099,
   PA: 0.0307,
   RI: 0.0599,
-  SC: 0.07,
+  SC: 0.064,
   SD: 0,
   TN: 0,
   TX: 0,
-  UT: 0.0485,
+  UT: 0.0455,
   VT: 0.0875,
   VA: 0.0575,
   WA: 0,
@@ -108,7 +108,7 @@ function convertToAnnual(amount: number, payPeriod: PayPeriod): number {
 }
 
 /**
- * Calculate federal income tax based on 2024 brackets
+ * Calculate federal income tax based on 2025 brackets
  */
 function calculateFederalTax(
   taxableIncome: number,
