@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { Calculator, ArrowRight, Shield, Sparkles } from 'lucide-react'
+import { Calculator, ArrowRight, Shield, Sparkles, FileText, TrendingUp } from 'lucide-react'
 import { motion } from 'motion/react'
 
 export default function Home() {
