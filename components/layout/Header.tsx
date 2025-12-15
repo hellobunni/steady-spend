@@ -20,7 +20,7 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <Image
               alt="Steady Spend"
-              src="/logo-transparent.png"
+              src="/logo-vertical.png"
               className="h-18 w-auto"
               width={140}
               height={30}
