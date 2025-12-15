@@ -7,6 +7,7 @@ import Image from 'next/image'
 const navItems = [
   { name: 'Home', path: '/' },
   { name: 'Budget Calculator', path: '/tools/monthly-budget' },
+  { name: 'Blog', path: '/blog' },
 ]
 
 export default function Header() {

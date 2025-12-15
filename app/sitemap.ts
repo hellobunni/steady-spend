@@ -1,7 +1,15 @@
 import { MetadataRoute } from 'next'
+import { getBlogPosts } from '@/lib/blog/getBlogPosts'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com'
+
+  const blogPosts = getBlogPosts().map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: post.lastModified ? new Date(post.lastModified) : new Date(post.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }))
 
   const routes = [
     '',
@@ -35,5 +43,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   })
 
-  return routes
+  return [...routes, ...blogPosts]
 }
