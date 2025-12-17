@@ -62,7 +62,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav aria-label="Main navigation" className="hidden md:flex items-center gap-1">
             {navItems.map((item) => {
               const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(item.path))
               return (
@@ -74,6 +74,7 @@ export default function Header() {
                       ? 'bg-emerald-100 text-emerald-700'
                       : 'text-gray-600 hover:bg-gray-100'
                   }`}
+                  aria-current={isActive ? 'page' : undefined}
                 >
                   {item.name}
                 </Link>
@@ -94,13 +95,20 @@ export default function Header() {
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
                 onClick={() => setIsToolsOpen(!isToolsOpen)}
+                aria-expanded={isToolsOpen}
+                aria-haspopup="true"
+                aria-label="Tools menu"
               >
                 Tools
                 <ChevronDown className={`w-4 h-4 transition-transform ${isToolsOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {isToolsOpen && (
-                <div className="absolute top-full left-0 mt-1 w-56 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
+                <div 
+                  className="absolute top-full left-0 mt-1 w-56 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden"
+                  role="menu"
+                  aria-label="Tools submenu"
+                >
                   {tools.map((tool) => {
                     const isToolActive = pathname === tool.path
                     return (
@@ -113,6 +121,8 @@ export default function Header() {
                             : 'text-gray-600 hover:bg-gray-100'
                         }`}
                         onClick={() => setIsToolsOpen(false)}
+                        role="menuitem"
+                        aria-current={isToolActive ? 'page' : undefined}
                       >
                         {tool.name}
                       </Link>
@@ -131,6 +141,7 @@ export default function Header() {
                 window.location.href = e.target.value
               }}
               className="px-3 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 bg-white"
+              aria-label="Mobile navigation menu"
             >
               {navItems.map((item) => (
                 <option key={item.path} value={item.path}>

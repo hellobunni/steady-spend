@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '',
     '/tools',
     '/tools/monthly-budget',
+    '/tools/take-home-pay',
     '/guides',
     '/blog',
     '/privacy-policy',
@@ -23,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ].map((route) => {
     let priority = 0.7
 
-    if (route === '/tools/monthly-budget') {
+    if (route === '/tools/monthly-budget' || route === '/tools/take-home-pay') {
       priority = 1.0
     } else if (route === '') {
       priority = 0.8
