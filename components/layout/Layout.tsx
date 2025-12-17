@@ -23,11 +23,7 @@ export default function Layout({ children }: LayoutProps) {
       <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="flex gap-6">
           {/* Left Sidebar Ad - Desktop Only */}
-          <aside className="hidden xl:block w-40 flex-shrink-0">
-            {/* <div className="sticky top-6">
-              <AdSpace size="sidebar" />
-            </div> */}
-          </aside>
+  
 
           {/* Main Content */}
           <main className="flex-1 min-w-0">{children}</main>
