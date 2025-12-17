@@ -137,6 +137,10 @@
   @apply mt-6 mb-3 text-xl font-semibold text-slate-900;
 }
 
+.prose h4 {
+  @apply mt-4 mb-2 text-lg font-semibold text-slate-900;
+}
+
 .prose p {
   @apply mb-4 leading-relaxed;
 }
@@ -180,3 +184,30 @@
 .prose pre code {
   @apply bg-transparent p-0 text-slate-100;
 }
+
+.prose img {
+  @apply w-full rounded-lg shadow-sm my-6;
+}
+
+.prose .screenshot-image {
+  @apply mb-22 w-3xl;
+}
+
+/* Wrapper for logo images - no fixed height, just max-width */
+/* .prose .logo-image-wrapper {
+  @apply my-6 flex justify-start items-center;
+  max-width: 220px;
+  width: 100%;
+  overflow: visible;
+  min-width: 0;
+} */
+
+/* Logo image maintains natural aspect ratio */
+/* .prose .logo-image-wrapper img.logo-image {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  @apply rounded-lg;
+  display: block;
+} */
