@@ -1,16 +1,29 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import BudgetCalculator from './BudgetCalculator'
+import Breadcrumbs from '@/components/layout/Breadcrumbs'
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com';
 
 export const metadata: Metadata = {
   title: 'Monthly Budget Calculator | SteadySpend',
   description:
     'Free monthly budget calculator. Track income and expenses to see where your money goes and how much you can save each month.',
+  alternates: {
+    canonical: `${baseUrl}/tools/monthly-budget`,
+  },
 }
 
 export default function MonthlyBudgetPage() {
   return (
     <div className="max-w-4xl mx-auto py-8 px-4">
+      {/* Breadcrumbs */}
+      <Breadcrumbs
+        items={[
+          { label: 'Tools', href: '/tools' },
+          { label: 'Monthly Budget Calculator', href: '/tools/monthly-budget' },
+        ]}
+      />
       {/* SEO Intro - Above Tool */}
       <div className="mb-8">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">

@@ -4,10 +4,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { getBlogPosts } from "@/lib/blog/getBlogPosts";
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com';
+
 export const metadata: Metadata = {
   title: "Money tips & budgeting blog | SteadySpend",
   description:
     "Calm, practical budgeting tips, spending guides, and money stories to help you understand your finances and make confident day-to-day decisions.",
+  alternates: {
+    canonical: `${baseUrl}/blog`,
+  },
 };
 
 export default function BlogPage() {
