@@ -96,8 +96,11 @@ export default function TakeHomePayCalculator() {
       includeSocialSecurity: true,
       includeMedicare: true,
       retirement401k: '',
+      retirement401kMode: 'dollar',
       hsaContribution: '',
+      hsaContributionMode: 'dollar',
       preTaxHealthInsurance: '',
+      preTaxHealthInsuranceMode: 'dollar',
       postTaxHealthInsurance: '',
       lifeInsurance: '',
       otherDeductions: '',
@@ -297,42 +300,86 @@ export default function TakeHomePayCalculator() {
               <div>
                 <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                   401(k) / 403(b) Contribution
-                  <Tooltip content="The amount you contribute to your retirement account each pay period. This reduces your taxable income, so you pay less in taxes now. Enter the amount per pay period (not annual)." />
+                  <Tooltip content="The amount you contribute to your retirement account. You can enter either a dollar amount per pay period or a percentage of your gross income. This reduces your taxable income, so you pay less in taxes now." />
                 </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
-                    $
-                  </span>
-                  <Input
-                    type="text"
-                    value={inputs.retirement401k}
-                    onChange={(e) =>
-                      handleNumberInput('retirement401k', e.target.value)
+                <div className="flex gap-2">
+                  <div className="relative flex-1">
+                    {inputs.retirement401kMode === 'dollar' ? (
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
+                        $
+                      </span>
+                    ) : (
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
+                        %
+                      </span>
+                    )}
+                    <Input
+                      type="text"
+                      value={inputs.retirement401k}
+                      onChange={(e) =>
+                        handleNumberInput('retirement401k', e.target.value)
+                      }
+                      placeholder={inputs.retirement401kMode === 'dollar' ? '500' : '5'}
+                      className={inputs.retirement401kMode === 'dollar' ? 'pl-8' : 'pr-8'}
+                    />
+                  </div>
+                  <Select
+                    value={inputs.retirement401kMode}
+                    onValueChange={(value) =>
+                      updateInput('retirement401kMode', value as 'dollar' | 'percentage')
                     }
-                    placeholder="500"
-                    className="pl-8"
-                  />
+                  >
+                    <SelectTrigger className="w-24">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="dollar">$</SelectItem>
+                      <SelectItem value="percentage">%</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
 
               <div>
                 <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                   HSA / FSA Contribution
-                  <Tooltip content="Health Savings Account (HSA) or Flexible Spending Account (FSA) contributions. These are pre-tax deductions used for medical expenses. Enter the amount per pay period." />
+                  <Tooltip content="Health Savings Account (HSA) or Flexible Spending Account (FSA) contributions. These are pre-tax deductions used for medical expenses. You can enter either a dollar amount per pay period or a percentage of your gross income." />
                 </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
-                    $
-                  </span>
-                  <Input
-                    type="text"
-                    value={inputs.hsaContribution}
-                    onChange={(e) =>
-                      handleNumberInput('hsaContribution', e.target.value)
+                <div className="flex gap-2">
+                  <div className="relative flex-1">
+                    {inputs.hsaContributionMode === 'dollar' ? (
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
+                        $
+                      </span>
+                    ) : (
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
+                        %
+                      </span>
+                    )}
+                    <Input
+                      type="text"
+                      value={inputs.hsaContribution}
+                      onChange={(e) =>
+                        handleNumberInput('hsaContribution', e.target.value)
+                      }
+                      placeholder={inputs.hsaContributionMode === 'dollar' ? '200' : '2'}
+                      className={inputs.hsaContributionMode === 'dollar' ? 'pl-8' : 'pr-8'}
+                    />
+                  </div>
+                  <Select
+                    value={inputs.hsaContributionMode}
+                    onValueChange={(value) =>
+                      updateInput('hsaContributionMode', value as 'dollar' | 'percentage')
                     }
-                    placeholder="200"
-                    className="pl-8"
-                  />
+                  >
+                    <SelectTrigger className="w-24">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="dollar">$</SelectItem>
+                      <SelectItem value="percentage">%</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
             </div>
@@ -340,21 +387,43 @@ export default function TakeHomePayCalculator() {
             <div>
               <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
                 Pre-Tax Health Insurance Premium
-                <Tooltip content="Health insurance premiums that are deducted from your paycheck before taxes. This reduces your taxable income. Enter the amount per pay period." />
+                <Tooltip content="Health insurance premiums that are deducted from your paycheck before taxes. This reduces your taxable income. You can enter either a dollar amount per pay period or a percentage of your gross income." />
               </label>
-              <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
-                  $
-                </span>
-                <Input
-                  type="text"
-                  value={inputs.preTaxHealthInsurance}
-                  onChange={(e) =>
-                    handleNumberInput('preTaxHealthInsurance', e.target.value)
+              <div className="flex gap-2">
+                <div className="relative flex-1">
+                  {inputs.preTaxHealthInsuranceMode === 'dollar' ? (
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
+                      $
+                    </span>
+                  ) : (
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
+                      %
+                    </span>
+                  )}
+                  <Input
+                    type="text"
+                    value={inputs.preTaxHealthInsurance}
+                    onChange={(e) =>
+                      handleNumberInput('preTaxHealthInsurance', e.target.value)
+                    }
+                    placeholder={inputs.preTaxHealthInsuranceMode === 'dollar' ? '300' : '3'}
+                    className={inputs.preTaxHealthInsuranceMode === 'dollar' ? 'pl-8' : 'pr-8'}
+                  />
+                </div>
+                <Select
+                  value={inputs.preTaxHealthInsuranceMode}
+                  onValueChange={(value) =>
+                    updateInput('preTaxHealthInsuranceMode', value as 'dollar' | 'percentage')
                   }
-                  placeholder="300"
-                  className="pl-8"
-                />
+                >
+                  <SelectTrigger className="w-24">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="dollar">$</SelectItem>
+                    <SelectItem value="percentage">%</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
               </CardContent>

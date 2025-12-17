@@ -60,6 +60,8 @@ export const STATE_TAX_RATES: Record<string, number> = {
 export type PayPeriod = 'yearly' | 'monthly' | 'biweekly'
 export type FilingStatus = 'single' | 'married'
 
+export type DeductionMode = 'dollar' | 'percentage'
+
 export type TakeHomePayInputs = {
   grossIncome: string
   payPeriod: PayPeriod
@@ -69,8 +71,11 @@ export type TakeHomePayInputs = {
   includeSocialSecurity: boolean
   includeMedicare: boolean
   retirement401k: string
+  retirement401kMode: DeductionMode
   hsaContribution: string
+  hsaContributionMode: DeductionMode
   preTaxHealthInsurance: string
+  preTaxHealthInsuranceMode: DeductionMode
   postTaxHealthInsurance: string
   lifeInsurance: string
   otherDeductions: string
@@ -162,18 +167,39 @@ export function calculateTakeHomePay(
   )
 
   // Pre-tax deductions (annual)
-  const annual401k = convertToAnnual(
-    parseFloat(inputs.retirement401k) || 0,
-    inputs.payPeriod
-  )
-  const annualHSA = convertToAnnual(
-    parseFloat(inputs.hsaContribution) || 0,
-    inputs.payPeriod
-  )
-  const annualPreTaxHealth = convertToAnnual(
-    parseFloat(inputs.preTaxHealthInsurance) || 0,
-    inputs.payPeriod
-  )
+  // Handle percentage vs dollar amount for each deduction
+  let annual401k = 0
+  if (inputs.retirement401kMode === 'percentage') {
+    const percentage = parseFloat(inputs.retirement401k) || 0
+    annual401k = annualGross * (percentage / 100)
+  } else {
+    annual401k = convertToAnnual(
+      parseFloat(inputs.retirement401k) || 0,
+      inputs.payPeriod
+    )
+  }
+
+  let annualHSA = 0
+  if (inputs.hsaContributionMode === 'percentage') {
+    const percentage = parseFloat(inputs.hsaContribution) || 0
+    annualHSA = annualGross * (percentage / 100)
+  } else {
+    annualHSA = convertToAnnual(
+      parseFloat(inputs.hsaContribution) || 0,
+      inputs.payPeriod
+    )
+  }
+
+  let annualPreTaxHealth = 0
+  if (inputs.preTaxHealthInsuranceMode === 'percentage') {
+    const percentage = parseFloat(inputs.preTaxHealthInsurance) || 0
+    annualPreTaxHealth = annualGross * (percentage / 100)
+  } else {
+    annualPreTaxHealth = convertToAnnual(
+      parseFloat(inputs.preTaxHealthInsurance) || 0,
+      inputs.payPeriod
+    )
+  }
 
   const totalPreTaxDeductions =
     annual401k + annualHSA + annualPreTaxHealth
