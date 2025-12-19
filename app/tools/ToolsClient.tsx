@@ -17,6 +17,15 @@ export default function ToolsClient() {
       tags: ['Budgeting', 'Planning'],
       status: 'available',
     },
+    {
+      icon: Calculator,
+      title: 'Take Home Pay Calculator',
+      description:
+        'Calculate your take home pay after taxes and deductions. See how much money you have left after all expenses.',
+      link: '/tools/take-home-pay-calculator',
+      tags: ['Salary', 'Taxes', 'Deductions'],
+      status: 'coming-soon',
+    }
     // Placeholder for future tools
   ]
 
@@ -84,7 +93,7 @@ export default function ToolsClient() {
                   <p className="text-gray-600 mb-6 leading-relaxed">{tool.description}</p>
                   <Link href={tool.link}>
                     <Button className="bg-linear-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white rounded-xl">
-                      Use This Tool
+                      {tool.status === 'available' ? 'Use This Tool' : 'Coming Soon'}
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
                   </Link>

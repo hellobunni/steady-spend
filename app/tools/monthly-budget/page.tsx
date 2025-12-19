@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import BudgetCalculator from './BudgetCalculator'
 import Breadcrumbs from '@/components/layout/Breadcrumbs'
+import { Accordion } from '@/components/ui/accordion'
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com';
 
@@ -44,34 +45,6 @@ export default function MonthlyBudgetPage() {
 
       {/* SEO Content - Below Tool */}
       <div className="mt-12 space-y-8 text-gray-700">
-        <section>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Why Use a Monthly Budget Calculator?</h2>
-          <p className="text-base leading-relaxed mb-4">
-            A monthly budget calculator gives you a clear snapshot of your financial situation. By
-            tracking your income and expenses in one place, you can:
-          </p>
-          <ul className="list-disc list-inside space-y-2 text-base leading-relaxed ml-4 mb-4">
-            <li>Identify spending patterns you might not notice day-to-day</li>
-            <li>Find areas where you can cut back without major lifestyle changes</li>
-            <li>Understand how much you&apos;re actually saving each month</li>
-            <li>Make more confident financial decisions with real numbers</li>
-            <li>See the impact of small changes across different expense categories</li>
-          </ul>
-          <p className="text-base leading-relaxed mb-4">
-            Many financial experts recommend saving around 20% of your income, but that&apos;s not always
-            realistic for everyone. This calculator shows your actual savings rate so you can focus on
-            progress — not perfection. Whether you&apos;re saving 5% or 50%, understanding your numbers
-            is the first step toward financial clarity.
-          </p>
-          <p className="text-base leading-relaxed">
-            Budgeting doesn&apos;t have to be restrictive or stressful. When you know where your money
-            goes, you can make intentional choices about spending and saving. A monthly budget calculator
-            removes the guesswork and shows you the reality of your financial situation — which is often
-            better than you think.
-          </p>
-        </section>
-
-        <div className="h-px bg-gray-200 my-6" />
 
         <section>
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">How to Use This Budget Calculator</h2>
@@ -116,192 +89,71 @@ export default function MonthlyBudgetPage() {
         <div className="h-px bg-gray-200 my-6" />
 
         <section>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Understanding Your Budget Results</h2>
-          <p className="text-base leading-relaxed mb-4">
-            Once you calculate your budget, you&apos;ll see several key numbers that help you understand
-            your financial situation:
-          </p>
-          <div className="space-y-4 mb-4">
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Remaining Income</h3>
-              <p className="text-base leading-relaxed">
-                This is how much money you have left after all expenses. A positive number means you&apos;re
-                spending less than you earn — which is great. A negative number means you&apos;re spending
-                more than you make, and you&apos;ll need to either increase income or reduce expenses.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Savings Rate</h3>
-              <p className="text-base leading-relaxed">
-                Your savings rate is the percentage of your income that you&apos;re not spending. This is
-                one of the most important numbers for building wealth over time. Even a 10% savings rate
-                can make a significant difference over years.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Expense Breakdown</h3>
-              <p className="text-base leading-relaxed">
-                The visual chart shows you which categories take up the most of your budget. This helps you
-                quickly identify where your money goes and where you might have opportunities to save.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <div className="h-px bg-gray-200 my-6" />
-
-        <section>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Budgeting Tips for Better Results</h2>
-          <p className="text-base leading-relaxed mb-4">
-            Getting accurate numbers is the foundation of effective budgeting. Here are practical tips to
-            help you get the most out of this calculator:
-          </p>
-          <div className="space-y-4 mb-4">
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Be Honest with Your Numbers</h3>
-              <p className="text-base leading-relaxed">
-                Accuracy leads to better insights. It&apos;s tempting to underestimate expenses or
-                overestimate income, but that only hurts you in the long run. Use real numbers from recent
-                months, not what you hope to spend.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Use Recent Statements</h3>
-              <p className="text-base leading-relaxed">
-                Pull out your last 2-3 months of bank and credit card statements. Look at what you
-                actually spent, not what you think you spent. You might be surprised by how much goes to
-                categories like dining out, subscriptions, or impulse purchases.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Don&apos;t Forget Irregular Expenses</h3>
-              <p className="text-base leading-relaxed">
-                Annual expenses like car insurance, property taxes, or holiday gifts can throw off your
-                monthly budget. Divide these by 12 and include them as monthly expenses. This way,
-                you&apos;re prepared when they come due.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Focus on One Category at a Time</h3>
-              <p className="text-base leading-relaxed">
-                If your expenses exceed your income, don&apos;t try to fix everything at once. Pick one
-                category where you can make meaningful changes, and start there. Small, sustainable changes
-                are better than dramatic cuts you can&apos;t maintain.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Remember: Something is Better Than Nothing</h3>
-              <p className="text-base leading-relaxed">
-                Even if you can only save $20 a month, that&apos;s progress. Don&apos;t let perfect be the
-                enemy of good. Every dollar you save is a step toward financial security.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <div className="h-px bg-gray-200 my-6" />
-
-        <section>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Common Budgeting Mistakes to Avoid</h2>
-          <p className="text-base leading-relaxed mb-4">
-            Many people struggle with budgeting because they make these common mistakes. Being aware of them
-            can help you create a budget that actually works:
-          </p>
-          <ul className="list-disc list-inside space-y-3 text-base leading-relaxed ml-4 mb-4">
-            <li>
-              <strong className="text-gray-900">Setting unrealistic goals:</strong> If you&apos;ve never
-              saved 20% of your income, don&apos;t start there. Build up gradually to sustainable savings
-              rates.
-            </li>
-            <li>
-              <strong className="text-gray-900">Forgetting about small expenses:</strong> That daily coffee
-              or monthly subscription might seem small, but they add up quickly. Include everything.
-            </li>
-            <li>
-              <strong className="text-gray-900">Not accounting for variable expenses:</strong> Utilities,
-              groceries, and gas costs change month to month. Use an average or slightly higher estimate to
-              be safe.
-            </li>
-            <li>
-              <strong className="text-gray-900">Giving up after one month:</strong> Budgeting takes
-              practice. Your first attempt won&apos;t be perfect, and that&apos;s okay. Adjust and try
-              again.
-            </li>
-            <li>
-              <strong className="text-gray-900">Comparing yourself to others:</strong> Your financial
-              situation is unique. Focus on your own progress, not what others are doing.
-            </li>
-          </ul>
-        </section>
-
-        <div className="h-px bg-gray-200 my-6" />
-
-        <section>
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">Frequently Asked Questions</h2>
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                Do I need to create an account to use this calculator?
-              </h3>
-              <p className="text-base leading-relaxed">
-                No. This calculator works entirely in your browser. Your data is saved locally using
-                localStorage, so you don&apos;t need to sign up or create an account. Your financial
-                information stays private and never leaves your device.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                What if my expenses are higher than my income?
-              </h3>
-              <p className="text-base leading-relaxed">
-                If your expenses exceed your income, the calculator will show you exactly how much you&apos;re
-                overspending. This is valuable information — you can&apos;t fix what you don&apos;t know
-                about. Look for categories where you can reduce spending, or consider ways to increase your
-                income. Even small changes can help close the gap.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                How often should I update my budget?
-              </h3>
-              <p className="text-base leading-relaxed">
-                Review your budget monthly, especially when you first start. As you get more comfortable and
-                your spending patterns stabilize, you might review it quarterly. Update it immediately if
-                your income or major expenses change significantly.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                Should I include savings as an expense?
-              </h3>
-              <p className="text-base leading-relaxed">
-                That depends on your approach. Some people treat savings like a bill and include it as an
-                expense category. Others prefer to see savings as what&apos;s left over after expenses. This
-                calculator shows your remaining income, which you can then allocate to savings, investments,
-                or other goals.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                What if I have irregular income?
-              </h3>
-              <p className="text-base leading-relaxed">
-                For irregular income, use your average monthly amount over the past 6-12 months. If your
-                income varies significantly, consider using your lowest recent month as a baseline to ensure
-                your budget works even in lean months.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                Can I use this for annual budgeting?
-              </h3>
-              <p className="text-base leading-relaxed">
-                This calculator is designed for monthly budgets, but you can multiply your results by 12 to
-                see annual totals. Monthly budgeting is often more manageable because it matches how most
-                bills and paychecks work.
-              </p>
-            </div>
-          </div>
+          <Accordion
+            items={[
+              {
+                question: 'Why Use a Monthly Budget Calculator?',
+                answer: (
+                  <>
+                    <p className="mb-4">
+                      A monthly budget calculator gives you a clear snapshot of your financial situation. By
+                      tracking your income and expenses in one place, you can:
+                    </p>
+                    <ul className="list-disc list-inside space-y-2 mb-4 ml-4">
+                      <li>Identify spending patterns you might not notice day-to-day</li>
+                      <li>Find areas where you can cut back without major lifestyle changes</li>
+                      <li>Understand how much you&apos;re actually saving each month</li>
+                      <li>Make more confident financial decisions with real numbers</li>
+                      <li>See the impact of small changes across different expense categories</li>
+                    </ul>
+                    <p className="mb-4">
+                      Many financial experts recommend saving around 20% of your income, but that&apos;s not always
+                      realistic for everyone. This calculator shows your actual savings rate so you can focus on
+                      progress — not perfection. Whether you&apos;re saving 5% or 50%, understanding your numbers
+                      is the first step toward financial clarity.
+                    </p>
+                    <p>
+                      Budgeting doesn&apos;t have to be restrictive or stressful. When you know where your money
+                      goes, you can make intentional choices about spending and saving. A monthly budget calculator
+                      removes the guesswork and shows you the reality of your financial situation — which is often
+                      better than you think.
+                    </p>
+                  </>
+                ),
+              },
+              {
+                question: 'What is the difference between a monthly budget calculator and a budget planner?',
+                answer:
+                  'A monthly budget calculator is a tool that helps you track your income and expenses to see where your money goes and how much you can save each month. A budget planner is a tool that helps you create a budget based on your income and expenses.',
+              },
+              {
+                question: 'What if my expenses are higher than my income?',
+                answer:
+                  'If your expenses exceed your income, the calculator will show you exactly how much you\'re overspending. This is valuable information — you can\'t fix what you don\'t know about. Look for categories where you can reduce spending, or consider ways to increase your income. Even small changes can help close the gap.',
+              },
+              {
+                question: 'How often should I update my budget?',
+                answer:
+                  'Review your budget monthly, especially when you first start. As you get more comfortable and your spending patterns stabilize, you might review it quarterly. Update it immediately if your income or major expenses change significantly.',
+              },
+              {
+                question: 'Should I include savings as an expense?',
+                answer:
+                  'That depends on your approach. Some people treat savings like a bill and include it as an expense category. Others prefer to see savings as what\'s left over after expenses. This calculator shows your remaining income, which you can then allocate to savings, investments, or other goals.',
+              },
+              {
+                question: 'What if I have irregular income?',
+                answer:
+                  'For irregular income, use your average monthly amount over the past 6-12 months. If your income varies significantly, consider using your lowest recent month as a baseline to ensure your budget works even in lean months.',
+              },
+              {
+                question: 'Can I use this for annual budgeting?',
+                answer:
+                  'This calculator is designed for monthly budgets, but you can multiply your results by 12 to see annual totals. Monthly budgeting is often more manageable because it matches how most bills and paychecks work.',
+              },
+            ]}
+          />
         </section>
 
         <div className="h-px bg-gray-200 my-6" />
