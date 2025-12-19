@@ -34,10 +34,30 @@ import {
   clearTakeHomePayData,
 } from '@/lib/storage/take-home-pay'
 
+const defaultInputs: TakeHomePayInputs = {
+  grossIncome: '',
+  payPeriod: 'yearly',
+  filingStatus: 'single',
+  state: 'CA',
+  dependents: '0',
+  includeSocialSecurity: true,
+  includeMedicare: true,
+  retirement401k: '',
+  retirement401kMode: 'dollar',
+  hsaContribution: '',
+  hsaContributionMode: 'dollar',
+  preTaxHealthInsurance: '',
+  preTaxHealthInsuranceMode: 'dollar',
+  postTaxHealthInsurance: '',
+  lifeInsurance: '',
+  otherDeductions: '',
+  additionalWithholding: '',
+  hasLocalTax: false,
+  localTaxRate: '',
+}
+
 export default function TakeHomePayCalculator() {
-  const [inputs, setInputs] = useState<TakeHomePayInputs>(() =>
-    loadTakeHomePayData()
-  )
+  const [inputs, setInputs] = useState<TakeHomePayInputs>(defaultInputs)
   const [showResults, setShowResults] = useState(false)
   const [results, setResults] = useState<TakeHomePayResults | null>(null)
   const [viewMode, setViewMode] = useState<'annual' | 'paycheck'>('annual')
@@ -46,6 +66,12 @@ export default function TakeHomePayCalculator() {
     postTax: false,
     advanced: false,
   })
+
+  // Load data from localStorage after hydration
+  useEffect(() => {
+    const savedData = loadTakeHomePayData()
+    setInputs(savedData)
+  }, [])
 
   // Save data whenever it changes
   useEffect(() => {

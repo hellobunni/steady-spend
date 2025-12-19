@@ -7,8 +7,8 @@ import { useState, useRef, useEffect } from 'react'
 import { ChevronDown } from 'lucide-react'
 
 const navItems = [
-  { name: 'Home', path: '/' },
   { name: 'Blog', path: '/blog' },
+  { name: 'Contact', path: '/contact' },
 ]
 
 const tools = [
@@ -18,7 +18,11 @@ const tools = [
   },
   {
     name: 'Take Home Pay Calculator',
-    path: '/tools/take-home-pay',
+    path: '/tools/take-home-pay-calculator',
+  },
+  {
+    name: '50/30/20 Budget Calculator',
+    path: '/tools/50-30-20',
   },
   // Add more tools here as they're created
 ]
@@ -63,24 +67,6 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav aria-label="Main navigation" className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => {
-              const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(item.path))
-              return (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    isActive
-                      ? 'bg-emerald-100 text-emerald-700'
-                      : 'text-gray-600 hover:bg-gray-100'
-                  }`}
-                  aria-current={isActive ? 'page' : undefined}
-                >
-                  {item.name}
-                </Link>
-              )
-            })}
-
             {/* Tools Dropdown */}
             <div
               ref={toolsRef}
@@ -131,6 +117,24 @@ export default function Header() {
                 </div>
               )}
             </div>
+
+            {navItems.map((item) => {
+              const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(item.path))
+              return (
+                <Link
+                  key={item.path}
+                  href={item.path}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'bg-emerald-100 text-emerald-700'
+                      : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  {item.name}
+                </Link>
+              )
+            })}
           </nav>
 
           {/* Mobile Menu - Simple version */}
