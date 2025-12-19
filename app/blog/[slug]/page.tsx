@@ -9,6 +9,7 @@ import { getRelatedPosts } from '@/lib/blog/getRelatedPosts';
 import BlogPostMeta from '@/components/blog/BlogPostMeta';
 import RelatedPosts from '@/components/blog/RelatedPosts';
 import ComparisonTable from '@/components/blog/ComparisonTable';
+import { Accordion } from '@/components/ui/accordion';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -204,6 +205,7 @@ export default async function BlogPostPage({ params }: Props) {
             source={post.content || ''} 
             components={{
               ComparisonTable,
+              Accordion,
               img: (props: any) => {
                 const className = props.className || '';
                 const isLogo = className.includes('logo-image');
