@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '',
     '/tools',
     '/tools/monthly-budget',
-    '/tools/take-home-pay',
+    '/tools/take-home-pay-calculator',
     '/guides',
     '/blog',
     '/privacy-policy',

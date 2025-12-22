@@ -20,10 +20,6 @@ const tools = [
     name: 'Take Home Pay Calculator',
     path: '/tools/take-home-pay-calculator',
   },
-  {
-    name: '50/30/20 Budget Calculator',
-    path: '/tools/50-30-20',
-  },
   // Add more tools here as they're created
 ]
 
