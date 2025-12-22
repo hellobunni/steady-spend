@@ -56,7 +56,7 @@ export function getBlogPost(slug: string): BlogPost | null {
     }
     
     return post;
-  } catch (error) {
+  } catch {
     return null;
   }
 }

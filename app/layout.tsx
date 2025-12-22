@@ -77,7 +77,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "url": baseUrl,
     "logo": `${baseUrl}/logo-vertical.png`,
     "description": "Free budgeting tools and guides to help you understand your money and spend with confidence.",
-    "sameAs": [],
+    "sameAs": [
+      "https://www.facebook.com/steadyspend",
+      "https://twitter.com/steadyspend",
+      "https://www.instagram.com/steadyspend",
+      "https://www.linkedin.com/company/steadyspend",
+      "https://www.youtube.com/@steadyspend"
+    ],
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "Customer Service",
