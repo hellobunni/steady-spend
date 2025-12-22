@@ -91,13 +91,13 @@ export default function BudgetSummary({
               </div>
               {remaining < savingsGoal && remaining > 0 && (
                 <p className="text-xs text-gray-600 mt-2">
-                  You're saving {formatCurrency(remaining)}. To reach the 20% goal, aim to save{' '}
+                  You&apos;re saving {formatCurrency(remaining)}. To reach the 20% goal, aim to save{' '}
                   {formatCurrency(savingsGoal)} per month.
                 </p>
               )}
               {remaining < 0 && (
                 <p className="text-xs text-red-600 mt-2">
-                  You're spending more than you earn. Consider reviewing your expenses.
+                  You&apos;re spending more than you earn. Consider reviewing your expenses.
                 </p>
               )}
             </div>

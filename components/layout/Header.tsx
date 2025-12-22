@@ -3,8 +3,9 @@
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState, useRef, useEffect } from 'react'
-import { ChevronDown } from 'lucide-react'
+import { useState, useRef, useEffect, startTransition } from 'react'
+import { ChevronDown, Menu, X } from 'lucide-react'
+import { motion, AnimatePresence } from 'motion/react'
 
 const navItems = [
   { name: 'Blog', path: '/blog' },
@@ -26,11 +27,16 @@ const tools = [
 export default function Header() {
   const pathname = usePathname()
   const [isToolsOpen, setIsToolsOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [focusedIndex, setFocusedIndex] = useState(-1)
+  const [mobileFocusedIndex, setMobileFocusedIndex] = useState(-1)
   const toolsRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLAnchorElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
   const menuItemRefs = useRef<(HTMLAnchorElement | null)[]>([])
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null)
+  const mobileMenuItemRefs = useRef<(HTMLAnchorElement | null)[]>([])
+  const mobileMenuRef = useRef<HTMLElement>(null)
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -39,13 +45,140 @@ export default function Header() {
         setIsToolsOpen(false)
         setFocusedIndex(-1)
       }
+      // Close mobile menu when clicking outside
+      if (
+        isMobileMenuOpen &&
+        mobileMenuRef.current &&
+        mobileMenuButtonRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node) &&
+        !mobileMenuButtonRef.current.contains(event.target as Node)
+      ) {
+        setIsMobileMenuOpen(false)
+        setMobileFocusedIndex(-1)
+        mobileMenuButtonRef.current?.focus()
+      }
     }
 
     document.addEventListener('mousedown', handleClickOutside)
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [])
+  }, [isMobileMenuOpen])
+
+  // Close mobile menu when pathname changes and return focus to button
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      startTransition(() => {
+        setIsMobileMenuOpen(false)
+        setMobileFocusedIndex(-1)
+        // Return focus to button after navigation
+        setTimeout(() => {
+          mobileMenuButtonRef.current?.focus()
+        }, 100)
+      })
+    }
+  }, [pathname, isMobileMenuOpen])
+
+  // Close mobile menu on escape key and return focus to button
+  useEffect(() => {
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === 'Escape' && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false)
+        setMobileFocusedIndex(-1)
+        mobileMenuButtonRef.current?.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handleEscape)
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [isMobileMenuOpen])
+
+  // Keyboard navigation for mobile menu
+  useEffect(() => {
+    if (!isMobileMenuOpen) return
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (!isMobileMenuOpen) return
+
+      const allMobileItems = [
+        ...navItems,
+        { name: 'Tools', path: '/tools' },
+        ...tools,
+      ]
+      const totalItems = allMobileItems.length
+
+      switch (event.key) {
+        case 'ArrowDown':
+          event.preventDefault()
+          setMobileFocusedIndex((prev) => {
+            const next = prev < totalItems - 1 ? prev + 1 : 0
+            mobileMenuItemRefs.current[next]?.focus()
+            return next
+          })
+          break
+
+        case 'ArrowUp':
+          event.preventDefault()
+          setMobileFocusedIndex((prev) => {
+            const next = prev > 0 ? prev - 1 : totalItems - 1
+            mobileMenuItemRefs.current[next]?.focus()
+            return next
+          })
+          break
+
+        case 'Home':
+          event.preventDefault()
+          setMobileFocusedIndex(0)
+          mobileMenuItemRefs.current[0]?.focus()
+          break
+
+        case 'End':
+          event.preventDefault()
+          const lastIndex = totalItems - 1
+          setMobileFocusedIndex(lastIndex)
+          mobileMenuItemRefs.current[lastIndex]?.focus()
+          break
+
+        case 'Tab':
+          // Allow Tab to work normally, but close menu if tabbing away
+          if (!mobileMenuRef.current?.contains(event.target as Node)) {
+            setIsMobileMenuOpen(false)
+            setMobileFocusedIndex(-1)
+          }
+          break
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isMobileMenuOpen])
+
+  // Focus first item when mobile menu opens
+  useEffect(() => {
+    if (isMobileMenuOpen && mobileMenuItemRefs.current[0]) {
+      // Small delay to ensure menu is rendered
+      setTimeout(() => {
+        mobileMenuItemRefs.current[0]?.focus()
+        setMobileFocusedIndex(0)
+      }, 100)
+    }
+  }, [isMobileMenuOpen])
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isMobileMenuOpen])
 
   // Keyboard navigation for dropdown
   useEffect(() => {
@@ -241,36 +374,149 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Mobile Menu - Simple version */}
-          <nav className="md:hidden" aria-label="Mobile navigation">
-            <label htmlFor="mobile-nav-select" className="sr-only">
-              Navigate to page
-            </label>
-            <select
-              id="mobile-nav-select"
-              value={pathname}
-              onChange={(e) => {
-                window.location.href = e.target.value
+          {/* Mobile Menu Button */}
+          <button
+            ref={mobileMenuButtonRef}
+            onClick={() => {
+              setIsMobileMenuOpen(!isMobileMenuOpen)
+              if (isMobileMenuOpen) {
+                setMobileFocusedIndex(-1)
+              }
+            }}
+            className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition-colors"
+            aria-label={isMobileMenuOpen ? 'Close mobile menu' : 'Open mobile menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
+          >
+            <motion.div
+              initial={false}
+              animate={{ rotate: isMobileMenuOpen ? 90 : 0 }}
+              transition={{
+                duration: 0.3,
+                ease: [0.4, 0, 0.2, 1]
               }}
-              className="px-3 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
-              aria-label="Mobile navigation menu"
             >
-              {navItems.map((item) => (
-                <option key={item.path} value={item.path}>
-                  {item.name}
-                </option>
-              ))}
-              <optgroup label="Tools">
-                <option value="/tools">Tools Home</option>
-                {tools.map((tool) => (
-                  <option key={tool.path} value={tool.path}>
-                    {tool.name}
-                  </option>
-                ))}
-              </optgroup>
-            </select>
-          </nav>
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6" aria-hidden="true" />
+              ) : (
+                <Menu className="w-6 h-6" aria-hidden="true" />
+              )}
+            </motion.div>
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.nav
+              ref={mobileMenuRef}
+              id="mobile-menu"
+              className="md:hidden mt-4 pb-4 border-t border-gray-200 pt-4 overflow-hidden"
+              aria-label="Mobile navigation"
+              role="menu"
+              aria-activedescendant={mobileFocusedIndex >= 0 ? `mobile-menu-item-${mobileFocusedIndex}` : undefined}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{
+                duration: 0.4,
+                ease: [0.4, 0, 0.2, 1],
+                opacity: { duration: 0.3 },
+                height: { duration: 0.4, ease: [0.4, 0, 0.2, 1] }
+              }}
+            >
+              <motion.div
+                className="flex flex-col gap-1"
+                initial={{ y: -10 }}
+                animate={{ y: 0 }}
+                exit={{ y: -10 }}
+                transition={{
+                  duration: 0.4,
+                  ease: [0.4, 0, 0.2, 1]
+                }}
+              >
+                {navItems.map((item, index) => {
+                  const isActive = pathname === item.path || (item.path !== '/' && pathname.startsWith(item.path))
+                  return (
+                    <Link
+                      key={item.path}
+                      id={`mobile-menu-item-${index}`}
+                      ref={(el) => {
+                        mobileMenuItemRefs.current[index] = el
+                      }}
+                      href={item.path}
+                      onClick={() => {
+                        setIsMobileMenuOpen(false)
+                        setMobileFocusedIndex(-1)
+                      }}
+                      onFocus={() => setMobileFocusedIndex(index)}
+                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 ${
+                        isActive
+                          ? 'bg-emerald-100 text-emerald-700'
+                          : 'text-gray-600 hover:bg-gray-100'
+                      }`}
+                      aria-current={isActive ? 'page' : undefined}
+                      role="menuitem"
+                    >
+                      {item.name}
+                    </Link>
+                  )
+                })}
+                
+                <Link
+                  id={`mobile-menu-item-${navItems.length}`}
+                  ref={(el) => {
+                    mobileMenuItemRefs.current[navItems.length] = el
+                  }}
+                  href="/tools"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false)
+                    setMobileFocusedIndex(-1)
+                  }}
+                  onFocus={() => setMobileFocusedIndex(navItems.length)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 ${
+                    isToolsActive
+                      ? 'bg-emerald-100 text-emerald-700'
+                      : 'text-gray-600 hover:bg-gray-100'
+                  }`}
+                  aria-current={isToolsActive ? 'page' : undefined}
+                  role="menuitem"
+                >
+                  Tools
+                </Link>
+
+                {tools.map((tool, toolIndex) => {
+                  const isToolActive = pathname === tool.path
+                  const itemIndex = navItems.length + 1 + toolIndex
+                  return (
+                    <Link
+                      key={tool.path}
+                      id={`mobile-menu-item-${itemIndex}`}
+                      ref={(el) => {
+                        mobileMenuItemRefs.current[itemIndex] = el
+                      }}
+                      href={tool.path}
+                      onClick={() => {
+                        setIsMobileMenuOpen(false)
+                        setMobileFocusedIndex(-1)
+                      }}
+                      onFocus={() => setMobileFocusedIndex(itemIndex)}
+                      className={`px-6 py-2 rounded-lg text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 ${
+                        isToolActive
+                          ? 'bg-emerald-100 text-emerald-700 font-medium'
+                          : 'text-gray-600 hover:bg-gray-100'
+                      }`}
+                      aria-current={isToolActive ? 'page' : undefined}
+                      role="menuitem"
+                    >
+                      {tool.name}
+                    </Link>
+                  )
+                })}
+              </motion.div>
+            </motion.nav>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   )
