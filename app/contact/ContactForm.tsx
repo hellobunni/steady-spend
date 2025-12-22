@@ -39,7 +39,7 @@ export default function ContactForm() {
         </div>
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
           Get In
-          <span className="bg-gradient-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent">
             {' '}
             Touch
           </span>

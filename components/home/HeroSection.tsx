@@ -41,7 +41,7 @@ export function HeroSection() {
             style={{ animationDelay: "0.2s" }}
           >
             Take Control of Your{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-emerald-700">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-600 to-emerald-700">
               Financial Future
             </span>
           </h1>

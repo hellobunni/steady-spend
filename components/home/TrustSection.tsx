@@ -42,7 +42,7 @@ export function TrustSection() {
         {/* Testimonials */}
         <div className="text-center mb-16">
           <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl mb-4">
-            Loved by <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-emerald-700">Thousands</span>
+            Loved by <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-600 to-emerald-700">Thousands</span>
           </h2>
           <p className="text-lg text-muted-foreground">
             Join the community of smart spenders

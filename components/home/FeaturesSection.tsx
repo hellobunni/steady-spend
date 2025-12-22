@@ -62,7 +62,7 @@ export function FeaturesSection() {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl mb-4">
             Everything You Need to{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-emerald-700">Master Your Money</span>
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-600 to-emerald-700">Master Your Money</span>
           </h2>
           <p className="text-lg text-muted-foreground">
             Powerful tools designed to simplify your finances and help you build lasting wealth.
@@ -81,7 +81,7 @@ export function FeaturesSection() {
                 style={{ animationDelay: `${0.1 + index * 0.1}s` }}
               >
                 {/* Icon */}
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`w-14 h-14 rounded-2xl bg-linear-to-br ${feature.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
                   <Icon className="w-7 h-7 text-white" />
                 </div>
 

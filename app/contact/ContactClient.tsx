@@ -58,12 +58,12 @@ export default function ContactClient() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-8"
         >
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-50 flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-emerald-100 to-emerald-50 flex items-center justify-center mx-auto mb-4">
             <Mail className="w-8 h-8 text-emerald-600" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Get In
-            <span className="bg-gradient-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent">
               {' '}
               Touch
             </span>
@@ -94,7 +94,7 @@ export default function ContactClient() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {error && (
                     <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3">
-                      <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                      <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
                       <p className="text-sm text-red-800">{error}</p>
                     </div>
                   )}
@@ -147,7 +147,7 @@ export default function ContactClient() {
                     type="submit"
                     size="lg"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white rounded-xl h-12 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-linear-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white rounded-xl h-12 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <>
