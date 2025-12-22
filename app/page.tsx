@@ -1,5 +1,9 @@
 import type { Metadata } from 'next'
-import HomeClient from './HomeClient'
+import { Layout } from '@/components/layout/Layout'
+import { HeroSection } from '@/components/home/HeroSection'
+import { FeaturesSection } from '@/components/home/FeaturesSection'
+import { TrustSection } from '@/components/home/TrustSection'
+import { CTASection } from '@/components/home/CTASection'
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com'
 
@@ -47,5 +51,12 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-  return <HomeClient />
+  return (
+    <Layout>
+      <HeroSection />
+      <FeaturesSection />
+      <TrustSection />
+      <CTASection />
+    </Layout>
+  )
 }
