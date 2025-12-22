@@ -53,7 +53,7 @@ export default function HomeClient() {
             <Link href="/tools/monthly-budget">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-8 py-6 text-lg rounded-xl"
+                className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-8 py-6 text-lg rounded-xl cursor-pointer"
               >
                 Try Budget Calculator
                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -101,7 +101,7 @@ export default function HomeClient() {
                 <Link href="/tools/monthly-budget">
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-8 rounded-xl"
+                    className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-8 rounded-xl cursor-pointer"
                   >
                     Get Started
                     <ArrowRight className="w-5 h-5 ml-2" />

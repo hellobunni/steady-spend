@@ -28,7 +28,7 @@ export default function Header() {
   const [isToolsOpen, setIsToolsOpen] = useState(false)
   const [focusedIndex, setFocusedIndex] = useState(-1)
   const toolsRef = useRef<HTMLDivElement>(null)
-  const buttonRef = useRef<HTMLButtonElement>(null)
+  const buttonRef = useRef<HTMLAnchorElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
   const menuItemRefs = useRef<(HTMLAnchorElement | null)[]>([])
 
@@ -154,22 +154,16 @@ export default function Header() {
               onMouseEnter={() => setIsToolsOpen(true)}
               onMouseLeave={() => setIsToolsOpen(false)}
             >
-              <button
+              <Link
                 ref={buttonRef}
+                href="/tools"
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 ${
                   isToolsActive
                     ? 'bg-emerald-100 text-emerald-700'
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
-                onClick={() => {
-                  setIsToolsOpen(!isToolsOpen)
-                  setFocusedIndex(-1)
-                }}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    setIsToolsOpen(!isToolsOpen)
-                  } else if (e.key === 'ArrowDown' && !isToolsOpen) {
+                  if (e.key === 'ArrowDown' && !isToolsOpen) {
                     e.preventDefault()
                     setIsToolsOpen(true)
                   }
@@ -177,24 +171,24 @@ export default function Header() {
                 aria-expanded={isToolsOpen}
                 aria-haspopup="true"
                 aria-controls={menuId}
-                aria-label="Tools menu"
               >
                 Tools
                 <ChevronDown 
                   className={`w-4 h-4 transition-transform ${isToolsOpen ? 'rotate-180' : ''}`}
                   aria-hidden="true"
                 />
-              </button>
+              </Link>
 
               {isToolsOpen && (
                 <div 
                   ref={menuRef}
                   id={menuId}
-                  className="absolute top-full left-0 mt-1 w-56 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden z-50"
+                  className="absolute top-full left-0 pt-1 w-56 z-50"
                   role="menu"
                   aria-label="Tools submenu"
                   aria-activedescendant={focusedIndex >= 0 ? `tool-${focusedIndex}` : undefined}
                 >
+                  <div className="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
                   {tools.map((tool, index) => {
                     const isToolActive = pathname === tool.path
                     return (
@@ -205,7 +199,7 @@ export default function Header() {
                           menuItemRefs.current[index] = el
                         }}
                         href={tool.path}
-                        className={`block px-4 py-2 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-inset ${
+                        className={`block px-4 py-2 text-sm transition-colors focus:outline-none ${
                           isToolActive
                             ? 'bg-emerald-100 text-emerald-700 font-medium'
                             : 'text-gray-600 hover:bg-gray-100'
@@ -223,6 +217,7 @@ export default function Header() {
                       </Link>
                     )
                   })}
+                  </div>
                 </div>
               )}
             </div>
