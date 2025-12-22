@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { formatCurrency } from '@/lib/utils'
-import { getExpenseCategories, type ExpenseCategory } from '@/lib/calculations/budget'
+import { getExpenseCategories } from '@/lib/calculations/budget'
 import { PieChart } from 'lucide-react'
 
 type BudgetChartProps = {

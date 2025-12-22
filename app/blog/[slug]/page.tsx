@@ -206,7 +206,11 @@ export default async function BlogPostPage({ params }: Props) {
             components={{
               ComparisonTable,
               Accordion,
-              img: (props: any) => {
+              img: (props: { src?: string; alt?: string; className?: string }) => {
+                if (!props.src) {
+                  return null;
+                }
+                
                 const className = props.className || '';
                 const isLogo = className.includes('logo-image');
                 const isScreenshot = className.includes('screenshot-image');
@@ -227,7 +231,7 @@ export default async function BlogPostPage({ params }: Props) {
                           height: 'auto',
                           maxWidth: '100%'
                         }}
-                        unoptimized={props.src?.includes('cloudinary.com') || props.src?.includes('clearbit.com')}
+                        unoptimized={props.src.includes('cloudinary.com') || props.src.includes('clearbit.com')}
                       />
                     </div>
                   );
@@ -241,7 +245,7 @@ export default async function BlogPostPage({ params }: Props) {
                         width={810}
                         height={540}
                         className="w-full h-auto rounded-lg shadow-sm"
-                        unoptimized={props.src?.includes('cloudinary.com')}
+                        unoptimized={props.src.includes('cloudinary.com')}
                       />
                     </div>
                   );
@@ -254,7 +258,7 @@ export default async function BlogPostPage({ params }: Props) {
                     width={800}
                     height={500}
                     className="w-full h-auto rounded-lg mb-4"
-                    unoptimized={props.src?.includes('cloudinary.com')}
+                    unoptimized={props.src.includes('cloudinary.com')}
                   />
                 );
               },

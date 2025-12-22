@@ -1,68 +1,85 @@
 import Link from 'next/link'
-import { getBlogPosts } from '@/lib/blog/getBlogPosts'
+import { Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react'
 
 export default function Footer() {
-  const blogPosts = getBlogPosts()
-  const popularPosts = blogPosts.slice(0, 3)
-
   return (
     <footer className="bg-white border-t border-gray-200 mt-0">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* Tools */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">Tools</h3>
-            <nav aria-label="Footer tools navigation" className="flex flex-col gap-2">
-              <Link href="/tools" className="text-sm text-gray-600 hover:text-emerald-600 transition-colors">
-                All Tools
-              </Link>
-              <Link href="/tools/monthly-budget" className="text-sm text-gray-600 hover:text-emerald-600 transition-colors">
-                Monthly Budget Calculator
-              </Link>
-              <Link href="/tools/take-home-pay" className="text-sm text-gray-600 hover:text-emerald-600 transition-colors">
-                Take Home Pay Calculator
-              </Link>
-            </nav>
+        <div className="flex flex-col items-center gap-4">
+          <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+            <Link href="/" className="text-gray-600 hover:text-emerald-600 transition-colors">
+              Home
+            </Link>
+            <Link href="/tools" className="text-gray-600 hover:text-emerald-600 transition-colors">
+              Tools
+            </Link>
+            <Link href="/blog" className="text-gray-600 hover:text-emerald-600 transition-colors">
+              Blog
+            </Link>
+            <Link href="/guides" className="text-gray-600 hover:text-emerald-600 transition-colors">
+              Guides
+            </Link>
+            <Link href="/privacy-policy" className="text-gray-600 hover:text-emerald-600 transition-colors">
+              Privacy
+            </Link>
+            <Link href="/disclaimer" className="text-gray-600 hover:text-emerald-600 transition-colors">
+              Disclaimer
+            </Link>
+            <Link href="/cookie-policy" className="text-gray-600 hover:text-emerald-600 transition-colors">
+              Cookie Policy
+            </Link>
+          </nav>
+          
+          {/* Social Media Links */}
+          <div className="flex items-center gap-4 mt-2">
+            <a
+              href="https://www.facebook.com/steadyspend"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-emerald-600 transition-colors"
+              aria-label="Facebook"
+            >
+              <Facebook className="w-5 h-5" />
+            </a>
+            <a
+              href="https://twitter.com/steadyspend"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-emerald-600 transition-colors"
+              aria-label="Twitter"
+            >
+              <Twitter className="w-5 h-5" />
+            </a>
+            <a
+              href="https://www.instagram.com/steadyspend"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-emerald-600 transition-colors"
+              aria-label="Instagram"
+            >
+              <Instagram className="w-5 h-5" />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/steadyspend"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-emerald-600 transition-colors"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="w-5 h-5" />
+            </a>
+            <a
+              href="https://www.youtube.com/@steadyspend"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-emerald-600 transition-colors"
+              aria-label="YouTube"
+            >
+              <Youtube className="w-5 h-5" />
+            </a>
           </div>
-
-          {/* Blog */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">Blog</h3>
-            <nav aria-label="Footer blog navigation" className="flex flex-col gap-2">
-              <Link href="/blog" className="text-sm text-gray-600 hover:text-emerald-600 transition-colors">
-                All Posts
-              </Link>
-              {popularPosts.map((post) => (
-                <Link
-                  key={post.slug}
-                  href={`/blog/${post.slug}`}
-                  className="text-sm text-gray-600 hover:text-emerald-600 transition-colors"
-                >
-                  {post.title}
-                </Link>
-              ))}
-            </nav>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">Legal</h3>
-            <nav aria-label="Footer legal navigation" className="flex flex-col gap-2">
-              <Link href="/privacy-policy" className="text-sm text-gray-600 hover:text-emerald-600 transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/cookie-policy" className="text-sm text-gray-600 hover:text-emerald-600 transition-colors">
-                Cookie Policy
-              </Link>
-              <Link href="/disclaimer" className="text-sm text-gray-600 hover:text-emerald-600 transition-colors">
-                Disclaimer
-              </Link>
-            </nav>
-          </div>
-        </div>
-
-        <div className="border-t border-gray-200 pt-6">
-          <p className="text-sm text-gray-500 text-center">© 2025 SteadySpend.com · Understand your money, spend with confidence</p>
+          
+          <p className="text-sm text-gray-500">© 2025 SteadySpend.com · Understand your money, spend with confidence</p>
         </div>
       </div>
     </footer>

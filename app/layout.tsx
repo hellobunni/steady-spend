@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com';
 
   // SiteNavigationElement structured data
   const navigationSchema = {
@@ -52,12 +52,42 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {
             "@type": "SiteNavigationElement",
             "name": "Take Home Pay Calculator",
-            "url": `${baseUrl}/tools/take-home-pay`
+            "url": `${baseUrl}/tools/take-home-pay-calculator`
           }
         ]
       }
     ]
-  }
+  };
+
+  // Structured Data - Website Schema
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "SteadySpend",
+    "url": baseUrl,
+    "description": "Free budgeting tools and guides to help you understand your money and spend with confidence.",
+    "logo": `${baseUrl}/logo-vertical.png`,
+    "sameAs": [
+      "https://www.facebook.com/steadyspend",
+      "https://twitter.com/steadyspend",
+      "https://www.instagram.com/steadyspend",
+      "https://www.linkedin.com/company/steadyspend",
+      "https://www.youtube.com/@steadyspend"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Service",
+      "availableLanguage": "English"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `${baseUrl}/blog?search={search_term_string}`
+      },
+      "query-input": "required name=search_term_string"
+    }
+  };
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -68,12 +98,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify(navigationSchema),
           }}
         />
-      <Script
-  async
-  strategy="afterInteractive"
-  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5741266771673267"
-  crossOrigin="anonymous"
-/>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
+          }}
+        />
+        <Script
+          async
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5741266771673267"
+          crossOrigin="anonymous"
+        />
         <Script
           id="gtm-head"
           strategy="afterInteractive"

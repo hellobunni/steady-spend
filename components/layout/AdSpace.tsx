@@ -50,19 +50,23 @@ export default function AdSpace({ size = 'banner', id, className = '' }: AdSpace
     }
   }, [adsenseEnabled, adsenseClientId])
 
-  // If AdSense is enabled and configured, render AdSense ad
-  if (adsenseEnabled && adsenseClientId && adsenseSlotId && id && typeof window !== 'undefined') {
-    useEffect(() => {
+  useEffect(() => {
+    // Initialize AdSense ad if enabled and configured
+    if (adsenseEnabled && adsenseClientId && adsenseSlotId && id && typeof window !== 'undefined') {
       try {
-        // @ts-ignore - adsbygoogle is loaded dynamically
+        // @ts-expect-error - adsbygoogle is loaded dynamically
         if (window.adsbygoogle && !window.adsbygoogle.loaded) {
-          // @ts-ignore
+          // @ts-expect-error - adsbygoogle is loaded dynamically
           window.adsbygoogle.push({})
         }
       } catch (err) {
         console.error('AdSense error:', err)
       }
-    }, [])
+    }
+  }, [adsenseEnabled, adsenseClientId, adsenseSlotId, id])
+
+  // If AdSense is enabled and configured, render AdSense ad
+  if (adsenseEnabled && adsenseClientId && adsenseSlotId && id && typeof window !== 'undefined') {
 
     return (
       <div

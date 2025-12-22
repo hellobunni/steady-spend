@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/take-home-pay-calculator',
     '/guides',
     '/blog',
+    '/contact',
     '/privacy-policy',
     '/cookie-policy',
     '/disclaimer',

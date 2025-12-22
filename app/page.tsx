@@ -4,9 +4,9 @@ import HomeClient from './HomeClient'
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com'
 
 export const metadata: Metadata = {
-  title: 'Free Budget Calculator & Money Management Tools | SteadySpend',
+  title: 'Free Budget Calculator & Tools | SteadySpend',
   description:
-    'Track your income and expenses with our free monthly budget calculator. Understand where your money goes and make confident financial decisions. No sign-up required.',
+    'Track income and expenses with our free monthly budget calculator. See where your money goes and make confident financial decisions. No sign-up.',
   keywords: [
     'budget calculator',
     'monthly budget',
@@ -21,9 +21,9 @@ export const metadata: Metadata = {
     canonical: baseUrl,
   },
   openGraph: {
-    title: 'Free Budget Calculator & Money Management Tools | SteadySpend',
+    title: 'Free Budget Calculator & Tools | SteadySpend',
     description:
-      'Track your income and expenses with our free monthly budget calculator. Understand where your money goes and make confident financial decisions.',
+      'Track income and expenses with our free monthly budget calculator. See where your money goes and make confident financial decisions.',
     url: baseUrl,
     siteName: 'SteadySpend',
     images: [
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free Budget Calculator & Money Management Tools | SteadySpend',
+    title: 'Free Budget Calculator & Tools | SteadySpend',
     description:
-      'Track your income and expenses with our free monthly budget calculator. No sign-up required.',
+      'Track income and expenses with our free monthly budget calculator. No sign-up required.',
     images: [`${baseUrl}/logo-vertical.png`],
   },
 }
