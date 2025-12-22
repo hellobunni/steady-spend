@@ -14,69 +14,59 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com';
-
 export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
-  title: {
-    default: "SteadySpend - Understand your money, spend with confidence",
-    template: "%s | SteadySpend",
-  },
+  title: "SteadySpend - Understand your money, spend with confidence",
   description: "Free budgeting tools and guides to help you understand your money and spend with confidence.",
-  keywords: ["budget calculator", "budgeting tools", "personal finance", "money management", "budgeting guide"],
-  authors: [{ name: "SteadySpend Team" }],
-  creator: "SteadySpend",
-  publisher: "SteadySpend",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: baseUrl,
-    siteName: "SteadySpend",
-    title: "SteadySpend - Understand your money, spend with confidence",
-    description: "Free budgeting tools and guides to help you understand your money and spend with confidence.",
-    images: [
-      {
-        url: `${baseUrl}/logo-vertical.png`,
-        width: 1200,
-        height: 630,
-        alt: "SteadySpend Logo",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "SteadySpend - Understand your money, spend with confidence",
-    description: "Free budgeting tools and guides to help you understand your money and spend with confidence.",
-    images: [`${baseUrl}/logo-vertical.png`],
-    creator: "@steadyspend",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  alternates: {
-    canonical: baseUrl,
-  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com';
 
-  // Structured Data - Organization Schema
-  const organizationSchema = {
+  // SiteNavigationElement structured data
+  const navigationSchema = {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "SiteNavigationElement",
+    "name": "Main Navigation",
+    "url": baseUrl,
+    "hasPart": [
+      {
+        "@type": "SiteNavigationElement",
+        "name": "Home",
+        "url": `${baseUrl}/`
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "name": "Blog",
+        "url": `${baseUrl}/blog`
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "name": "Tools",
+        "url": `${baseUrl}/tools`,
+        "hasPart": [
+          {
+            "@type": "SiteNavigationElement",
+            "name": "Monthly Budget Calculator",
+            "url": `${baseUrl}/tools/monthly-budget`
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "name": "Take Home Pay Calculator",
+            "url": `${baseUrl}/tools/take-home-pay-calculator`
+          }
+        ]
+      }
+    ]
+  };
+
+  // Structured Data - Website Schema
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
     "name": "SteadySpend",
     "url": baseUrl,
-    "logo": `${baseUrl}/logo-vertical.png`,
     "description": "Free budgeting tools and guides to help you understand your money and spend with confidence.",
+    "logo": `${baseUrl}/logo-vertical.png`,
     "sameAs": [
       "https://www.facebook.com/steadyspend",
       "https://twitter.com/steadyspend",
@@ -88,16 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       "@type": "ContactPoint",
       "contactType": "Customer Service",
       "availableLanguage": "English"
-    }
-  };
-
-  // Structured Data - Website Schema
-  const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "SteadySpend",
-    "url": baseUrl,
-    "description": "Free budgeting tools and guides to help you understand your money and spend with confidence.",
+    },
     "potentialAction": {
       "@type": "SearchAction",
       "target": {
@@ -111,11 +92,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
+            __html: JSON.stringify(navigationSchema),
           }}
         />
         <script
@@ -124,43 +104,37 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify(websiteSchema),
           }}
         />
-        {process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID && (
-          <Script
-            async
-            strategy="afterInteractive"
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}`}
-            crossOrigin="anonymous"
-          />
-        )}
-        {process.env.NEXT_PUBLIC_GTM_ID && (
-          <Script
-            id="gtm-head"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
-                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_ID}');
-              `,
-            }}
-          />
-        )}
+        <Script
+          async
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5741266771673267"
+          crossOrigin="anonymous"
+        />
+        <Script
+          id="gtm-head"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-KVZ8VQQS');
+            `,
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {process.env.NEXT_PUBLIC_GTM_ID && (
-          <noscript>
-            <iframe
-              src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
-              height="0"
-              width="0"
-              style={{ display: 'none', visibility: 'hidden' }}
-            />
-          </noscript>
-        )}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-KVZ8VQQS"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
         <Layout>{children}</Layout>
       </body>
     </html>

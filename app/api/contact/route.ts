@@ -3,15 +3,35 @@ import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
   try {
-    // Check for API key
-    const apiKey = process.env.RESEND_API
-    if (!apiKey) {
-      console.error('RESEND_API environment variable is not set')
+    // Validate environment variables first
+    const missingVars: string[] = []
+    
+    if (!process.env.RESEND_API) {
+      missingVars.push('RESEND_API')
+    }
+    if (!process.env.CONTACT_EMAIL) {
+      missingVars.push('CONTACT_EMAIL')
+    }
+    if (!process.env.FROM_EMAIL) {
+      missingVars.push('FROM_EMAIL')
+    }
+
+    if (missingVars.length > 0) {
+      console.error(`Missing environment variables: ${missingVars.join(', ')}`)
       return NextResponse.json(
-        { error: 'Email service is not configured. Please contact support.' },
+        { 
+          error: 'Email service is not configured. Please contact support.',
+          details: process.env.NODE_ENV === 'development' 
+            ? `Missing: ${missingVars.join(', ')}` 
+            : undefined
+        },
         { status: 500 }
       )
     }
+
+    const apiKey = process.env.RESEND_API!
+    const recipientEmail = process.env.CONTACT_EMAIL!
+    const fromEmail = process.env.FROM_EMAIL!
 
     const resend = new Resend(apiKey)
     const body = await request.json()
@@ -31,29 +51,6 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { error: 'Invalid email format' },
         { status: 400 }
-      )
-    }
-
-    // Email configuration:
-    // - 'to': Your email where contact form submissions are received
-    // - 'from': Must be from verified domain (steadyspend.com)
-    // - 'replyTo': User's email so you can reply directly to them
-    const recipientEmail = process.env.CONTACT_EMAIL
-    const fromEmail = process.env.FROM_EMAIL
-
-    if (!recipientEmail) {
-      console.error('CONTACT_EMAIL environment variable is not set')
-      return NextResponse.json(
-        { error: 'Email service is not configured. Please contact support.' },
-        { status: 500 }
-      )
-    }
-
-    if (!fromEmail) {
-      console.error('FROM_EMAIL environment variable is not set')
-      return NextResponse.json(
-        { error: 'Email service is not configured. Please contact support.' },
-        { status: 500 }
       )
     }
 
