@@ -47,7 +47,30 @@ export function loadBudgetData(): BudgetData {
   try {
     const stored = localStorage.getItem(STORAGE_KEY)
     if (!stored) return defaultBudgetData
-    return JSON.parse(stored) as BudgetData
+    const parsed = JSON.parse(stored) as Partial<BudgetData>
+    
+    // Handle migration from old allocation format or ensure expenses exists
+    if (!parsed.expenses || typeof parsed.expenses !== 'object') {
+      return {
+        income: parsed.income || '',
+        expenses: defaultBudgetData.expenses,
+      }
+    }
+    
+    // Ensure all expense fields exist
+    return {
+      income: parsed.income || '',
+      expenses: {
+        housing: parsed.expenses.housing ?? '',
+        utilities: parsed.expenses.utilities ?? '',
+        transportation: parsed.expenses.transportation ?? '',
+        food: parsed.expenses.food ?? '',
+        insurance: parsed.expenses.insurance ?? '',
+        debt: parsed.expenses.debt ?? '',
+        subscriptions: parsed.expenses.subscriptions ?? '',
+        miscellaneous: parsed.expenses.miscellaneous ?? '',
+      },
+    }
   } catch (error) {
     console.error('Failed to load budget data:', error)
     return defaultBudgetData
@@ -62,4 +85,3 @@ export function clearBudgetData(): void {
     console.error('Failed to clear budget data:', error)
   }
 }
-

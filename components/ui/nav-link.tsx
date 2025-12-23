@@ -21,7 +21,7 @@ const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(
       <Link
         ref={ref}
         href={href}
-        className={cn(className, isActive && activeClassName)}
+        className={cn('cursor-pointer', className, isActive && activeClassName)}
         {...props}
       />
     )

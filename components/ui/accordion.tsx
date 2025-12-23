@@ -12,6 +12,8 @@ interface AccordionItemProps {
 
 function AccordionItem({ question, answer, defaultOpen = false }: AccordionItemProps) {
   const [isOpen, setIsOpen] = React.useState(defaultOpen)
+  const itemRef = React.useRef<HTMLDivElement>(null)
+  const wasOpenRef = React.useRef(isOpen)
 
   // Generate a stable ID for accessibility
   const contentId = React.useMemo(
@@ -22,19 +24,38 @@ function AccordionItem({ question, answer, defaultOpen = false }: AccordionItemP
   // Check if answer is a string or ReactNode
   const isStringAnswer = typeof answer === 'string'
 
+  const handleToggle = () => {
+    const willBeOpen = !isOpen
+    setIsOpen(willBeOpen)
+
+    // Scroll into view when opening (not when closing)
+    if (willBeOpen && !wasOpenRef.current) {
+      // Small delay to let the animation start
+      setTimeout(() => {
+        itemRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'nearest',
+        })
+      }, 100)
+    }
+
+    wasOpenRef.current = willBeOpen
+  }
+
   return (
-    <div className="border-b border-gray-200 last:border-b-0">
+    <div ref={itemRef} className="border-b border-gray-200 last:border-b-0">
       <button
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between py-4 text-left focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded-md px-2 -mx-2"
+        onClick={handleToggle}
+        className="w-full flex items-center justify-between py-4 text-left focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded-md px-2 -mx-2 cursor-pointer transition-colors duration-200 hover:bg-gray-50/50"
         aria-expanded={isOpen}
         aria-controls={contentId}
       >
         <h3 className="text-xl font-semibold text-gray-900 pr-4">{question}</h3>
         <ChevronDown
           className={cn(
-            'h-5 w-5 text-gray-600 shrink-0 transition-transform duration-200',
+            'h-5 w-5 text-gray-600 shrink-0 transition-transform duration-300 ease-in-out',
             isOpen && 'transform rotate-180'
           )}
           aria-hidden="true"
@@ -43,7 +64,7 @@ function AccordionItem({ question, answer, defaultOpen = false }: AccordionItemP
       <div
         id={contentId}
         className={cn(
-          'overflow-hidden transition-all duration-200 ease-in-out',
+          'overflow-hidden transition-all duration-300 ease-in-out',
           isOpen ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
         )}
         aria-hidden={!isOpen}

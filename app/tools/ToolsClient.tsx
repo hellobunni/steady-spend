@@ -1,126 +1,144 @@
 'use client'
 
 import Link from 'next/link'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Calculator, DollarSign, ArrowRight, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Calculator, ArrowRight, Sparkles } from 'lucide-react'
-import { motion } from 'motion/react'
+
+type Tool = {
+  icon: typeof Calculator
+  title: string
+  description: string
+  link: string
+  status: 'live' | 'coming-soon'
+  gradient: string
+  pill?: string
+}
+
+const tools: Tool[] = [
+  {
+    icon: Calculator,
+    title: 'Monthly Budget Calculator',
+    description:
+      'Create a personalized budget, balance your categories, and see how changes affect your monthly cash flow.',
+    link: '/tools/monthly-budget',
+    status: 'live',
+    gradient: 'from-emerald-500 to-teal-500',
+    pill: 'Popular',
+  },
+  {
+    icon: DollarSign,
+    title: 'Take-Home Pay Calculator',
+    description:
+      'Estimate what actually lands in your account after taxes and deductions so you can plan with confidence.',
+    link: '/tools/take-home-pay-calculator',
+    status: 'coming-soon',
+    gradient: 'from-sky-500 to-blue-500',
+  },
+]
 
 export default function ToolsClient() {
-  const tools = [
-    {
-      icon: Calculator,
-      title: 'Monthly Budget Calculator',
-      description:
-        'Track your income and expenses. See where your money goes and how much you can save each month.',
-      link: '/tools/monthly-budget',
-      tags: ['Budgeting', 'Planning'],
-      status: 'available',
-    },
-    {
-      icon: Calculator,
-      title: 'Take Home Pay Calculator',
-      description:
-        'Calculate your take home pay after taxes and deductions. See how much money you have left after all expenses.',
-      link: '/tools/take-home-pay-calculator',
-      tags: ['Salary', 'Taxes', 'Deductions'],
-      status: 'coming-soon',
-    }
-    // Placeholder for future tools
-  ]
-
   return (
-    <div className="min-h-screen py-12 px-4">
-      <div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
-          <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
-            <Sparkles className="w-4 h-4" />
-            Free Financial Tools
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Smart Tools for
-            <span className="bg-linear-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent">
-              {' '}
-              Better Decisions
+    <div className="bg-white">
+      <section className="py-16 lg:py-24 gradient-hero">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center space-y-6">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium text-primary">
+              <Sparkles className="w-4 h-4" />
+              Free financial tools
             </span>
-          </h1>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Simple calculators and tools to help you understand your finances and make confident
-            choices.
-          </p>
-        </motion.div>
+            <div className="space-y-4">
+              <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-foreground">
+                Financial calculators that feel calm and clear
+              </h1>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Pick a calculator, adjust a few numbers, and see where your money goes. No accounts,
+                no pressure—just straightforward guidance.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-sm text-foreground">
+              <span className="px-3 py-1 rounded-full bg-white/70 border border-border">
+                No sign-up needed
+              </span>
+              <span className="px-3 py-1 rounded-full bg-white/70 border border-border">
+                Runs in your browser
+              </span>
+              <span className="px-3 py-1 rounded-full bg-white/70 border border-border">
+                Reset anytime
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        {/* Tools Grid */}
-        <div className="grid gap-6">
-          {tools.map((tool, index) => (
-            <motion.div
-              key={tool.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <Card className="border-0 shadow-sm bg-white rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                <CardHeader className="pb-4">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-start gap-4">
-                      <div className="w-14 h-14 rounded-xl bg-linear-to-br from-emerald-100 to-emerald-50 flex items-center justify-center shrink-0">
-                        <tool.icon className="w-7 h-7 text-emerald-600" />
+      <section className="py-14 lg:py-20 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-5xl mx-auto grid gap-8 md:grid-cols-2">
+            {tools.map((tool) => {
+              const Icon = tool.icon
+              const isComingSoon = tool.status === 'coming-soon'
+
+              return (
+                <div
+                  key={tool.title}
+                  className={`glass-card p-8 lg:p-9 h-full transition-all duration-300 ${
+                    isComingSoon ? 'opacity-80' : 'hover:-translate-y-1 hover:shadow-glow'
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-4 mb-6">
+                    <div className="flex items-center gap-4">
+                      <div
+                        className={`w-14 h-14 rounded-2xl bg-linear-to-br ${tool.gradient} flex items-center justify-center`}
+                      >
+                        <Icon className="w-7 h-7 text-white" />
                       </div>
                       <div>
-                        <CardTitle className="text-2xl font-semibold text-gray-900 mb-2">
+                        <p className="text-xs uppercase tracking-wide text-muted-foreground mb-1">
+                          {isComingSoon ? 'Coming soon' : 'Live tool'}
+                        </p>
+                        <h2 className="font-display text-2xl font-semibold text-foreground">
                           {tool.title}
-                        </CardTitle>
-                        <div className="flex gap-2 mb-3">
-                          {tool.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
+                        </h2>
                       </div>
                     </div>
+                    {tool.pill ? (
+                      <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
+                        {tool.pill}
+                      </span>
+                    ) : null}
                   </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 mb-6 leading-relaxed">{tool.description}</p>
-                  <Link href={tool.link}>
-                    <Button className="bg-linear-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white rounded-xl">
-                      {tool.status === 'available' ? 'Use This Tool' : 'Coming Soon'}
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
 
-        {/* Coming Soon */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mt-12 text-center"
-        >
-          <Card className="border-0 shadow-sm bg-linear-to-br from-gray-50 to-emerald-50/30 rounded-2xl overflow-hidden">
-            <CardContent className="p-8">
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">More Tools Coming Soon</h3>
-              <p className="text-gray-600">
-                We&apos;re working on more calculators and tools to help you with savings, debt
-                payoff, retirement planning, and more.
-              </p>
-            </CardContent>
-          </Card>
-        </motion.div>
-      </div>
+                  <p className="text-muted-foreground leading-relaxed mb-8">{tool.description}</p>
+
+                  <div className="flex flex-wrap items-center gap-3">
+                    {isComingSoon ? (
+                      <Button variant="outline" disabled className="w-full sm:w-auto">
+                        Coming Soon
+                      </Button>
+                    ) : (
+                      <Button asChild className="w-full sm:w-auto group">
+                        <Link href={tool.link}>
+                          Open calculator
+                          <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        </Link>
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          <div className="max-w-4xl mx-auto mt-14 text-center space-y-3">
+            <h3 className="font-display text-2xl font-semibold text-foreground">
+              More calm money tools are on the way
+            </h3>
+            <p className="text-muted-foreground">
+              We&apos;re adding payoff planners, savings trackers, and gentle reminders to help you
+              stay consistent. Have a request? Reach out and we&apos;ll prioritize it.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

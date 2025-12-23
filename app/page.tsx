@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { HeroSection } from '@/components/home/HeroSection'
 import { FeaturesSection } from '@/components/home/FeaturesSection'
-import { TrustSection } from '@/components/home/TrustSection'
 import { CTASection } from '@/components/home/CTASection'
 import { FeaturedPostsSection } from '@/components/home/FeaturedPostsSection'
 

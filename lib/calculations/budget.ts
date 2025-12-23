@@ -61,4 +61,3 @@ export function getExpenseCategories(
 
   return categories.sort((a, b) => b.value - a.value)
 }
-
