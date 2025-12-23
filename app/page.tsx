@@ -3,6 +3,7 @@ import { HeroSection } from '@/components/home/HeroSection'
 import { FeaturesSection } from '@/components/home/FeaturesSection'
 import { TrustSection } from '@/components/home/TrustSection'
 import { CTASection } from '@/components/home/CTASection'
+import { FeaturedPostsSection } from '@/components/home/FeaturedPostsSection'
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com'
 
@@ -53,8 +54,9 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+
+      <FeaturedPostsSection />
       <FeaturesSection />
-      <TrustSection />
       <CTASection />
     </>
   )

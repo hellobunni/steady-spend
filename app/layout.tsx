@@ -4,6 +4,7 @@ import "./globals.css";
 import Script from "next/script";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { Toaster } from "@/components/ui/toast";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
@@ -143,6 +144,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </main>
           <Footer />
         </div>
+        <Toaster />
       </body>
     </html>
   );

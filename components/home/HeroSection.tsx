@@ -1,8 +1,21 @@
 'use client'
 
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Book, BookOpen, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { motion } from "motion/react";
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 30 },
+  animate: { opacity: 1, y: 0 },
+};
+
+const springTransition = {
+  type: "spring" as const,
+  stiffness: 100,
+  damping: 15,
+  mass: 1,
+};
 
 export function HeroSection() {
   return (
@@ -27,38 +40,41 @@ export function HeroSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div 
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8 opacity-0 animate-fade-in-up border-none bg-white"
-            style={{ animationDelay: "0.1s" }}
+          <motion.div 
+            {...fadeInUp}
+            transition={{ ...springTransition, delay: 0.1 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8 border-none bg-white"
           >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-foreground">Smart budgeting made simple</span>
-          </div>
+            <BookOpen className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium text-foreground">Free guides & tools for smarter spending</span>
+          </motion.div>
 
           {/* Headline */}
-          <h1 
-            className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight mb-6 opacity-0 animate-fade-in-up"
-            style={{ animationDelay: "0.2s" }}
+          <motion.h1 
+            {...fadeInUp}
+            transition={{ ...springTransition, delay: 0.2 }}
+            className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight mb-6"
           >
-            Take Control of Your{" "}
+            Your Guide to{" "}
             <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-600 to-emerald-700">
-              Financial Future
+              Smarter Spending
             </span>
-          </h1>
+          </motion.h1>
 
           {/* Subheadline */}
-          <p 
-            className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 opacity-0 animate-fade-in-up"
-            style={{ animationDelay: "0.3s" }}
+          <motion.p 
+            {...fadeInUp}
+            transition={{ ...springTransition, delay: 0.3 }}
+            className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
           >
-            Modern budgeting tools and financial insights that help you spend smarter, 
-            save more, and achieve your money goals faster.
-          </p>
+            Practical money tips, helpful budgeting guides, and free tools to help you take control of your finances — no signup required.
+          </motion.p>
 
           {/* CTAs */}
-          <div 
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in-up"
-            style={{ animationDelay: "0.4s" }}
+          <motion.div 
+            {...fadeInUp}
+            transition={{ ...springTransition, delay: 0.4 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Button 
               size="lg" 
@@ -66,7 +82,7 @@ export function HeroSection() {
               asChild
             >
               <Link href="/tools/monthly-budget">
-                Start Budgeting Free
+                Read Latest Posts
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
@@ -77,10 +93,10 @@ export function HeroSection() {
               asChild
             >
               <Link href="/tools">
-                Explore Tools
+                Try Our Calculators
               </Link>
             </Button>
-          </div>
+          </motion.div>
         </div>
       </div>
 
