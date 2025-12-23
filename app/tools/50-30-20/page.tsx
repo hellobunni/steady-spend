@@ -3,7 +3,7 @@ import Link from 'next/link'
 import FiftyThirtyTwentyCalculator from './FiftyThirtyTwentyCalculator'
 import Breadcrumbs from '@/components/layout/Breadcrumbs'
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com'
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com'
 
 export const metadata: Metadata = {
   title: '50/30/20 Budget Calculator | SteadySpend',

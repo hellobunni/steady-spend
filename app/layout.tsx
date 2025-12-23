@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com';
 
   // SiteNavigationElement structured data
   const navigationSchema = {

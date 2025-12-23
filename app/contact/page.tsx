@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import ContactForm from './ContactForm'
 import Breadcrumbs from '@/components/layout/Breadcrumbs'
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com'
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com'
 
 export const metadata: Metadata = {
   title: 'Contact Us | SteadySpend',

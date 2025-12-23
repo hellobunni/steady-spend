@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com';
   const postUrl = `${baseUrl}/blog/${slug}`;
 
   return {
@@ -85,7 +85,7 @@ export default async function BlogPostPage({ params }: Props) {
     3
   );
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com';
   const postUrl = `${baseUrl}/blog/${slug}`;
 
   // Article Structured Data

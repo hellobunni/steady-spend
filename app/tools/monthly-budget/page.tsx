@@ -4,7 +4,7 @@ import BudgetCalculator from './BudgetCalculator'
 import Breadcrumbs from '@/components/layout/Breadcrumbs'
 import { Accordion } from '@/components/ui/accordion'
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com';
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com';
 
 export const metadata: Metadata = {
   title: 'Monthly Budget Calculator | SteadySpend',

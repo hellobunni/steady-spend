@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Calculator, Clock } from 'lucide-react'
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com'
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com'
 
 export const metadata: Metadata = {
   title: 'Take-Home Pay Calculator | SteadySpend',
