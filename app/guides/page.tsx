@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import GuidesClient from './GuidesClient'
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com'
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com'
 
 export const metadata: Metadata = {
   title: 'Free Financial Guides & Money Management Tips | SteadySpend',

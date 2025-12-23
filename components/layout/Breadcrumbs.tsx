@@ -11,7 +11,7 @@ type BreadcrumbsProps = {
 };
 
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://steadyspend.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com';
 
   // Build breadcrumb schema
   const breadcrumbSchema = {
