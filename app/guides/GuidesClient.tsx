@@ -42,7 +42,7 @@ export default function GuidesClient() {
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Learn at
-            <span className="bg-gradient-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent"> Your Own Pace</span>
+            <span className="bg-linear-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent"> Your Own Pace</span>
           </h1>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Simple, actionable guides to help you master your money without the jargon.
@@ -61,7 +61,7 @@ export default function GuidesClient() {
               <Card className="border-0 shadow-sm bg-white rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full cursor-pointer">
                 <CardHeader>
                   <div className="flex items-start gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-100 to-emerald-50 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-lg bg-linear-to-br from-emerald-100 to-emerald-50 flex items-center justify-center">
                       <BookOpen className="w-5 h-5 text-emerald-600" />
                     </div>
                     <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-medium">
@@ -89,7 +89,7 @@ export default function GuidesClient() {
           transition={{ delay: 0.4 }}
           className="mt-12 text-center"
         >
-          <Card className="border-0 shadow-sm bg-gradient-to-br from-gray-50 to-emerald-50/30 rounded-2xl overflow-hidden">
+          <Card className="border-0 shadow-sm bg-linear-to-br from-gray-50 to-emerald-50/30 rounded-2xl overflow-hidden">
             <CardContent className="p-8">
               <h3 className="text-xl font-semibold text-gray-900 mb-2">More Guides Coming Soon</h3>
               <p className="text-gray-600">

@@ -28,7 +28,7 @@ export default function HomeClient() {
             className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight"
           >
             Understand Your Money,
-            <span className="bg-gradient-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent">
               {' '}
               Spend With Confidence
             </span>
@@ -53,7 +53,7 @@ export default function HomeClient() {
             <Link href="/tools/monthly-budget">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-8 py-6 text-lg rounded-xl cursor-pointer"
+                className="bg-linear-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-8 py-6 text-lg rounded-xl cursor-pointer"
               >
                 Try Budget Calculator
                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -81,10 +81,10 @@ export default function HomeClient() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            <Card className="border-0 shadow-lg bg-gradient-to-br from-emerald-50 to-emerald-100/50 rounded-2xl overflow-hidden">
+            <Card className="border-0 shadow-lg bg-linear-to-br from-emerald-50 to-emerald-100/50 rounded-2xl overflow-hidden">
               <CardContent className="p-8 md:p-12">
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-600 to-emerald-700 flex items-center justify-center flex-shrink-0">
+                  <div className="w-14 h-14 rounded-xl bg-linear-to-br from-emerald-600 to-emerald-700 flex items-center justify-center shrink-0">
                     <Calculator className="w-7 h-7 text-white" />
                   </div>
                   <div>
@@ -101,7 +101,7 @@ export default function HomeClient() {
                 <Link href="/tools/monthly-budget">
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-8 rounded-xl cursor-pointer"
+                    className="bg-linear-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white px-8 rounded-xl cursor-pointer"
                   >
                     Get Started
                     <ArrowRight className="w-5 h-5 ml-2" />

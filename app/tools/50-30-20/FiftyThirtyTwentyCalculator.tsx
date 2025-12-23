@@ -24,17 +24,18 @@ import {
 } from '@/lib/storage/fifty-thirty-twenty'
 
 export default function FiftyThirtyTwentyCalculator() {
-  const [income, setIncome] = useState('')
+  // Load data from localStorage using lazy initialization
+  const [income, setIncome] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const savedData = loadFiftyThirtyTwentyData()
+      return savedData.income
+    }
+    return ''
+  })
   const [showResults, setShowResults] = useState(false)
   const [results, setResults] = useState<FiftyThirtyTwentyResults | null>(
     null
   )
-
-  // Load data from localStorage after hydration
-  useEffect(() => {
-    const savedData = loadFiftyThirtyTwentyData()
-    setIncome(savedData.income)
-  }, [])
 
   // Save data whenever it changes
   useEffect(() => {

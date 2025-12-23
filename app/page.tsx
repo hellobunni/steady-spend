@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
-import HomeClient from './HomeClient'
+import { HeroSection } from '@/components/home/HeroSection'
+import { FeaturesSection } from '@/components/home/FeaturesSection'
+import { CTASection } from '@/components/home/CTASection'
+import { FeaturedPostsSection } from '@/components/home/FeaturedPostsSection'
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com'
 
@@ -47,5 +50,13 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-  return <HomeClient />
+  return (
+    <>
+      <HeroSection />
+
+      <FeaturedPostsSection />
+      <FeaturesSection />
+      <CTASection />
+    </>
+  )
 }

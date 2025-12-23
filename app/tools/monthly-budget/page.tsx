@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import BudgetCalculator from './BudgetCalculator'
-import Breadcrumbs from '@/components/layout/Breadcrumbs'
+import { ToolPageLayout } from '@/components/tools/ToolPageLayout'
+import { ContentSection } from '@/components/content/ContentSection'
 import { Accordion } from '@/components/ui/accordion'
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com';
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com'
 
 export const metadata: Metadata = {
   title: 'Monthly Budget Calculator | SteadySpend',
@@ -17,46 +18,42 @@ export const metadata: Metadata = {
 
 export default function MonthlyBudgetPage() {
   return (
-    <div className="max-w-4xl mx-auto py-8 px-4">
-      {/* Breadcrumbs */}
-      <Breadcrumbs
-        items={[
-          { label: 'Tools', href: '/tools' },
-          { label: 'Monthly Budget Calculator', href: '/tools/monthly-budget' },
-        ]}
-      />
-      {/* SEO Intro - Above Tool */}
-      <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          Monthly Budget Calculator
-        </h1>
-        <p className="text-lg text-gray-700 leading-relaxed mb-4">
-          Understand where your money goes each month — and what you can actually save.
-        </p>
+    <ToolPageLayout
+      title="Monthly Budget Calculator"
+      description="Understand where your money goes each month — and what you can actually save."
+      breadcrumbs={[
+        { label: 'Tools', href: '/tools' },
+        { label: 'Monthly Budget Calculator', href: '/tools/monthly-budget' },
+      ]}
+      intro={
         <p className="text-base text-gray-600 leading-relaxed">
           This free monthly budget calculator helps you see your income, organize your expenses, and
           understand how much money you have left over each month. No accounts, no sign-ups — your data
           stays private and is saved locally in your browser.
         </p>
-      </div>
-
-      {/* Budget Calculator Tool */}
-      <BudgetCalculator />
-
-      {/* SEO Content - Below Tool */}
-      <div className="mt-12 space-y-8 text-gray-700">
-
-        <section>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">How to Use This Budget Calculator</h2>
+      }
+      tool={<BudgetCalculator />}
+      content={
+        <>
+          <ContentSection title="How to Use This Budget Calculator">
           <p className="text-base leading-relaxed mb-4">
             This calculator is designed to be simple and straightforward. You don&apos;t need any
             financial background or special knowledge — just your monthly income and expense numbers.
+            If you prefer a percentage-based approach, try our{' '}
+            <Link href="/tools/50-30-20" className="text-emerald-600 hover:text-emerald-700 underline">
+              50/30/20 Budget Calculator
+            </Link>{' '}
+            instead.
           </p>
           <ol className="list-decimal list-inside space-y-3 text-base leading-relaxed ml-4 mb-4">
             <li>
               <strong className="text-gray-900">Enter your total monthly income after taxes.</strong> This
               is your take-home pay, not your gross salary. If you have multiple income sources, add them
-              together. For irregular income, use your average monthly amount.
+              together. For irregular income, use your average monthly amount. If you&apos;re not sure of your take-home pay, use our{' '}
+              <Link href="/tools/take-home-pay-calculator" className="text-emerald-600 hover:text-emerald-700 underline">
+                Take-Home Pay Calculator
+              </Link>{' '}
+              first.
             </li>
             <li>
               <strong className="text-gray-900">Add your expenses for each category.</strong> Start with
@@ -80,16 +77,13 @@ export default function MonthlyBudgetPage() {
               utilities? Small changes can add up quickly.
             </li>
           </ol>
-          <p className="text-base leading-relaxed">
-            Your data is automatically saved in your browser, so you can come back anytime and pick up
-            where you left off. No need to re-enter everything each time you want to check your budget.
-          </p>
-        </section>
+            <p className="text-base leading-relaxed">
+              Your data is automatically saved in your browser, so you can come back anytime and pick up
+              where you left off. No need to re-enter everything each time you want to check your budget.
+            </p>
+          </ContentSection>
 
-        <div className="h-px bg-gray-200 my-6" />
-
-        <section>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Frequently Asked Questions</h2>
+          <ContentSection title="Frequently asked questions">
           <Accordion
             items={[
               {
@@ -111,7 +105,11 @@ export default function MonthlyBudgetPage() {
                       Many financial experts recommend saving around 20% of your income, but that&apos;s not always
                       realistic for everyone. This calculator shows your actual savings rate so you can focus on
                       progress — not perfection. Whether you&apos;re saving 5% or 50%, understanding your numbers
-                      is the first step toward financial clarity.
+                      is the first step toward financial clarity. Learn more about the{' '}
+                      <Link href="/blog/50-30-20-budget-rule" className="text-emerald-600 hover:text-emerald-700 underline">
+                        50/30/20 budgeting rule
+                      </Link>{' '}
+                      if you&apos;re looking for a simple framework to guide your spending.
                     </p>
                     <p>
                       Budgeting doesn&apos;t have to be restrictive or stressful. When you know where your money
@@ -154,12 +152,9 @@ export default function MonthlyBudgetPage() {
               },
             ]}
           />
-        </section>
+          </ContentSection>
 
-        <div className="h-px bg-gray-200 my-6" />
-
-        <section>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Next Steps After Budgeting</h2>
+          <ContentSection title="Next Steps After Budgeting">
           <p className="text-base leading-relaxed mb-4">
             Once you understand your monthly budget, you can take your financial planning to the next
             level. Here are some natural next steps:
@@ -197,18 +192,34 @@ export default function MonthlyBudgetPage() {
               financial guides
             </Link>
             . You&apos;ll find step-by-step instructions on topics like{' '}
-            <Link href="/guides" className="text-emerald-600 hover:text-emerald-700 underline">
+            <Link href="/blog/how-to-start-budgeting" className="text-emerald-600 hover:text-emerald-700 underline">
               getting started with budgeting
             </Link>
-            , understanding your spending habits, and building an emergency fund. You can also browse all
-            our{' '}
+            ,{' '}
+            <Link href="/blog/how-to-create-monthly-budget-2026" className="text-emerald-600 hover:text-emerald-700 underline">
+              creating a monthly budget
+            </Link>
+            ,{' '}
+            <Link href="/blog/how-to-track-your-spending" className="text-emerald-600 hover:text-emerald-700 underline">
+              tracking your spending
+            </Link>
+            , and{' '}
+            <Link href="/blog/common-budget-mistakes" className="text-emerald-600 hover:text-emerald-700 underline">
+              avoiding common budget mistakes
+            </Link>
+            . You can also browse all our{' '}
             <Link href="/tools" className="text-emerald-600 hover:text-emerald-700 underline">
               free financial tools
             </Link>{' '}
+            including our{' '}
+            <Link href="/tools/50-30-20" className="text-emerald-600 hover:text-emerald-700 underline">
+              50/30/20 Budget Calculator
+            </Link>{' '}
             to find calculators that match your current financial goals.
           </p>
-        </section>
-      </div>
-    </div>
+          </ContentSection>
+        </>
+      }
+    />
   )
 }
