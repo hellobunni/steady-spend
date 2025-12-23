@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import BudgetCalculator from './BudgetCalculator'
-import Breadcrumbs from '@/components/layout/Breadcrumbs'
+import { ToolPageLayout } from '@/components/tools/ToolPageLayout'
+import { ContentSection } from '@/components/content/ContentSection'
 import { Accordion } from '@/components/ui/accordion'
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com'
@@ -17,36 +18,24 @@ export const metadata: Metadata = {
 
 export default function MonthlyBudgetPage() {
   return (
-    <div className="max-w-6xl mx-auto py-10 lg:py-14 px-4 sm:px-6 lg:px-8">
-      <Breadcrumbs
-        items={[
-          { label: 'Tools', href: '/tools' },
-          { label: 'Monthly Budget Calculator', href: '/tools/monthly-budget' },
-        ]}
-      />
-
-      {/* SEO Intro - Above Tool */}
-      <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          Monthly Budget Calculator
-        </h1>
-        <p className="text-lg text-gray-700 leading-relaxed mb-4">
-          Understand where your money goes each month — and what you can actually save.
-        </p>
+    <ToolPageLayout
+      title="Monthly Budget Calculator"
+      description="Understand where your money goes each month — and what you can actually save."
+      breadcrumbs={[
+        { label: 'Tools', href: '/tools' },
+        { label: 'Monthly Budget Calculator', href: '/tools/monthly-budget' },
+      ]}
+      intro={
         <p className="text-base text-gray-600 leading-relaxed">
           This free monthly budget calculator helps you see your income, organize your expenses, and
           understand how much money you have left over each month. No accounts, no sign-ups — your data
           stays private and is saved locally in your browser.
         </p>
-      </div>
-
-      {/* Budget Calculator Tool */}
-      <BudgetCalculator />
-
-      {/* Supporting SEO Copy */}
-      <div className="mt-12 space-y-10 text-gray-700">
-        <section>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">How to Use This Budget Calculator</h2>
+      }
+      tool={<BudgetCalculator />}
+      content={
+        <>
+          <ContentSection title="How to Use This Budget Calculator">
           <p className="text-base leading-relaxed mb-4">
             This calculator is designed to be simple and straightforward. You don&apos;t need any
             financial background or special knowledge — just your monthly income and expense numbers.
@@ -88,16 +77,13 @@ export default function MonthlyBudgetPage() {
               utilities? Small changes can add up quickly.
             </li>
           </ol>
-          <p className="text-base leading-relaxed">
-            Your data is automatically saved in your browser, so you can come back anytime and pick up
-            where you left off. No need to re-enter everything each time you want to check your budget.
-          </p>
-        </section>
+            <p className="text-base leading-relaxed">
+              Your data is automatically saved in your browser, so you can come back anytime and pick up
+              where you left off. No need to re-enter everything each time you want to check your budget.
+            </p>
+          </ContentSection>
 
-        <div className="h-px bg-gray-200" />
-
-        <section>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Frequently asked questions</h2>
+          <ContentSection title="Frequently asked questions">
           <Accordion
             items={[
               {
@@ -166,12 +152,9 @@ export default function MonthlyBudgetPage() {
               },
             ]}
           />
-        </section>
+          </ContentSection>
 
-        <div className="h-px bg-gray-200" />
-
-        <section>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Next Steps After Budgeting</h2>
+          <ContentSection title="Next Steps After Budgeting">
           <p className="text-base leading-relaxed mb-4">
             Once you understand your monthly budget, you can take your financial planning to the next
             level. Here are some natural next steps:
@@ -234,8 +217,9 @@ export default function MonthlyBudgetPage() {
             </Link>{' '}
             to find calculators that match your current financial goals.
           </p>
-        </section>
-      </div>
-    </div>
+          </ContentSection>
+        </>
+      }
+    />
   )
 }

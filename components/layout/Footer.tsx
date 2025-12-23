@@ -1,5 +1,7 @@
 import Link from 'next/link'
-import { Mail, Twitter, Linkedin, Github } from 'lucide-react'
+import { Mail, Twitter, Linkedin, Github, Instagram, Facebook } from 'lucide-react'
+import { ImPinterest2 } from "react-icons/im";
+import { RiTwitterXFill } from "react-icons/ri";
 
 const footerLinks = {
   product: [
@@ -19,9 +21,10 @@ const footerLinks = {
 }
 
 const socialLinks = [
-  { icon: Twitter, href: "https://twitter.com/steadyspend", label: "Twitter" },
-  { icon: Linkedin, href: "https://www.linkedin.com/company/steadyspend", label: "LinkedIn" },
-  { icon: Github, href: "#", label: "GitHub" },
+  { icon: Instagram, href: "https://instagram.com/steadyspend", label: "Instagram" },
+  { icon: ImPinterest2, href: "https://pinterest.com/steadyspend", label: "Pinterest" },
+  { icon: Facebook, href: "https://facebook.com/steadyspend", label: "Facebook" },
+  { icon: RiTwitterXFill, href: "https://x.com/SteadySpend", label: "X (Twitter)" },
   { icon: Mail, href: "/contact", label: "Email" },
 ]
 

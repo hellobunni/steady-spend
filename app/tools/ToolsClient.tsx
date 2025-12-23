@@ -26,6 +26,15 @@ const tools: Tool[] = [
     pill: 'Popular',
   },
   {
+    icon: Calculator,
+    title: '50/30/20 Budget Calculator',
+    description:
+      'Split your income into 50% needs, 30% wants, and 20% savings. A simple budgeting method for beginners.',
+    link: '/tools/50-30-20',
+    status: 'live',
+    gradient: 'from-violet-500 to-purple-500',
+  },
+  {
     icon: DollarSign,
     title: 'Take-Home Pay Calculator',
     description:
@@ -80,14 +89,14 @@ export default function ToolsClient() {
               return (
                 <div
                   key={tool.title}
-                  className={`glass-card p-8 lg:p-9 h-full transition-all duration-300 ${
+                  className={`glass-card p-8 lg:p-9 h-full flex flex-col transition-all duration-300 ${
                     isComingSoon ? 'opacity-80' : 'hover:-translate-y-1 hover:shadow-glow'
                   }`}
                 >
-                  <div className="flex items-start justify-between gap-4 mb-6">
+                  <div className="flex items-start justify-between gap-4 mb-6 min-h-[80px]">
                     <div className="flex items-center gap-4">
                       <div
-                        className={`w-14 h-14 rounded-2xl bg-linear-to-br ${tool.gradient} flex items-center justify-center`}
+                        className={`w-14 h-14 rounded-2xl bg-linear-to-br ${tool.gradient} flex items-center justify-center flex-shrink-0`}
                       >
                         <Icon className="w-7 h-7 text-white" />
                       </div>
@@ -101,15 +110,19 @@ export default function ToolsClient() {
                       </div>
                     </div>
                     {tool.pill ? (
-                      <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
+                      <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium flex-shrink-0">
                         {tool.pill}
                       </span>
-                    ) : null}
+                    ) : (
+                      <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium flex-shrink-0 opacity-0 pointer-events-none">
+                        Placeholder
+                      </span>
+                    )}
                   </div>
 
-                  <p className="text-muted-foreground leading-relaxed mb-8">{tool.description}</p>
+                  <p className="text-muted-foreground leading-relaxed mb-8 flex-1">{tool.description}</p>
 
-                  <div className="flex flex-wrap items-center gap-3">
+                  <div className="flex flex-wrap items-center gap-3 mt-auto">
                     {isComingSoon ? (
                       <Button variant="outline" disabled className="w-full sm:w-auto">
                         Coming Soon

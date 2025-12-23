@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { FileText, Sparkles, Calendar } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Calendar, Clock, ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { getBlogPosts } from "@/lib/blog/getBlogPosts";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com';
@@ -17,90 +17,158 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   const posts = getBlogPosts();
+  const featuredPost = posts[0]; // First post is featured
+  const otherPosts = posts.slice(1);
 
   return (
-    <div className="py-8 sm:py-10 lg:py-12">
-      <div className="mx-auto max-w-5xl px-2 sm:px-4">
-        {/* Header */}
-        <section className="mb-10 text-center sm:mb-12">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-800">
-            <Sparkles className="h-4 w-4" />
-            Gentle money guidance
+    <section className="py-20 lg:py-28 gradient-hero">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-800">
+              <Sparkles className="h-4 w-4" />
+              Gentle money guidance
+            </div>
+            <h1 className="font-display font-bold text-4xl sm:text-5xl mb-4">
+              Financial <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Insights</span>
+            </h1>
+            <p className="text-lg text-slate-600">
+              Tips, guides, and strategies to help you master your money.
+            </p>
           </div>
-          <h1 className="text-balance text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
-            Money tips
-            <span className="bg-linear-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-              {" "}
-              & insights
-            </span>
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-balance text-base text-slate-600 sm:text-lg">
-            Calm, practical articles to help you understand your spending,
-            adjust your budget, and feel more steady with your money.
-          </p>
-        </section>
 
-        {/* Blog Posts Grid */}
-        <section
-          aria-label="Latest money and budgeting articles"
-          className="grid gap-6 md:grid-cols-2"
-        >
-          {posts.map((post) => (
-            <Link key={post.slug} href={`/blog/${post.slug}`}>
-              <article className="h-full">
-                <Card className="h-full cursor-pointer border border-emerald-100/70 bg-white/80 shadow-sm transition-shadow hover:shadow-md">
-                  <CardHeader>
-                    <div className="mb-3 flex items-start gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-linear-to-br from-emerald-50 to-teal-50">
-                        <FileText className="h-5 w-5 text-emerald-700" />
+          {/* Featured Post */}
+          {featuredPost && (
+            <div className="mb-12">
+              <Link href={`/blog/${featuredPost.slug}`}>
+                <article className="glass-card overflow-hidden group hover:shadow-glow transition-all duration-300 hover:-translate-y-1">
+                  <div className="grid md:grid-cols-2 gap-0">
+                    {/* Featured Image */}
+                    <div className="relative h-64 md:h-auto min-h-[300px]">
+                      {featuredPost.featuredImage ? (
+                        <Image
+                          src={featuredPost.featuredImage}
+                          alt={featuredPost.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                      ) : (
+                        <div className="w-full h-full gradient-primary opacity-80" />
+                      )}
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="p-8 flex flex-col justify-center">
+                      <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full w-fit mb-4">
+                        {featuredPost.category}
+                      </span>
+                      <h2 className="font-display font-semibold text-2xl sm:text-3xl mb-3 group-hover:text-emerald-700 transition-colors">
+                        {featuredPost.title}
+                      </h2>
+                      <p className="text-slate-600 text-base mb-6 leading-relaxed">
+                        {featuredPost.description}
+                      </p>
+                      <div className="flex items-center justify-between text-sm text-slate-500">
+                        <div className="flex items-center gap-4">
+                          <span className="flex items-center gap-1.5">
+                            <Calendar className="w-4 h-4" />
+                            {new Date(featuredPost.date).toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'short',
+                              day: 'numeric',
+                            })}
+                          </span>
+                          {featuredPost.readTime && (
+                            <span className="flex items-center gap-1.5">
+                              <Clock className="w-4 h-4" />
+                              {featuredPost.readTime} min
+                            </span>
+                          )}
+                        </div>
+                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </div>
-                      <span className="inline-flex rounded-full bg-emerald-50 px-2 py-1 text-xs font-medium text-emerald-800">
+                    </div>
+                  </div>
+                </article>
+              </Link>
+            </div>
+          )}
+
+          {/* Other Posts Grid */}
+          {otherPosts.length > 0 && (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {otherPosts.map((post) => (
+                <Link key={post.slug} href={`/blog/${post.slug}`}>
+                  <article className="glass-card overflow-hidden group hover:shadow-glow transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
+                    {/* Post Image */}
+                    <div className="relative h-40">
+                      {post.featuredImage ? (
+                        <Image
+                          src={post.featuredImage}
+                          alt={post.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                      ) : (
+                        <div className="w-full h-full gradient-primary opacity-80" />
+                      )}
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="p-6 flex flex-col flex-grow">
+                      <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full w-fit mb-3">
                         {post.category}
                       </span>
+                      <h2 className="font-display font-semibold text-lg mb-2 group-hover:text-emerald-700 transition-colors flex-grow">
+                        {post.title}
+                      </h2>
+                      <p className="text-slate-600 text-sm mb-4 line-clamp-2">
+                        {post.description}
+                      </p>
+                      <div className="flex items-center justify-between text-sm text-slate-500 mt-auto">
+                        <div className="flex items-center gap-4">
+                          <span className="flex items-center gap-1">
+                            <Calendar className="w-4 h-4" />
+                            {new Date(post.date).toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'short',
+                              day: 'numeric',
+                            })}
+                          </span>
+                          {post.readTime && (
+                            <span className="flex items-center gap-1">
+                              <Clock className="w-4 h-4" />
+                              {post.readTime} min
+                            </span>
+                          )}
+                        </div>
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </div>
                     </div>
-                    <CardTitle className="text-lg font-semibold text-slate-900 sm:text-xl">
-                      {post.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="mb-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-                      {post.description}
-                    </p>
-                    <div className="flex items-center gap-2 text-sm text-slate-500">
-                      <Calendar className="h-4 w-4" />
-                      <span>
-                        {new Date(post.date).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'short',
-                          day: 'numeric',
-                        })}
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </article>
-            </Link>
-          ))}
-        </section>
+                  </article>
+                </Link>
+              ))}
+            </div>
+          )}
 
-        {/* Coming Soon - only show if no posts */}
-        {posts.length === 0 && (
-          <section className="mt-10 sm:mt-12">
-            <Card className="border border-emerald-100/70 bg-linear-to-br from-white via-emerald-50/40 to-teal-50/30">
-              <CardContent className="px-6 py-6 text-center sm:px-8 sm:py-8">
-                <h2 className="text-lg font-semibold text-slate-900 sm:text-xl">
-                  More articles coming soon
-                </h2>
-                <p className="mt-2 text-sm text-slate-600 sm:text-base">
-                  We&apos;re slowly adding more guides, stories, and calm
-                  step-by-step walkthroughs to help you build a budget that feels
-                  steady and sustainable.
-                </p>
-              </CardContent>
-            </Card>
-          </section>
-        )}
+          {/* Coming Soon - only show if no posts */}
+          {posts.length === 0 && (
+            <div className="glass-card p-8 sm:p-12 text-center">
+              <h2 className="text-xl font-semibold text-slate-900 mb-3">
+                More articles coming soon
+              </h2>
+              <p className="text-slate-600">
+                We&apos;re slowly adding more guides, stories, and calm
+                step-by-step walkthroughs to help you build a budget that feels
+                steady and sustainable.
+              </p>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
