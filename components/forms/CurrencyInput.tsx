@@ -2,7 +2,7 @@
 
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useId } from 'react'
 
 interface CurrencyInputProps extends Omit<React.ComponentProps<'input'>, 'type'> {
   label?: string
@@ -13,7 +13,8 @@ interface CurrencyInputProps extends Omit<React.ComponentProps<'input'>, 'type'>
 
 export const CurrencyInput = forwardRef<HTMLInputElement, CurrencyInputProps>(
   ({ label, helperText, error, size = 'md', className, id, ...props }, ref) => {
-    const inputId = id || `currency-${Math.random().toString(36).substr(2, 9)}`
+    const generatedId = useId()
+    const inputId = id || `currency-${generatedId}`
     const helperId = helperText ? `${inputId}-helper` : undefined
     const errorId = error ? `${inputId}-error` : undefined
     

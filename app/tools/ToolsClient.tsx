@@ -65,13 +65,13 @@ export default function ToolsClient() {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-sm text-foreground">
-              <span className="px-3 py-1 rounded-full bg-white/70 border border-border">
+              <span className="px-3 py-1 rounded-full bg-white/70 border border-border/60">
                 No sign-up needed
               </span>
-              <span className="px-3 py-1 rounded-full bg-white/70 border border-border">
+              <span className="px-3 py-1 rounded-full bg-white/70 border border-border/60">
                 Runs in your browser
               </span>
-              <span className="px-3 py-1 rounded-full bg-white/70 border border-border">
+              <span className="px-3 py-1 rounded-full bg-white/70 border border-border/60">
                 Reset anytime
               </span>
             </div>

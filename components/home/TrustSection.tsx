@@ -1,6 +1,6 @@
 'use client'
 
-import { CheckCircle, Star } from "lucide-react";
+import { Star } from "lucide-react";
 
 const testimonials = [
   {
@@ -21,13 +21,6 @@ const testimonials = [
     role: "Teacher",
     rating: 5,
   },
-];
-
-const trustPoints = [
-  "No credit card required",
-  "Bank-level security",
-  "Free forever plan",
-  "Cancel anytime",
 ];
 
 export function TrustSection() {
@@ -65,7 +58,7 @@ export function TrustSection() {
 
               {/* Quote */}
               <blockquote className="text-foreground mb-6 leading-relaxed">
-                "{testimonial.quote}"
+                &ldquo;{testimonial.quote}&rdquo;
               </blockquote>
 
               {/* Author */}

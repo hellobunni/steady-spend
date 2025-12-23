@@ -47,16 +47,17 @@ export function Navbar() {
           : 'bg-transparent'
       )}
     >
-      <nav className="container-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="container-2xl mx-auto sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 font-display font-bold text-xl sm:text-2xl text-foreground hover:text-primary transition-colors"
+            className="flex items-center gap-2 font-display font-bold text-xl sm:text-2xl text-foreground hover:text-primary transition-colors px-4 lg:px-0"
           >
            
             <Image src="/logo-icon.png" alt="SteadySpend" width={38} height={38} />
-            <span className="hidden sm:inline mb-0">SteadySpend</span>
+            <span className="mb-0">SteadySpend</span>
+            
           </Link>
 
           {/* Desktop Navigation */}
@@ -143,7 +144,7 @@ export function Navbar() {
         {/* Mobile Navigation */}
         <div
           className={cn(
-            'lg:hidden overflow-hidden transition-all duration-300 ease-in-out',
+            'lg:hidden overflow-hidden transition-all duration-300 ease-in-out bg-white px-4',
             isOpen ? 'max-h-[600px] pb-6' : 'max-h-0'
           )}
         >

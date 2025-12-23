@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Mail, Twitter, Linkedin, Github, Instagram, Facebook } from 'lucide-react'
+import { Mail, Instagram, Facebook } from 'lucide-react'
 import { ImPinterest2 } from "react-icons/im";
 import { RiTwitterXFill } from "react-icons/ri";
 

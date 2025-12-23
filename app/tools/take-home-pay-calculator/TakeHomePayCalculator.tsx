@@ -57,7 +57,13 @@ const defaultInputs: TakeHomePayInputs = {
 }
 
 export default function TakeHomePayCalculator() {
-  const [inputs, setInputs] = useState<TakeHomePayInputs>(defaultInputs)
+  // Load data from localStorage using lazy initialization
+  const [inputs, setInputs] = useState<TakeHomePayInputs>(() => {
+    if (typeof window !== 'undefined') {
+      return loadTakeHomePayData()
+    }
+    return defaultInputs
+  })
   const [showResults, setShowResults] = useState(false)
   const [results, setResults] = useState<TakeHomePayResults | null>(null)
   const [viewMode, setViewMode] = useState<'annual' | 'paycheck'>('annual')
@@ -66,12 +72,6 @@ export default function TakeHomePayCalculator() {
     postTax: false,
     advanced: false,
   })
-
-  // Load data from localStorage after hydration
-  useEffect(() => {
-    const savedData = loadTakeHomePayData()
-    setInputs(savedData)
-  }, [])
 
   // Save data whenever it changes
   useEffect(() => {

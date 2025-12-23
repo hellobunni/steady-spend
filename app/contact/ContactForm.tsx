@@ -112,8 +112,8 @@ export default function ContactForm() {
 
             <div className="grid sm:grid-cols-3 gap-6 mt-12">
               {[
-                { icon: Mail, label: 'Email', value: 'hello@steadyspend.com' },
-                { icon: MessageSquare, label: 'Support', value: '24/7 chat' },
+                { icon: Mail, label: 'Email', value: 'contact@steadyspend.com' },
+                { icon: MessageSquare, label: 'Support', value: 'Responds within 24 hours' },
                 { icon: MapPin, label: 'Based', value: 'San Francisco, CA' },
               ].map((item) => (
                 <div key={item.label} className="text-center">
