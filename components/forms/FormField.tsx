@@ -29,7 +29,7 @@ export const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
             </span>
           )}
         </Label>
-        {React.cloneElement(children, {
+        {React.cloneElement(children as React.ReactElement<React.HTMLAttributes<HTMLElement>>, {
           id: fieldId,
           'aria-describedby': errorId || helperId,
           'aria-invalid': error ? 'true' : 'false',

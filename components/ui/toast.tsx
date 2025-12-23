@@ -5,14 +5,14 @@ import { useToast } from '@/hooks/use-toast'
 import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-const Toast = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & {
-    title?: React.ReactNode
-    description?: React.ReactNode
-    onClose?: () => void
-  }
->(({ className, title, description, onClose, ...props }, ref) => {
+interface ToastProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
+  title?: React.ReactNode
+  description?: React.ReactNode
+  onClose?: () => void
+}
+
+const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
+  ({ className, title, description, onClose, ...props }, ref) => {
   return (
     <div
       ref={ref}

@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 import React, { forwardRef, useId } from 'react'
 
-interface CurrencyInputProps extends Omit<React.ComponentProps<'input'>, 'type'> {
+interface CurrencyInputProps extends Omit<React.ComponentProps<'input'>, 'type' | 'size'> {
   label?: string
   helperText?: string
   error?: string
