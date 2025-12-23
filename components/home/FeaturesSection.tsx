@@ -50,7 +50,7 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <section className="py-20 lg:py-32 bg-background relative overflow-hidden">
+    <section className="py-20 lg:py-32 bg-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 right-0 w-[500px] h-[500px] rounded-full bg-primary/5 blur-3xl" />

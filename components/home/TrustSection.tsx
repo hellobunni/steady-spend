@@ -81,16 +81,6 @@ export function TrustSection() {
             </div>
           ))}
         </div>
-
-        {/* Trust Points */}
-        <div className="flex flex-wrap justify-center gap-6 lg:gap-12">
-          {trustPoints.map((point) => (
-            <div key={point} className="flex items-center gap-2 text-muted-foreground">
-              <CheckCircle className="w-5 h-5 text-primary" />
-              <span className="font-medium">{point}</span>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

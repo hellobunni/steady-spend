@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Layout } from '@/components/layout/Layout'
 import { HeroSection } from '@/components/home/HeroSection'
 import { FeaturesSection } from '@/components/home/FeaturesSection'
 import { TrustSection } from '@/components/home/TrustSection'
@@ -52,11 +51,11 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <Layout>
+    <>
       <HeroSection />
       <FeaturesSection />
       <TrustSection />
       <CTASection />
-    </Layout>
+    </>
   )
 }

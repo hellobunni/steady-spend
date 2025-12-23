@@ -31,7 +31,7 @@ export function HeroSection() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8 opacity-0 animate-fade-in-up border-none bg-white"
             style={{ animationDelay: "0.1s" }}
           >
-            <Sparkles className="w-4 h-4 text-primary bg-primary " />
+            <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-foreground">Smart budgeting made simple</span>
           </div>
 
@@ -80,25 +80,6 @@ export function HeroSection() {
                 Explore Tools
               </Link>
             </Button>
-          </div>
-
-          {/* Stats */}
-          <div 
-            className="mt-16 grid grid-cols-2 sm:grid-cols-3 gap-8 max-w-2xl mx-auto opacity-0 animate-fade-in-up"
-            style={{ animationDelay: "0.5s" }}
-          >
-            {[
-              { value: "50K+", label: "Active Users" },
-              { value: "$2M+", label: "Money Saved" },
-              { value: "4.9★", label: "User Rating" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="font-display font-bold text-3xl sm:text-4xl text-foreground mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
-              </div>
-            ))}
           </div>
         </div>
       </div>
