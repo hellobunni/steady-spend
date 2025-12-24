@@ -1,9 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Breadcrumbs from '@/components/layout/Breadcrumbs'
-import { Card, CardContent } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Calculator, Clock } from 'lucide-react'
+import TakeHomePayCalculator from './TakeHomePayCalculator'
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com'
 
@@ -28,43 +26,22 @@ export default function TakeHomePayCalculatorPage() {
       />
 
       {/* SEO Intro - Above Tool */}
-      <div className="text-center mb-12 mt-22">
+      <div className="mb-8">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
           Take-Home Pay Calculator
         </h1>
         <p className="text-lg text-gray-700 leading-relaxed mb-4">
           Calculate your actual take-home pay after taxes, deductions, and other withholdings.
         </p>
-        <p className="text-base text-gray-600 leading-relaxed">
+        <p className="text-base text-gray-600 leading-relaxed mb-4">
           This free take-home pay calculator helps you understand how much money you&apos;ll actually
           receive in your paycheck after federal taxes, state taxes, FICA, and other deductions. No
-          accounts, no sign-ups — your data stays private.
+          accounts, no sign-ups — your data stays private and is saved locally in your browser.
         </p>
       </div>
 
-      {/* Coming Soon Card */}
-      <Card className="border border-gray-200 shadow-sm">
-        <CardContent className="p-8 text-center">
-          <div className="w-16 h-16 rounded-lg bg-emerald-50 flex items-center justify-center mx-auto mb-4">
-            <Clock className="w-8 h-8 text-emerald-600" />
-          </div>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-3">Coming Soon</h2>
-          <p className="text-gray-600 mb-6 leading-relaxed max-w-2xl mx-auto">
-            We&apos;re building this calculator to help you understand your take-home pay. In the
-            meantime, use our{' '}
-            <Link href="/tools/monthly-budget" className="text-emerald-600 hover:text-emerald-700 underline">
-              monthly budget calculator
-            </Link>{' '}
-            to track your spending and plan your finances.
-          </p>
-          <Link href="/tools/monthly-budget">
-            <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
-              <Calculator className="w-4 h-4" />
-              Try Budget Calculator
-            </Button>
-          </Link>
-        </CardContent>
-      </Card>
+      {/* Take-Home Pay Calculator Tool */}
+      <TakeHomePayCalculator />
 
       {/* SEO Content - Below Tool */}
       <div className="mt-12 space-y-8 text-gray-700">
