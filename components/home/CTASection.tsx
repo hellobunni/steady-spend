@@ -14,13 +14,13 @@ export function CTASection() {
         <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-white/10 blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
+      <div className="container-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-5xl mx-auto text-center">
           <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
             Ready to Build a Better Budget?
           </h2>
-          <p className="text-lg text-white/80 mb-10 max-w-xl mx-auto">
-            Start using our <Link href="/tools" className="text-white underline hover:text-white/90 font-medium">free financial tools</Link> today and join others mastering their <strong className="text-white">money management</strong>. Explore practical guides, tips, and calculators designed to help you spend smarter and save more.
+          <p className="text-lg text-white/80 mb-10 max-w-4xl mx-auto">
+            Start using our <Link href="/tools" className="text-white underline hover:text-white/90 font-medium">free financial tools</Link> today and join others mastering their <strong className="text-white">money management</strong>. <br /> Explore practical guides, tips, and calculators designed to help you spend smarter and save more.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button 
