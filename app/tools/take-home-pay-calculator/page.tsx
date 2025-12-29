@@ -30,7 +30,23 @@ export const metadata: Metadata = {
       'Calculate your actual take-home pay after taxes and deductions. Free, private, and accurate.',
     url: `${baseUrl}/tools/take-home-pay-calculator`,
     siteName: 'SteadySpend',
+    images: [
+      {
+        url: `${baseUrl}/logo-vertical.png`,
+        width: 1200,
+        height: 630,
+        alt: 'SteadySpend - Take-Home Pay Calculator',
+      },
+    ],
+    locale: 'en_US',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '2026 Take-Home Pay Calculator | SteadySpend',
+    description:
+      'Calculate your actual take-home pay after taxes and deductions. Free, private, and accurate.',
+    images: [`${baseUrl}/logo-vertical.png`],
   },
 }
 

@@ -36,11 +36,14 @@ const defaultCredentials: Credential[] = [
 
 export default function AuthorBio({
   name = "Lynae Thomas",
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   initials = "LT",
   imageSrc = "/headshot.jpeg",
   bio = "Personal finance educator and creator of SteadySpend. After paying off $28,000 in debt and building financial stability, I now help everyday people take control of their money through practical, judgment-free guidance.",
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   credentials = defaultCredentials,
   showDisclaimer = true,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   showLearnMore = true,
   aboutHref = "/about",
   className = "",

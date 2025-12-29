@@ -46,7 +46,7 @@ const faqSchema = {
 export const metadata: Metadata = {
   title: 'Free Financial Tools & Calculators | SteadySpend',
   description:
-    'Free financial tools and calculators to help you budget, track expenses, and make confident money decisions. No sign-up required.',
+    'Free financial tools and calculators to help you budget, track expenses, and make confident money decisions. Calculate your take-home pay, create monthly budgets, and use the 50/30/20 rule. No sign-up required.',
   keywords: [
     'financial tools',
     'budget calculator',
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Free Financial Tools & Calculators | SteadySpend',
     description:
-      'Free financial tools and calculators to help you budget, track expenses, and make confident money decisions.',
+      'Free financial tools and calculators to help you budget, track expenses, and make confident money decisions. Calculate your take-home pay, create monthly budgets, and use the 50/30/20 rule.',
     url: `${baseUrl}/tools`,
     siteName: 'SteadySpend',
     images: [
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Free Financial Tools & Calculators | SteadySpend',
     description:
-      'Free financial tools and calculators to help you budget and track expenses. No sign-up required.',
+      'Free financial tools and calculators to help you budget, track expenses, and make confident money decisions. Calculate your take-home pay, create monthly budgets, and use the 50/30/20 rule. No sign-up required.',
     images: [`${baseUrl}/logo-vertical.png`],
   },
 }

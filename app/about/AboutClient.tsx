@@ -85,7 +85,7 @@ export default function AboutClient() {
               className="order-2 lg:order-1 flex justify-center"
             >
               <div className="relative">
-                <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-border/50 overflow-hidden">
+                <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-2xl bg-linear-to-br from-primary/20 to-primary/5 border border-border/50 overflow-hidden">
                   <Image
                     src="/headshot.jpeg"
                     alt="Lynae Thomas"

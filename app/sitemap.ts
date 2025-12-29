@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     '',
+    '/about',
     '/tools',
     '/tools/monthly-budget',
     '/tools/50-30-20',
@@ -32,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       route === '/tools/take-home-pay-calculator'
     ) {
       priority = 1.0
-    } else if (route === '') {
+    } else if (route === '' || route === '/about') {
       priority = 0.8
     } else if (
       route === '/privacy-policy' ||

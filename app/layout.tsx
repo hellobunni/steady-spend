@@ -17,6 +17,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com'),
   title: "SteadySpend - Understand your money, spend with confidence",
   description: "Free budgeting tools and guides to help you understand your money and spend with confidence.",
 };
