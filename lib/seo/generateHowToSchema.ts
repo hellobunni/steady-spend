@@ -1,4 +1,4 @@
-import { BlogPost, HowToConfig } from '@/lib/blog/types';
+import { BlogPost } from '@/lib/blog/types';
 
 /**
  * Generates HowTo structured data (JSON-LD) for a blog post

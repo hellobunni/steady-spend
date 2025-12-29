@@ -27,7 +27,7 @@ const features: Feature[] = [
     description: "Calculate your actual take-home pay after taxes and deductions. Essential for accurate budgeting and financial planning.",
     href: "/tools/take-home-pay-calculator",
     color: "from-accent to-primary",
-    badge: "Coming Soon",
+    badge: "Live",
   },
   {
     icon: BookOpen,

@@ -41,7 +41,7 @@ const tools: Tool[] = [
     description:
       'Calculate your net income after federal and state taxes. Perfect for planning your budget based on your actual paycheck instead of your gross salary.',
     link: '/tools/take-home-pay-calculator',
-    status: 'coming-soon',
+    status: 'live',
     gradient: 'from-sky-500 to-blue-500',
   },
 ]
