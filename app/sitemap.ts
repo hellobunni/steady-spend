@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '',
     '/tools',
     '/tools/monthly-budget',
+    '/tools/50-30-20',
     '/tools/take-home-pay-calculator',
     '/guides',
     '/blog',
@@ -25,7 +26,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ].map((route) => {
     let priority = 0.7
 
-    if (route === '/tools/monthly-budget' || route === '/tools/take-home-pay-calculator') {
+    if (
+      route === '/tools/monthly-budget' ||
+      route === '/tools/50-30-20' ||
+      route === '/tools/take-home-pay-calculator'
+    ) {
       priority = 1.0
     } else if (route === '') {
       priority = 0.8

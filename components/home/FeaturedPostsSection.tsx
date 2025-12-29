@@ -27,10 +27,10 @@ export function FeaturedPostsSection() {
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl mb-4">
-            Latest <span className="bg-linear-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent">Articles</span>
+            <span className="bg-linear-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent">Personal Finance Education</span> & 2026 Budgeting Tips
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Practical tips and guides to help you make smarter financial decisions
+            Expert guides and practical tips to help you make smarter financial decisions and build lasting wealth
           </p>
         </div>
 
@@ -53,6 +53,8 @@ export function FeaturedPostsSection() {
                       <div 
                         className="h-40 bg-cover bg-center"
                         style={{ backgroundImage: `url(${post.featuredImage})` }}
+                        role="img"
+                        aria-label={`${post.title} - Monthly Budgeting Guide for 2026`}
                       />
                     ) : (
                       <div className="h-40 gradient-primary opacity-80" />
@@ -98,7 +100,7 @@ export function FeaturedPostsSection() {
             <div className="text-center">
               <Button variant="outline" size="lg" className="group" asChild>
                 <Link href="/blog">
-                  View All Posts
+                  Explore All Budgeting Methods
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
