@@ -10,6 +10,8 @@ import { generateHowToSchema } from '@/lib/seo/generateHowToSchema';
 import BlogPostMeta from '@/components/blog/BlogPostMeta';
 import RelatedPosts from '@/components/blog/RelatedPosts';
 import ComparisonTable from '@/components/blog/ComparisonTable';
+import AuthorBio from '@/components/blog/AuthorBio';
+import MathFormula from '@/components/blog/MathFormula';
 import { Accordion } from '@/components/ui/accordion';
 
 type Props = {
@@ -90,6 +92,9 @@ export default async function BlogPostPage({ params }: Props) {
   const postUrl = `${baseUrl}/blog/${slug}`;
 
   // Article Structured Data
+  // Use Person type for named authors, Organization for generic team
+  const isNamedAuthor = post.author && post.author !== 'SteadySpend Team' && post.author !== 'The SteadySpend Financial Education Team';
+  
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -100,11 +105,17 @@ export default async function BlogPostPage({ params }: Props) {
       : [`${baseUrl}/logo-vertical.png`],
     datePublished: post.date,
     dateModified: post.lastModified || post.date,
-    author: {
-      '@type': 'Organization',
-      name: post.author || 'SteadySpend Team',
-      url: baseUrl,
-    },
+    author: isNamedAuthor
+      ? {
+          '@type': 'Person',
+          name: post.author,
+          url: `${baseUrl}/about`,
+        }
+      : {
+          '@type': 'Organization',
+          name: post.author || 'SteadySpend Team',
+          url: baseUrl,
+        },
     publisher: {
       '@type': 'Organization',
       name: 'SteadySpend',
@@ -219,6 +230,8 @@ export default async function BlogPostPage({ params }: Props) {
             components={{
               ComparisonTable,
               Accordion,
+              AuthorBio,
+              MathFormula,
               img: (props: { src?: string; alt?: string; className?: string }) => {
                 if (!props.src) {
                   return null;

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Calendar, Clock, User } from 'lucide-react';
 import { BlogPost } from '@/lib/blog/types';
 
@@ -6,6 +7,12 @@ type Props = {
 };
 
 export default function BlogPostMeta({ post }: Props) {
+  const isNamedAuthor = post.author && 
+    post.author !== 'SteadySpend Team' && 
+    post.author !== 'The SteadySpend Financial Education Team';
+  
+  const authorHref = isNamedAuthor ? '/about' : undefined;
+
   return (
     <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-slate-600">
       <div className="flex items-center gap-2">
@@ -27,7 +34,16 @@ export default function BlogPostMeta({ post }: Props) {
       {post.author && (
         <div className="flex items-center gap-2">
           <User className="h-4 w-4" />
-          <span>{post.author}</span>
+          {authorHref ? (
+            <Link 
+              href={authorHref}
+              className="hover:text-slate-900 hover:underline transition-colors"
+            >
+              {post.author}
+            </Link>
+          ) : (
+            <span>{post.author}</span>
+          )}
         </div>
       )}
     </div>
