@@ -6,6 +6,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getBlogPost } from '@/lib/blog/getBlogPost';
 import { getBlogPostSlugs } from '@/lib/blog/getBlogPosts';
 import { getRelatedPosts } from '@/lib/blog/getRelatedPosts';
+import { generateHowToSchema } from '@/lib/seo/generateHowToSchema';
 import BlogPostMeta from '@/components/blog/BlogPostMeta';
 import RelatedPosts from '@/components/blog/RelatedPosts';
 import ComparisonTable from '@/components/blog/ComparisonTable';
@@ -55,7 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
               url: post.featuredImage,
               width: 1200,
               height: 630,
-              alt: post.title,
+              alt: post.imageAlt || post.title,
             },
           ]
         : [],
@@ -147,6 +148,9 @@ export default async function BlogPostPage({ params }: Props) {
     ],
   };
 
+  // HowTo Structured Data (if configured)
+  const howToSchema = generateHowToSchema(post, baseUrl);
+
   return (
     <>
       {/* Structured Data */}
@@ -164,6 +168,15 @@ export default async function BlogPostPage({ params }: Props) {
           __html: JSON.stringify(breadcrumbSchema),
         }}
       />
+      {howToSchema && (
+        <Script
+          id="howto-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(howToSchema),
+          }}
+        />
+      )}
 
       <article className="py-8 sm:py-10 lg:py-12">
       <div className="mx-auto max-w-4xl px-2 sm:px-4">
@@ -184,7 +197,7 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-sm">
               <Image
                 src={post.featuredImage}
-                alt={post.title}
+                alt={post.imageAlt || post.title}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
