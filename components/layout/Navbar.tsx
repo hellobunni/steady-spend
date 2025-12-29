@@ -16,6 +16,7 @@ const toolsLinks = [
   { href: '/tools', label: 'All Tools', icon: Wrench },
   { href: '/tools/monthly-budget', label: 'Monthly Budget Calculator', icon: Calculator },
   { href: '/tools/50-30-20', label: '50/30/20 Calculator', icon: Calculator },
+  { href: '/tools/take-home-pay-calculator', label: 'Take-Home Pay Calculator', icon: Calculator },
 ]
 
 export function Navbar() {
