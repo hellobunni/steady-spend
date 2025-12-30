@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: 'SteadySpend',
     images: [
       {
-        url: `${baseUrl}/headshot.jpeg`,
+        url: `${baseUrl}/headshot-v2.png`,
         width: 1200,
         height: 1200,
         alt: 'Lynae Thomas - Creator of SteadySpend',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: 'About SteadySpend | Meet the Creator',
     description:
       'Learn about the story behind SteadySpend. Simple budgeting tools created by someone who understands the struggle.',
-    images: [`${baseUrl}/headshot.jpeg`],
+    images: [`${baseUrl}/headshot-v2.png`],
   },
 }
 
