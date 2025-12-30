@@ -89,13 +89,12 @@ export default function AboutClient() {
                   <Image
                     src="/headshot-v2.png"
                     alt="Lynae Thomas"
-                    width={320}
-                    height={320}
+                    width={380}
+                    height={380}
                     className="w-full h-full object-cover"
                     priority
                   />
                 </div>
-                <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-primary/10 rounded-full blur-2xl" />
               </div>
             </motion.div>
 
