@@ -87,7 +87,7 @@ export default function AboutClient() {
               <div className="relative">
                 <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-2xl bg-linear-to-br from-primary/20 to-primary/5 border border-border/50 overflow-hidden">
                   <Image
-                    src="/headshot.jpeg"
+                    src="/headshot-v2.png"
                     alt="Lynae Thomas"
                     width={320}
                     height={320}
