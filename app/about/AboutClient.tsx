@@ -4,41 +4,11 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { 
-  Award, 
-  BookOpen, 
-  Briefcase, 
   CheckCircle, 
-  GraduationCap, 
-  Heart, 
   Mail, 
-  Shield, 
-  TrendingUp,
-  Users
+  Shield
 } from 'lucide-react'
 import { motion } from 'motion/react'
-
-const credentials = [
-  {
-    icon: GraduationCap,
-    title: "Bachelor's in Finance",
-    description: "Formal education in financial planning and analysis",
-  },
-  {
-    icon: Award,
-    title: "Certified Financial Educator",
-    description: "Accredited to teach personal finance fundamentals",
-  },
-  {
-    icon: Briefcase,
-    title: "10+ Years Experience",
-    description: "Helping individuals and families manage their money",
-  },
-  {
-    icon: Users,
-    title: "1,000+ People Helped",
-    description: "Through workshops, coaching, and content",
-  },
-]
 
 const trustSignals = [
   "All advice is educational, not financial advice",
@@ -46,15 +16,6 @@ const trustSignals = [
   "Fact-checked and regularly updated content",
   "Transparent about personal experiences",
   "Easy to contact with questions",
-]
-
-const expertise = [
-  "Budgeting & Cash Flow Management",
-  "Debt Payoff Strategies",
-  "Emergency Fund Planning",
-  "Expense Tracking & Reduction",
-  "Financial Goal Setting",
-  "Beginner Investing Basics",
 ]
 
 const fadeInUp = {

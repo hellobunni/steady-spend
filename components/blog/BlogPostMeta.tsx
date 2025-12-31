@@ -9,7 +9,7 @@ type Props = {
 export default function BlogPostMeta({ post }: Props) {
   const isNamedAuthor = post.author && 
     post.author !== 'SteadySpend Team' && 
-    post.author !== 'The SteadySpend Financial Education Team';
+    post.author !== 'Lynae Thomas';
   
   const authorHref = isNamedAuthor ? '/about' : undefined;
 
