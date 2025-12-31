@@ -1,0 +1,22 @@
+name: Enforce Branch Rules
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+
+jobs:
+  check-staging-only:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if PR is from staging
+        run: |
+          if [ "${{ github.head_ref }}" != "staging" ]; then
+            echo "❌ Pull requests to 'main' can only come from 'staging' branch"
+            echo "Current source branch: ${{ github.head_ref }}"
+            echo "Please merge your changes into 'staging' first, then create a PR from 'staging' to 'main'"
+            exit 1
+          fi
+          echo "✅ PR is from staging branch - allowed"
+
