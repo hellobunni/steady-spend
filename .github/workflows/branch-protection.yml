@@ -12,6 +12,12 @@ jobs:
     steps:
       - name: Check if PR is from staging
         run: |
+          # Allow admins to bypass (useful for initial setup)
+          if [ "${{ github.actor }}" == "${{ github.repository_owner }}" ]; then
+            echo "ℹ️  Admin bypass detected - allowing merge"
+            exit 0
+          fi
+          
           if [ "${{ github.head_ref }}" != "staging" ]; then
             echo "❌ Pull requests to 'main' can only come from 'staging' branch"
             echo "Current source branch: ${{ github.head_ref }}"
