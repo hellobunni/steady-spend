@@ -93,7 +93,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   // Article Structured Data
   // Use Person type for named authors, Organization for generic team
-  const isNamedAuthor = post.author && post.author !== 'SteadySpend Team' && post.author !== 'The SteadySpend Financial Education Team';
+  const isNamedAuthor = post.author && post.author !== 'SteadySpend Team' && post.author !== 'Lynae Thomas';
   
   const articleSchema = {
     '@context': 'https://schema.org',
