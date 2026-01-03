@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Calendar, Clock, ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { getBlogPosts } from "@/lib/blog/getBlogPosts";
+import { allPosts } from "content-collections/generated";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com';
 
@@ -16,7 +16,31 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const posts = getBlogPosts();
+  // Filter and sort posts from Content Collections
+  const posts = allPosts
+    .filter((post) => post._isVisible !== false) // Filter out future posts
+    .filter((post) => post.title && post.date) // Filter out invalid posts
+    .sort((a, b) => {
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    })
+    .map((post) => ({
+      title: post.title,
+      description: post.description,
+      slug: post.slug,
+      date: post.date,
+      lastModified: post.lastModified,
+      category: post.category,
+      tags: post.tags,
+      featuredImage: post.featuredImage,
+      imageAlt: post.imageAlt,
+      imageCredit: post.imageCredit,
+      author: post.author,
+      readTime: post.readTime,
+      keywords: post.keywords,
+      relatedPosts: post.relatedPosts,
+      howTo: post.howTo,
+    }));
+
   const featuredPost = posts[0]; // First post is featured
   const otherPosts = posts.slice(1);
 
