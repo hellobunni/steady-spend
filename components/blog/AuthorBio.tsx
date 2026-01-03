@@ -39,7 +39,8 @@ export default function AuthorBio({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   initials = "LT",
   imageSrc = "/headshot-v2.png",
-  bio = "Personal finance educator and creator of SteadySpend. After paying off $28,000 in debt and building financial stability, I now help everyday people take control of their money through practical, judgment-free guidance.",
+  bio =
+    "I’m the creator of SteadySpend and a software engineer learning my way through personal finance in real time. After paying off $28,000 in debt and rebuilding my financial foundation, I started sharing what helped me—simple tools, honest lessons, and practical ways to feel more in control of your money without shame or overwhelm.",
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   credentials = defaultCredentials,
   showDisclaimer = true,
@@ -56,7 +57,7 @@ export default function AuthorBio({
             {/* Header */}
             <div className="flex flex-col sm:flex-row gap-6 items-start mb-6">
               {/* Author Avatar */}
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 border border-border/50 flex items-center justify-center flex-shrink-0 overflow-hidden">
+              <div className="w-20 h-20 rounded-full bg-linear-to-br from-primary/20 to-primary/5 border border-border/50 flex items-center justify-center shrink-0 overflow-hidden">
                 <Image
                   src={imageSrc}
                   alt={`${name} headshot`}
