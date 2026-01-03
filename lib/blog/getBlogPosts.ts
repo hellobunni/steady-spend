@@ -1,9 +1,5 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
+import { allPosts } from "content-collections/generated";
 import { BlogPost } from './types';
-
-const postsDirectory = path.join(process.cwd(), 'app/content/blog');
 
 /**
  * Check if a post date has passed (considering 5am cutoff)
@@ -29,50 +25,35 @@ export function isPostDatePassed(postDate: string): boolean {
 }
 
 export function getBlogPosts(): BlogPost[] {
-  // Check if directory exists
-  if (!fs.existsSync(postsDirectory)) {
-    return [];
-  }
-
-  const fileNames = fs.readdirSync(postsDirectory);
-  const posts = fileNames
-    .filter((name) => name.endsWith('.mdx'))
-    .map((fileName) => {
-      const fullPath = path.join(postsDirectory, fileName);
-      const fileContents = fs.readFileSync(fullPath, 'utf8');
-      const { data, content } = matter(fileContents);
-      
-      // Extract slug from filename if not in frontmatter
-      const slug = (data.slug as string) || fileName.replace(/\.mdx$/, '');
-      
-      return {
-        ...(data as Partial<BlogPost>),
-        slug,
-        content,
-      } as BlogPost;
-    })
+  return allPosts
+    .filter((post) => post._isVisible !== false) // Filter out future posts (using flag from transform)
     .filter((post) => post.title && post.date) // Filter out invalid posts
-    .filter((post) => isPostDatePassed(post.date)) // Filter out future posts
+    .map((post) => ({
+      title: post.title,
+      description: post.description,
+      slug: post.slug,
+      date: post.date,
+      lastModified: post.lastModified,
+      category: post.category,
+      tags: post.tags,
+      featuredImage: post.featuredImage,
+      imageAlt: post.imageAlt,
+      imageCredit: post.imageCredit,
+      author: post.author,
+      readTime: post.readTime,
+      keywords: post.keywords,
+      relatedPosts: post.relatedPosts,
+      howTo: post.howTo,
+      mdx: post.mdx, // Compiled MDX code
+    }))
     .sort((a, b) => {
       return new Date(b.date).getTime() - new Date(a.date).getTime();
     });
-
-  return posts;
 }
 
 export function getBlogPostSlugs(): string[] {
-  if (!fs.existsSync(postsDirectory)) {
-    return [];
-  }
-
-  const fileNames = fs.readdirSync(postsDirectory);
-  return fileNames
-    .filter((name) => name.endsWith('.mdx'))
-    .map((name) => {
-      const fullPath = path.join(postsDirectory, name);
-      const fileContents = fs.readFileSync(fullPath, 'utf8');
-      const { data } = matter(fileContents);
-      return (data.slug as string) || name.replace(/\.mdx$/, '');
-    });
+  return allPosts
+    .filter((post) => post._isVisible !== false)
+    .map((post) => post.slug);
 }
 

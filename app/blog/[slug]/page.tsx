@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Script from 'next/script';
-import { MDXRemote } from 'next-mdx-remote/rsc';
+import { MDXContent } from '@content-collections/mdx/react';
+import { mdxComponents } from '@prose-ui/next';
 import { getBlogPost } from '@/lib/blog/getBlogPost';
 import { getBlogPostSlugs } from '@/lib/blog/getBlogPosts';
 import { getRelatedPosts } from '@/lib/blog/getRelatedPosts';
@@ -224,72 +225,77 @@ export default async function BlogPostPage({ params }: Props) {
         )}
 
         {/* Content */}
-        <div className="prose prose-slate prose-lg max-w-none">
-          <MDXRemote 
-            source={post.content || ''} 
-            components={{
-              ComparisonTable,
-              Accordion,
-              AuthorBio,
-              MathFormula,
-              img: (props: { src?: string; alt?: string; className?: string }) => {
-                if (!props.src) {
-                  return null;
-                }
-                
-                const className = props.className || '';
-                const isLogo = className.includes('logo-image');
-                const isScreenshot = className.includes('screenshot-image');
-                
-                if (isLogo) {
-                  // Logo: wrap in logo-image-wrapper div and convert to Next.js Image
+        <div className="prose-ui w-full max-w-none">
+          {post.mdx && (
+            <MDXContent
+              code={post.mdx}
+              components={{
+                ...mdxComponents,
+                // Merge custom components with Prose-UI components
+                ComparisonTable,
+                Accordion,
+                AuthorBio,
+                MathFormula,
+                // Override img component with custom image handling
+                img: (props: { src?: string; alt?: string; className?: string }) => {
+                  if (!props.src) {
+                    return null;
+                  }
+                  
+                  const className = props.className || '';
+                  const isLogo = className.includes('logo-image');
+                  const isScreenshot = className.includes('screenshot-image');
+                  
+                  if (isLogo) {
+                    // Logo: wrap in logo-image-wrapper div and convert to Next.js Image
+                    return (
+                      <div className="logo-image-wrapper">
+                        <Image
+                          src={props.src}
+                          alt={props.alt || ''}
+                          width={300}
+                          height={300}
+                          className="logo-image"
+                          style={{ 
+                            objectFit: 'contain', 
+                            width: 'auto',
+                            height: 'auto',
+                            maxWidth: '100%'
+                          }}
+                          unoptimized={props.src.includes('cloudinary.com') || props.src.includes('clearbit.com')}
+                        />
+                      </div>
+                    );
+                  } else if (isScreenshot) {
+                    // Screenshot: maintain aspect ratio, full width, no distortion
+                    return (
+                      <div className="mb-12 w-full">
+                        <Image
+                          src={props.src}
+                          alt={props.alt || ''}
+                          width={810}
+                          height={540}
+                          className="w-full h-auto rounded-lg shadow-sm"
+                          unoptimized={props.src.includes('cloudinary.com')}
+                        />
+                      </div>
+                    );
+                  }
+                  // Fallback for other images
                   return (
-                    <div className="logo-image-wrapper">
-                      <Image
-                        src={props.src}
-                        alt={props.alt || ''}
-                        width={300}
-                        height={300}
-                        className="logo-image"
-                        style={{ 
-                          objectFit: 'contain', 
-                          width: 'auto',
-                          height: 'auto',
-                          maxWidth: '100%'
-                        }}
-                        unoptimized={props.src.includes('cloudinary.com') || props.src.includes('clearbit.com')}
-                      />
-                    </div>
+                    <Image
+                      src={props.src}
+                      alt={props.alt || ''}
+                      width={800}
+                      height={500}
+                      className="w-full h-auto rounded-lg mb-4"
+                      unoptimized={props.src.includes('cloudinary.com')}
+                    />
                   );
-                } else if (isScreenshot) {
-                  // Screenshot: maintain aspect ratio, full width, no distortion
-                  return (
-                    <div className="mb-12 w-full">
-                      <Image
-                        src={props.src}
-                        alt={props.alt || ''}
-                        width={810}
-                        height={540}
-                        className="w-full h-auto rounded-lg shadow-sm"
-                        unoptimized={props.src.includes('cloudinary.com')}
-                      />
-                    </div>
-                  );
-                }
-                // Fallback for other images
-                return (
-                  <Image
-                    src={props.src}
-                    alt={props.alt || ''}
-                    width={800}
-                    height={500}
-                    className="w-full h-auto rounded-lg mb-4"
-                    unoptimized={props.src.includes('cloudinary.com')}
-                  />
-                );
-              },
-            }}
-          />
+                },
+              }}
+            />
+          )}
         </div>
 
         {/* Related Posts */}
