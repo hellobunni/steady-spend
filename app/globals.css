@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "@prose-ui/style/prose-ui.css";
+@import "@prose-ui/style/katex.min.css";
 
 @custom-variant dark (&:is(.dark *));
 
