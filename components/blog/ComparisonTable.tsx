@@ -12,13 +12,15 @@ type ComparisonTableProps = {
 export default function ComparisonTable({
   headers,
   rows,
-  className = '',
+  className = "",
   source,
   lastUpdated,
 }: ComparisonTableProps) {
   return (
     <>
-      <div className={`mt-8 mb-3 overflow-x-auto rounded-lg border border-slate-200 shadow-sm ${className}`}>
+      <div
+        className={`mt-8 mb-3 overflow-x-auto rounded-lg border border-slate-200 shadow-sm ${className}`}
+      >
         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b-2 border-slate-200 bg-slate-50">
@@ -26,7 +28,7 @@ export default function ComparisonTable({
                 <th
                   key={index}
                   className={`px-4 py-3 text-sm font-semibold text-slate-900 first:pl-6 last:pr-6 ${
-                    index === 0 ? 'text-left' : 'text-center'
+                    index === 0 ? "text-left" : "text-center"
                   }`}
                 >
                   {header}
@@ -44,7 +46,7 @@ export default function ComparisonTable({
                   <td
                     key={cellIndex}
                     className={`px-4 py-3 text-sm text-slate-700 first:pl-6 last:pr-6 ${
-                      cellIndex === 0 ? 'text-left' : 'text-center'
+                      cellIndex === 0 ? "text-left" : "text-center"
                     }`}
                     dangerouslySetInnerHTML={{ __html: cell }}
                   />
@@ -56,9 +58,9 @@ export default function ComparisonTable({
       </div>
       {(source || lastUpdated) && (
         <div className="space-y-1">
-          {source && source.link && source.title && (
+          {source?.link && source.title && (
             <p className="text-xs text-slate-500">
-              <span className="font-medium">Source:</span>{' '}
+              <span className="font-medium">Source:</span>{" "}
               <a
                 href={source.link}
                 target="_blank"

@@ -1,15 +1,15 @@
-'use client'
+"use client";
 
-import { Card, CardContent } from '@/components/ui/card'
-import { formatCurrency, formatPercentage } from '@/lib/utils'
-import { TrendingUp, TrendingDown, PiggyBank } from 'lucide-react'
+import { PiggyBank, TrendingDown, TrendingUp } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { formatCurrency, formatPercentage } from "@/lib/utils";
 
 type BudgetSummaryProps = {
-  income: number
-  totalExpenses: number
-  remaining: number
-  savingsRate: number
-}
+  income: number;
+  totalExpenses: number;
+  remaining: number;
+  savingsRate: number;
+};
 
 export default function BudgetSummary({
   income,
@@ -17,8 +17,8 @@ export default function BudgetSummary({
   remaining,
   savingsRate,
 }: BudgetSummaryProps) {
-  const isPositive = remaining >= 0
-  const savingsGoal = income * 0.2 // 20% savings goal
+  const isPositive = remaining >= 0;
+  const savingsGoal = income * 0.2; // 20% savings goal
 
   return (
     <div className="grid gap-4 md:grid-cols-2">
@@ -48,7 +48,7 @@ export default function BudgetSummary({
                 )}
                 <span
                   className={`text-xl font-bold ${
-                    isPositive ? 'text-emerald-600' : 'text-red-600'
+                    isPositive ? "text-emerald-600" : "text-red-600"
                   }`}
                 >
                   {formatCurrency(remaining)}
@@ -81,17 +81,17 @@ export default function BudgetSummary({
                 <div
                   className={`h-2.5 rounded-full transition-all ${
                     savingsRate >= 20
-                      ? 'bg-emerald-600'
+                      ? "bg-emerald-600"
                       : savingsRate >= 10
-                        ? 'bg-amber-500'
-                        : 'bg-red-500'
+                        ? "bg-amber-500"
+                        : "bg-red-500"
                   }`}
                   style={{ width: `${Math.min(100, (savingsRate / 20) * 100)}%` }}
                 />
               </div>
               {remaining < savingsGoal && remaining > 0 && (
                 <p className="text-xs text-gray-600 mt-2">
-                  You&apos;re saving {formatCurrency(remaining)}. To reach the 20% goal, aim to save{' '}
+                  You&apos;re saving {formatCurrency(remaining)}. To reach the 20% goal, aim to save{" "}
                   {formatCurrency(savingsGoal)} per month.
                 </p>
               )}
@@ -105,5 +105,5 @@ export default function BudgetSummary({
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

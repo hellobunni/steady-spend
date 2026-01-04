@@ -1,46 +1,49 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { useToast } from '@/hooks/use-toast'
-import { X } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { X } from "lucide-react";
+import * as React from "react";
+import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
-interface ToastProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
-  title?: React.ReactNode
-  description?: React.ReactNode
-  onClose?: () => void
+interface ToastProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  onClose?: () => void;
 }
 
 const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
   ({ className, title, description, onClose, ...props }, ref) => {
-  return (
-    <div
-      ref={ref}
-      className={cn(
-        'group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border bg-card p-6 pr-8 shadow-lg transition-all',
-        className
-      )}
-      {...props}
-    >
-      <div className="grid gap-1">
-        {title && <div className="text-sm font-semibold">{title}</div>}
-        {description && <div className="text-sm text-muted-foreground opacity-90">{description}</div>}
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-md border bg-card p-6 pr-8 shadow-lg transition-all",
+          className
+        )}
+        {...props}
+      >
+        <div className="grid gap-1">
+          {title && <div className="text-sm font-semibold">{title}</div>}
+          {description && (
+            <div className="text-sm text-muted-foreground opacity-90">{description}</div>
+          )}
+        </div>
+        {onClose && (
+          <button
+            className="absolute right-2 top-2 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100"
+            onClick={onClose}
+          >
+            <X className="h-4 w-4" />
+          </button>
+        )}
       </div>
-      {onClose && (
-        <button
-          className="absolute right-2 top-2 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-2 group-hover:opacity-100"
-          onClick={onClose}
-        >
-          <X className="h-4 w-4" />
-        </button>
-      )}
-    </div>
-  )
-})
-Toast.displayName = 'Toast'
+    );
+  }
+);
+Toast.displayName = "Toast";
 
 export function Toaster() {
-  const { toasts, dismiss } = useToast()
+  const { toasts, dismiss } = useToast();
 
   return (
     <div
@@ -58,8 +61,7 @@ export function Toaster() {
         />
       ))}
     </div>
-  )
+  );
 }
 
-export { Toast }
-
+export { Toast };

@@ -1,4 +1,4 @@
-export function LoadingState({ message = 'Calculating...' }: { message?: string }) {
+export function LoadingState({ message = "Calculating..." }: { message?: string }) {
   return (
     <div className="space-y-6 pt-6 border-t border-gray-200" role="status" aria-live="polite">
       <div className="glass-card p-6 lg:p-8">
@@ -14,6 +14,5 @@ export function LoadingState({ message = 'Calculating...' }: { message?: string 
         </div>
       </div>
     </div>
-  )
+  );
 }
-

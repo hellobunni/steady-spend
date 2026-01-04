@@ -1,4 +1,4 @@
-import { BlogPost } from '@/lib/blog/types';
+import type { BlogPost } from "@/lib/blog/types";
 
 /**
  * Generates HowTo structured data (JSON-LD) for a blog post
@@ -6,10 +6,7 @@ import { BlogPost } from '@/lib/blog/types';
  * @param baseUrl - Base URL of the site
  * @returns HowTo schema object or null if invalid
  */
-export function generateHowToSchema(
-  post: BlogPost,
-  baseUrl: string
-): object | null {
+export function generateHowToSchema(post: BlogPost, baseUrl: string): object | null {
   if (!post.howTo || !post.howTo.steps || post.howTo.steps.length === 0) {
     return null;
   }
@@ -17,24 +14,24 @@ export function generateHowToSchema(
   const postUrl = `${baseUrl}/blog/${post.slug}`;
 
   return {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
+    "@context": "https://schema.org",
+    "@type": "HowTo",
     name: post.title,
     description: post.description,
-    totalTime: post.howTo.totalTime || 'PT20M',
+    totalTime: post.howTo.totalTime || "PT20M",
     estimatedCost: post.howTo.estimatedCost
       ? {
-          '@type': 'MonetaryAmount',
-          currency: post.howTo.estimatedCost.currency || 'USD',
-          value: post.howTo.estimatedCost.value || '0',
+          "@type": "MonetaryAmount",
+          currency: post.howTo.estimatedCost.currency || "USD",
+          value: post.howTo.estimatedCost.value || "0",
         }
       : {
-          '@type': 'MonetaryAmount',
-          currency: 'USD',
-          value: '0',
+          "@type": "MonetaryAmount",
+          currency: "USD",
+          value: "0",
         },
     step: post.howTo.steps.map((step, index) => ({
-      '@type': 'HowToStep',
+      "@type": "HowToStep",
       url: step.url || `${postUrl}#step-${index + 1}`,
       name: step.name,
       text: step.text,
@@ -42,4 +39,3 @@ export function generateHowToSchema(
     })),
   };
 }
-

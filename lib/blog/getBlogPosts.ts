@@ -1,5 +1,5 @@
 import { allPosts } from "content-collections";
-import { BlogPost } from './types';
+import type { BlogPost } from "./types";
 
 /**
  * Check if a post date has passed (considering 5am cutoff)
@@ -8,7 +8,7 @@ import { BlogPost } from './types';
 export function isPostDatePassed(postDate: string): boolean {
   const now = new Date();
   const today5am = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 5, 0, 0);
-  
+
   // Parse post date and set to 5am on that date
   const postDateObj = new Date(postDate);
   const postDate5am = new Date(
@@ -19,7 +19,7 @@ export function isPostDatePassed(postDate: string): boolean {
     0,
     0
   );
-  
+
   // Post is visible if its 5am time is <= today's 5am time
   return postDate5am.getTime() <= today5am.getTime();
 }
@@ -52,8 +52,5 @@ export function getBlogPosts(): BlogPost[] {
 }
 
 export function getBlogPostSlugs(): string[] {
-  return allPosts
-    .filter((post) => post._isVisible !== false)
-    .map((post) => post.slug);
+  return allPosts.filter((post) => post._isVisible !== false).map((post) => post.slug);
 }
-

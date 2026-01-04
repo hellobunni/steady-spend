@@ -1,50 +1,50 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { Calculator, DollarSign, ArrowRight, Sparkles } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Accordion } from '@/components/ui/accordion'
+import { ArrowRight, Calculator, DollarSign, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { Accordion } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 
 type Tool = {
-  icon: typeof Calculator
-  title: string
-  description: string
-  link: string
-  status: 'live' | 'coming-soon'
-  gradient: string
-  pill?: string
-}
+  icon: typeof Calculator;
+  title: string;
+  description: string;
+  link: string;
+  status: "live" | "coming-soon";
+  gradient: string;
+  pill?: string;
+};
 
 const tools: Tool[] = [
   {
     icon: Calculator,
-    title: 'Monthly Budget Planner & Cash Flow Calculator',
+    title: "Monthly Budget Planner & Cash Flow Calculator",
     description:
-      'Take control of your monthly spending. Use this tool to track expenses, identify savings opportunities, and visualize your cash flow in real-time.',
-    link: '/tools/monthly-budget',
-    status: 'live',
-    gradient: 'from-emerald-500 to-teal-500',
-    pill: 'Popular',
+      "Take control of your monthly spending. Use this tool to track expenses, identify savings opportunities, and visualize your cash flow in real-time.",
+    link: "/tools/monthly-budget",
+    status: "live",
+    gradient: "from-emerald-500 to-teal-500",
+    pill: "Popular",
   },
   {
     icon: Calculator,
-    title: '50/30/20 Rule Calculator for Beginners',
+    title: "50/30/20 Rule Calculator for Beginners",
     description:
-      'Simplify your finances using the popular 50/30/20 budgeting method. Automatically allocate your income toward Needs (50%), Wants (30%), and Financial Goals (20%).',
-    link: '/tools/50-30-20',
-    status: 'live',
-    gradient: 'from-violet-500 to-purple-500',
+      "Simplify your finances using the popular 50/30/20 budgeting method. Automatically allocate your income toward Needs (50%), Wants (30%), and Financial Goals (20%).",
+    link: "/tools/50-30-20",
+    status: "live",
+    gradient: "from-violet-500 to-purple-500",
   },
   {
     icon: DollarSign,
-    title: 'Salary & Take-Home Pay Calculator (After-Tax)',
+    title: "Salary & Take-Home Pay Calculator (After-Tax)",
     description:
-      'Calculate your net income after federal and state taxes. Perfect for planning your budget based on your actual paycheck instead of your gross salary.',
-    link: '/tools/take-home-pay-calculator',
-    status: 'live',
-    gradient: 'from-sky-500 to-blue-500',
+      "Calculate your net income after federal and state taxes. Perfect for planning your budget based on your actual paycheck instead of your gross salary.",
+    link: "/tools/take-home-pay-calculator",
+    status: "live",
+    gradient: "from-sky-500 to-blue-500",
   },
-]
+];
 
 export default function ToolsClient() {
   return (
@@ -58,10 +58,12 @@ export default function ToolsClient() {
             </span>
             <div className="space-y-4">
               <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl text-foreground">
-              Free Personal Finance Tools & Budgeting Calculators
+                Free Personal Finance Tools & Budgeting Calculators
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed">
-              Master your money with simple, ad-free financial tools. From calculating your take-home pay to mastering the 50/30/20 rule, our clear-cut calculators help you make informed financial decisions without the stress
+                Master your money with simple, ad-free financial tools. From calculating your
+                take-home pay to mastering the 50/30/20 rule, our clear-cut calculators help you
+                make informed financial decisions without the stress
               </p>
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-sm text-foreground">
@@ -83,27 +85,27 @@ export default function ToolsClient() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto grid gap-8 md:grid-cols-2">
             {tools.map((tool) => {
-              const Icon = tool.icon
-              const isComingSoon = tool.status === 'coming-soon'
+              const Icon = tool.icon;
+              const isComingSoon = tool.status === "coming-soon";
 
               return (
                 <div
                   key={tool.title}
                   className={`glass-card p-8 lg:p-9 h-full flex flex-col transition-all duration-300 ${
-                    isComingSoon ? 'opacity-80' : 'hover:-translate-y-1 hover:shadow-glow'
+                    isComingSoon ? "opacity-80" : "hover:-translate-y-1 hover:shadow-glow"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-4 mb-6 min-h-[80px]">
                     <div className="flex items-center gap-4">
-                    <div
-                      className={`w-14 h-14 rounded-2xl bg-linear-to-br ${tool.gradient} flex items-center justify-center shrink-0`}
-                      aria-label={`Icon for ${tool.title.toLowerCase()}`}
-                    >
-                      <Icon className="w-7 h-7 text-white" aria-hidden="true" />
-                    </div>
+                      <div
+                        className={`w-14 h-14 rounded-2xl bg-linear-to-br ${tool.gradient} flex items-center justify-center shrink-0`}
+                        aria-label={`Icon for ${tool.title.toLowerCase()}`}
+                      >
+                        <Icon className="w-7 h-7 text-white" aria-hidden="true" />
+                      </div>
                       <div>
                         <p className="text-xs uppercase tracking-wide text-muted-foreground mb-1">
-                          {isComingSoon ? 'Coming soon' : 'Live tool'}
+                          {isComingSoon ? "Coming soon" : "Live tool"}
                         </p>
                         <h2 className="font-display text-2xl font-semibold text-foreground">
                           {tool.title}
@@ -121,7 +123,9 @@ export default function ToolsClient() {
                     )}
                   </div>
 
-                  <p className="text-muted-foreground leading-relaxed mb-8 flex-1">{tool.description}</p>
+                  <p className="text-muted-foreground leading-relaxed mb-8 flex-1">
+                    {tool.description}
+                  </p>
 
                   <div className="flex flex-wrap items-center gap-3 mt-auto">
                     {isComingSoon ? (
@@ -138,7 +142,7 @@ export default function ToolsClient() {
                     )}
                   </div>
                 </div>
-              )
+              );
             })}
           </div>
 
@@ -148,7 +152,9 @@ export default function ToolsClient() {
                 Financial Success Starts with the Right Tools
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-                Managing your money shouldn&apos;t feel like a chore. Our free financial calculators are designed to give you instant clarity on your cash flow, helping you bridge the gap between financial goals and daily spending.
+                Managing your money shouldn&apos;t feel like a chore. Our free financial calculators
+                are designed to give you instant clarity on your cash flow, helping you bridge the
+                gap between financial goals and daily spending.
               </p>
             </div>
 
@@ -159,28 +165,34 @@ export default function ToolsClient() {
               <Accordion
                 items={[
                   {
-                    question: 'What is the best way to start a monthly budget?',
+                    question: "What is the best way to start a monthly budget?",
                     answer:
                       'The most effective way to start is by tracking your actual income and expenses for 30 days. Use a monthly budget planner to categorize your spending into "fixed" costs (like rent) and "variable" costs (like dining out) to see exactly where your money goes.',
                   },
                   {
-                    question: 'How does the 50/30/20 budgeting rule work?',
+                    question: "How does the 50/30/20 budgeting rule work?",
                     answer: (
                       <>
-                        The 50/30/20 rule is a simple financial framework where you allocate 50% of your income to needs, 30% to wants, and 20% to savings or debt repayment. It is an ideal method for beginners who want a balanced lifestyle without complex tracking.{' '}
-                        <Link href="/tools/50-30-20" className="text-primary hover:underline font-medium">
+                        The 50/30/20 rule is a simple financial framework where you allocate 50% of
+                        your income to needs, 30% to wants, and 20% to savings or debt repayment. It
+                        is an ideal method for beginners who want a balanced lifestyle without
+                        complex tracking.{" "}
+                        <Link
+                          href="/tools/50-30-20"
+                          className="text-primary hover:underline font-medium"
+                        >
                           Ready to try it? Use our 50/30/20 Calculator above.
                         </Link>
                       </>
                     ),
                   },
                   {
-                    question: 'How do I calculate my actual take-home pay?',
+                    question: "How do I calculate my actual take-home pay?",
                     answer:
                       'To find your net take-home pay, you must subtract federal, state, and local taxes, as well as FICA and healthcare deductions, from your gross salary. Knowing your "after-tax" income is the only way to build an accurate budget that prevents overspending.',
                   },
                   {
-                    question: 'Why should I use a financial calculator instead of a spreadsheet?',
+                    question: "Why should I use a financial calculator instead of a spreadsheet?",
                     answer:
                       'While spreadsheets are powerful, interactive financial tools provide instant visualizations and "what-if" scenarios. They allow you to quickly see how a small change in spending today can lead to significant savings over time—without the risk of manual formula errors.',
                   },
@@ -191,5 +203,5 @@ export default function ToolsClient() {
         </div>
       </section>
     </div>
-  )
+  );
 }

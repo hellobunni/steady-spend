@@ -1,24 +1,24 @@
-'use client'
+"use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { formatCurrency } from '@/lib/utils'
-import { getExpenseCategories } from '@/lib/calculations/budget'
-import { PieChart } from 'lucide-react'
+import { PieChart } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getExpenseCategories } from "@/lib/calculations/budget";
+import { formatCurrency } from "@/lib/utils";
 
 type BudgetChartProps = {
-  expenses: Record<string, string>
-}
+  expenses: Record<string, string>;
+};
 
 export default function BudgetChart({ expenses }: BudgetChartProps) {
-  const categories = getExpenseCategories(expenses)
-  const total = categories.reduce((sum, cat) => sum + cat.value, 0)
+  const categories = getExpenseCategories(expenses);
+  const total = categories.reduce((sum, cat) => sum + cat.value, 0);
 
   if (categories.length === 0) {
-    return null
+    return null;
   }
 
   // Simple bar chart visualization
-  const maxValue = Math.max(...categories.map((cat) => cat.value))
+  const maxValue = Math.max(...categories.map((cat) => cat.value));
 
   return (
     <Card>
@@ -33,8 +33,8 @@ export default function BudgetChart({ expenses }: BudgetChartProps) {
       <CardContent>
         <div className="space-y-4">
           {categories.map((category) => {
-            const percentage = total > 0 ? (category.value / total) * 100 : 0
-            const barWidth = maxValue > 0 ? (category.value / maxValue) * 100 : 0
+            const percentage = total > 0 ? (category.value / total) * 100 : 0;
+            const barWidth = maxValue > 0 ? (category.value / maxValue) * 100 : 0;
 
             return (
               <div key={category.name} className="space-y-1.5">
@@ -55,10 +55,10 @@ export default function BudgetChart({ expenses }: BudgetChartProps) {
                   />
                 </div>
               </div>
-            )
+            );
           })}
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

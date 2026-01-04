@@ -1,6 +1,5 @@
-export { ToolPageLayout } from './ToolPageLayout'
-export { PrivacyNotice } from './PrivacyNotice'
-export { ActionButtonGroup } from './ActionButtonGroup'
-export { LoadingState } from './LoadingState'
-export { ResultsSection } from './ResultsSection'
-
+export { ActionButtonGroup } from "./ActionButtonGroup";
+export { LoadingState } from "./LoadingState";
+export { PrivacyNotice } from "./PrivacyNotice";
+export { ResultsSection } from "./ResultsSection";
+export { ToolPageLayout } from "./ToolPageLayout";

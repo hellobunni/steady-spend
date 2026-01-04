@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { BlogPost } from '@/lib/blog/types';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { BlogPost } from "@/lib/blog/types";
 
 type Props = {
   posts: BlogPost[];
@@ -40,4 +40,3 @@ export default function RelatedPosts({ posts }: Props) {
     </section>
   );
 }
-
