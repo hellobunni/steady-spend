@@ -62,6 +62,7 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1">
             {/* Tools Dropdown */}
+            {/* biome-ignore lint/a11y/noStaticElementInteractions: Dropdown container with hover interactions */}
             <div
               className="relative"
               onMouseEnter={() => setIsToolsOpen(true)}
@@ -137,6 +138,7 @@ export function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
+            type="button"
             onClick={() => setIsOpen(!isOpen)}
             className="lg:hidden p-2 rounded-lg hover:bg-muted/50 transition-colors"
             aria-label="Toggle menu"

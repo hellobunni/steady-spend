@@ -136,6 +136,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             src="https://www.googletagmanager.com/ns.html?id=GTM-KVZ8VQQS"
             height="0"
             width="0"
+            title="Google Tag Manager"
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>

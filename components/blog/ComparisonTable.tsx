@@ -26,7 +26,7 @@ export default function ComparisonTable({
             <tr className="border-b-2 border-slate-200 bg-slate-50">
               {headers.map((header, index) => (
                 <th
-                  key={index}
+                  key={header}
                   className={`px-4 py-3 text-sm font-semibold text-slate-900 first:pl-6 last:pr-6 ${
                     index === 0 ? "text-left" : "text-center"
                   }`}
@@ -39,12 +39,12 @@ export default function ComparisonTable({
           <tbody>
             {rows.map((row, rowIndex) => (
               <tr
-                key={rowIndex}
+                key={`row-${rowIndex}-${row[0] || ""}`}
                 className="border-b border-slate-100 last:border-b-0 hover:bg-slate-50/50 transition-colors"
               >
                 {row.map((cell, cellIndex) => (
                   <td
-                    key={cellIndex}
+                    key={`cell-${rowIndex}-${cellIndex}-${cell.substring(0, 20)}`}
                     className={`px-4 py-3 text-sm text-slate-700 first:pl-6 last:pr-6 ${
                       cellIndex === 0 ? "text-left" : "text-center"
                     }`}

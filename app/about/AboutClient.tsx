@@ -119,8 +119,8 @@ export default function AboutClient() {
               className="glass-card p-8 rounded-2xl"
             >
               <ul className="space-y-4">
-                {trustSignals.map((signal, index) => (
-                  <li key={index} className="flex items-start gap-3">
+                {trustSignals.map((signal) => (
+                  <li key={signal} className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                     <span className="text-foreground">{signal}</span>
                   </li>
