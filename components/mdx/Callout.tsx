@@ -30,7 +30,7 @@ export default function Callout({ type, title, children }: CalloutProps) {
           {title}
         </h3>
       )}
-      <div className="prose prose-slate prose-sm max-w-none [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_strong]:font-semibold [&_p]:my-0 [&_p+_p]:mt-3">
+      <div className="prose prose-sm max-w-none [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_strong]:font-semibold [&_p]:my-0 [&_p+_p]:mt-3">
         {children}
       </div>
     </aside>
