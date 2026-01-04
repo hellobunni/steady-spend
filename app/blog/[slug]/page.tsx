@@ -190,42 +190,42 @@ export default async function BlogPostPage({ params }: Props) {
         />
       )}
 
-      <article className="py-8 sm:py-10 lg:py-12">
-      <div className="mx-auto max-w-4xl px-2 sm:px-4">
-        {/* Header */}
-        <header className="mb-8">
-          <div className="mb-4 inline-flex rounded-full bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-800">
-            {post.category}
-          </div>
-          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
-            {post.title}
-          </h1>
-          <BlogPostMeta post={post} />
-        </header>
-
-        {/* Post Image */}
-        {post.featuredImage && (
-          <div className="mb-8">
-            <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-sm">
-              <Image
-                src={post.featuredImage}
-                alt={post.imageAlt || post.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-                priority
-              />
+      <article className="py-8 sm:py-12 lg:py-16">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <header className="mb-10 sm:mb-12">
+            <div className="mb-4 inline-flex rounded-full bg-emerald-50 px-3 py-1.5 text-sm font-medium text-emerald-800">
+              {post.category}
             </div>
-            {post.imageCredit && (
-              <p className="mt-2 text-xs text-slate-500">
-                Image credit: {post.imageCredit}
-              </p>
-            )}
-          </div>
-        )}
+            <h1 className="mb-6 text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl md:text-5xl lg:text-6xl">
+              {post.title}
+            </h1>
+            <BlogPostMeta post={post} />
+          </header>
 
-        {/* Content */}
-        <div className="prose-ui w-full max-w-none">
+          {/* Post Image */}
+          {post.featuredImage && (
+            <div className="mb-10 sm:mb-12">
+              <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-md border border-slate-200">
+                <Image
+                  src={post.featuredImage}
+                  alt={post.imageAlt || post.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                  priority
+                />
+              </div>
+              {post.imageCredit && (
+                <p className="mt-3 text-xs text-slate-500">
+                  Image credit: {post.imageCredit}
+                </p>
+              )}
+            </div>
+          )}
+
+          {/* Content */}
+          <div className="prose-ui w-full max-w-none">
           {post.mdx && (
             <MDXContent
               code={post.mdx}
@@ -298,12 +298,12 @@ export default async function BlogPostPage({ params }: Props) {
           )}
         </div>
 
-        {/* Related Posts */}
-        {relatedPosts.length > 0 && (
-          <RelatedPosts posts={relatedPosts} />
-        )}
-      </div>
-    </article>
+          {/* Related Posts */}
+          {relatedPosts.length > 0 && (
+            <RelatedPosts posts={relatedPosts} />
+          )}
+        </div>
+      </article>
     </>
   );
 }

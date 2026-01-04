@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Calendar, Clock, ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { allPosts } from "content-collections/generated";
+import { allPosts } from "content-collections";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com';
 

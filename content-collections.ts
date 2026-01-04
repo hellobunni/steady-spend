@@ -69,6 +69,7 @@ const postsSchema = z.object({
   keywords: z.array(z.string()).optional(),
   relatedPosts: z.array(z.string()).optional(),
   howTo: howToConfigSchema.optional(),
+  content: z.string(), // Explicit content property (required by Content Collections)
 });
 
 const posts = defineCollection({

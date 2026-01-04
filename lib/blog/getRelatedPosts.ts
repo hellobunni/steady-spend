@@ -1,4 +1,4 @@
-import { allPosts } from "content-collections/generated";
+import { allPosts } from "content-collections";
 import { BlogPost } from './types';
 
 export function getRelatedPosts(
