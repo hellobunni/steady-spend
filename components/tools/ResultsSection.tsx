@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import { ReactNode } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { AnimatePresence, motion } from "motion/react";
+import type { ReactNode } from "react";
 
 interface ResultsSectionProps {
-  show: boolean
-  title: string
-  children: ReactNode
-  className?: string
+  show: boolean;
+  title: string;
+  children: ReactNode;
+  className?: string;
 }
 
 export function ResultsSection({ show, title, children, className }: ResultsSectionProps) {
@@ -19,7 +19,7 @@ export function ResultsSection({ show, title, children, className }: ResultsSect
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className={`space-y-6 pt-6 border-t border-gray-200 ${className || ''}`}
+          className={`space-y-6 pt-6 border-t border-gray-200 ${className || ""}`}
           role="region"
           aria-labelledby="results-title"
         >
@@ -34,6 +34,5 @@ export function ResultsSection({ show, title, children, className }: ResultsSect
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }
-

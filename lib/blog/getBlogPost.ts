@@ -1,5 +1,5 @@
 import { allPosts } from "content-collections";
-import { BlogPost } from './types';
+import type { BlogPost } from "./types";
 
 export function getBlogPost(slug: string): BlogPost | null {
   const post = allPosts.find((p) => p.slug === slug);
@@ -32,4 +32,3 @@ export function getBlogPost(slug: string): BlogPost | null {
     mdx: post.mdx, // Compiled MDX code
   };
 }
-

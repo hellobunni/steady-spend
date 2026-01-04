@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Calculator, ArrowRight, Shield, Sparkles } from 'lucide-react'
-import { motion } from 'motion/react'
+import { ArrowRight, Calculator, Shield, Sparkles } from "lucide-react";
+import { motion } from "motion/react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 export default function HomeClient() {
   return (
@@ -29,7 +29,7 @@ export default function HomeClient() {
           >
             Understand Your Money,
             <span className="bg-linear-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent">
-              {' '}
+              {" "}
               Spend With Confidence
             </span>
           </motion.h1>
@@ -119,17 +119,21 @@ export default function HomeClient() {
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
             Free Budgeting Tools for Better Money Management
           </h2>
-          
+
           <div className="space-y-8 text-gray-700">
             <div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-4">
                 Why Use a Budget Calculator?
               </h3>
               <p className="text-base leading-relaxed mb-4">
-                A budget calculator helps you understand where your money goes each month. By tracking your income and expenses, you can identify spending patterns, find opportunities to save, and make more informed financial decisions. Our free monthly budget calculator makes it easy to see your complete financial picture without any sign-up or account required.
+                A budget calculator helps you understand where your money goes each month. By
+                tracking your income and expenses, you can identify spending patterns, find
+                opportunities to save, and make more informed financial decisions. Our free monthly
+                budget calculator makes it easy to see your complete financial picture without any
+                sign-up or account required.
               </p>
               <p className="text-base leading-relaxed mb-4">
-                According to the{' '}
+                According to the{" "}
                 <a
                   href="https://www.consumerfinance.gov/consumer-tools/money-as-you-grow/"
                   target="_blank"
@@ -138,7 +142,9 @@ export default function HomeClient() {
                 >
                   Consumer Financial Protection Bureau
                 </a>
-                , creating a budget is one of the most important steps you can take to improve your financial well-being. Budgeting helps you prioritize spending, build savings, and reduce financial stress.
+                , creating a budget is one of the most important steps you can take to improve your
+                financial well-being. Budgeting helps you prioritize spending, build savings, and
+                reduce financial stress.
               </p>
             </div>
 
@@ -151,17 +157,22 @@ export default function HomeClient() {
               </p>
               <ul className="list-disc list-inside space-y-2 text-base leading-relaxed ml-4 mb-4">
                 <li>
-                  <strong className="text-gray-900">Enter your income:</strong> Add all sources of monthly income, including salary, freelance work, and other earnings
+                  <strong className="text-gray-900">Enter your income:</strong> Add all sources of
+                  monthly income, including salary, freelance work, and other earnings
                 </li>
                 <li>
-                  <strong className="text-gray-900">List your expenses:</strong> Categorize your spending into housing, food, transportation, utilities, and other expenses
+                  <strong className="text-gray-900">List your expenses:</strong> Categorize your
+                  spending into housing, food, transportation, utilities, and other expenses
                 </li>
                 <li>
-                  <strong className="text-gray-900">See your results:</strong> Instantly see where your money goes and identify areas where you can save
+                  <strong className="text-gray-900">See your results:</strong> Instantly see where
+                  your money goes and identify areas where you can save
                 </li>
               </ul>
               <p className="text-base leading-relaxed">
-                All your data is stored locally in your browser, so your financial information never leaves your device. No accounts, no sign-ups, no tracking—just a simple tool to help you understand your money.
+                All your data is stored locally in your browser, so your financial information never
+                leaves your device. No accounts, no sign-ups, no tracking—just a simple tool to help
+                you understand your money.
               </p>
             </div>
 
@@ -170,17 +181,25 @@ export default function HomeClient() {
                 Additional Budgeting Tools and Resources
               </h3>
               <p className="text-base leading-relaxed mb-4">
-                Beyond our monthly budget calculator, we offer other free tools to help you manage your finances:
+                Beyond our monthly budget calculator, we offer other free tools to help you manage
+                your finances:
               </p>
               <ul className="list-disc list-inside space-y-2 text-base leading-relaxed ml-4 mb-4">
                 <li>
-                  <Link href="/tools/50-30-20" className="text-emerald-700 underline hover:text-emerald-800">
+                  <Link
+                    href="/tools/50-30-20"
+                    className="text-emerald-700 underline hover:text-emerald-800"
+                  >
                     50/30/20 Budget Calculator
                   </Link>
-                  : Use the popular 50/30/20 rule to allocate your income across needs, wants, and savings
+                  : Use the popular 50/30/20 rule to allocate your income across needs, wants, and
+                  savings
                 </li>
                 <li>
-                  <Link href="/tools/take-home-pay-calculator" className="text-emerald-700 underline hover:text-emerald-800">
+                  <Link
+                    href="/tools/take-home-pay-calculator"
+                    className="text-emerald-700 underline hover:text-emerald-800"
+                  >
                     Take-Home Pay Calculator
                   </Link>
                   : Calculate your actual income after taxes and deductions
@@ -191,25 +210,37 @@ export default function HomeClient() {
               </p>
               <ul className="list-disc list-inside space-y-2 text-base leading-relaxed ml-4 mb-4">
                 <li>
-                  <Link href="/blog/how-to-start-budgeting" className="text-emerald-700 underline hover:text-emerald-800">
+                  <Link
+                    href="/blog/how-to-start-budgeting"
+                    className="text-emerald-700 underline hover:text-emerald-800"
+                  >
                     How to Start Budgeting
                   </Link>
                   : A beginner-friendly guide to creating your first budget
                 </li>
                 <li>
-                  <Link href="/blog/how-to-track-your-spending" className="text-emerald-700 underline hover:text-emerald-800">
+                  <Link
+                    href="/blog/how-to-track-your-spending"
+                    className="text-emerald-700 underline hover:text-emerald-800"
+                  >
                     How to Track Your Spending
                   </Link>
                   : Learn effective methods for monitoring where your money goes
                 </li>
                 <li>
-                  <Link href="/blog/50-30-20-budget-rule" className="text-emerald-700 underline hover:text-emerald-800">
+                  <Link
+                    href="/blog/50-30-20-budget-rule"
+                    className="text-emerald-700 underline hover:text-emerald-800"
+                  >
                     The 50/30/20 Budget Rule Explained
                   </Link>
                   : Understand this popular budgeting framework
                 </li>
                 <li>
-                  <Link href="/blog/common-budget-mistakes" className="text-emerald-700 underline hover:text-emerald-800">
+                  <Link
+                    href="/blog/common-budget-mistakes"
+                    className="text-emerald-700 underline hover:text-emerald-800"
+                  >
                     Common Budget Mistakes to Avoid
                   </Link>
                   : Learn from common pitfalls and improve your budgeting success
@@ -222,7 +253,8 @@ export default function HomeClient() {
                 Financial Education Resources
               </h3>
               <p className="text-base leading-relaxed mb-4">
-                For additional financial education and resources, we recommend these trusted sources:
+                For additional financial education and resources, we recommend these trusted
+                sources:
               </p>
               <ul className="list-disc list-inside space-y-2 text-base leading-relaxed ml-4 mb-4">
                 <li>
@@ -266,23 +298,34 @@ export default function HomeClient() {
                 Getting Started with Budgeting
               </h4>
               <p className="text-base leading-relaxed mb-4">
-                If you&apos;re new to budgeting, start with our{' '}
-                <Link href="/blog/how-to-start-budgeting" className="text-emerald-700 underline hover:text-emerald-800">
+                If you&apos;re new to budgeting, start with our{" "}
+                <Link
+                  href="/blog/how-to-start-budgeting"
+                  className="text-emerald-700 underline hover:text-emerald-800"
+                >
                   beginner&apos;s guide to budgeting
                 </Link>
-                . This comprehensive guide walks you through the basics of creating a budget, tracking expenses, and setting financial goals. Once you understand the fundamentals, use our{' '}
-                <Link href="/tools/monthly-budget" className="text-emerald-700 underline hover:text-emerald-800">
+                . This comprehensive guide walks you through the basics of creating a budget,
+                tracking expenses, and setting financial goals. Once you understand the
+                fundamentals, use our{" "}
+                <Link
+                  href="/tools/monthly-budget"
+                  className="text-emerald-700 underline hover:text-emerald-800"
+                >
                   monthly budget calculator
-                </Link>{' '}
+                </Link>{" "}
                 to put your knowledge into practice.
               </p>
               <p className="text-base leading-relaxed">
-                Remember, budgeting is a skill that improves with practice. Start simple, be consistent, and adjust your budget as your financial situation changes. With the right tools and knowledge, you can take control of your finances and spend with confidence.
+                Remember, budgeting is a skill that improves with practice. Start simple, be
+                consistent, and adjust your budget as your financial situation changes. With the
+                right tools and knowledge, you can take control of your finances and spend with
+                confidence.
               </p>
             </div>
           </div>
         </div>
       </section>
     </div>
-  )
+  );
 }

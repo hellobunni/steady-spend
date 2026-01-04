@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
 import { ArrowRight, BookOpen, Calculator } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export function CTASection() {
   return (
@@ -20,11 +20,17 @@ export function CTASection() {
             Ready to Build a Better Budget?
           </h2>
           <p className="text-lg text-white/80 mb-10 max-w-4xl mx-auto">
-            Start using our <Link href="/tools" className="text-white underline hover:text-white/90 font-medium">free financial tools</Link> today and join others mastering their <strong className="text-white">money management</strong>. <br /> Explore practical guides, tips, and calculators designed to help you spend smarter and save more.
+            Start using our{" "}
+            <Link href="/tools" className="text-white underline hover:text-white/90 font-medium">
+              free financial tools
+            </Link>{" "}
+            today and join others mastering their{" "}
+            <strong className="text-white">money management</strong>. <br /> Explore practical
+            guides, tips, and calculators designed to help you spend smarter and save more.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="bg-white text-primary hover:bg-white/90 px-8 py-6 text-lg font-semibold shadow-xl group"
               asChild
             >
@@ -33,9 +39,9 @@ export function CTASection() {
                 Try Budget Calculator
               </Link>
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
+            <Button
+              size="lg"
+              variant="outline"
               className="border-white/30 text-white hover:bg-white/10 px-8 py-6 text-lg font-semibold bg-transparent group"
               asChild
             >
@@ -51,4 +57,3 @@ export function CTASection() {
     </section>
   );
 }
-

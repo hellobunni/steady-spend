@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
-import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
 import { Toaster } from "@/components/ui/toast";
-import { Analytics } from "@vercel/analytics/next"
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
@@ -18,79 +18,81 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.steadyspend.com"),
   title: "SteadySpend - Understand your money, spend with confidence",
-  description: "Free budgeting tools and guides to help you understand your money and spend with confidence.",
+  description:
+    "Free budgeting tools and guides to help you understand your money and spend with confidence.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.steadyspend.com";
 
   // SiteNavigationElement structured data
   const navigationSchema = {
     "@context": "https://schema.org",
     "@type": "SiteNavigationElement",
-    "name": "Main Navigation",
-    "url": baseUrl,
-    "hasPart": [
+    name: "Main Navigation",
+    url: baseUrl,
+    hasPart: [
       {
         "@type": "SiteNavigationElement",
-        "name": "Home",
-        "url": `${baseUrl}/`
+        name: "Home",
+        url: `${baseUrl}/`,
       },
       {
         "@type": "SiteNavigationElement",
-        "name": "Blog",
-        "url": `${baseUrl}/blog`
+        name: "Blog",
+        url: `${baseUrl}/blog`,
       },
       {
         "@type": "SiteNavigationElement",
-        "name": "Tools",
-        "url": `${baseUrl}/tools`,
-        "hasPart": [
+        name: "Tools",
+        url: `${baseUrl}/tools`,
+        hasPart: [
           {
             "@type": "SiteNavigationElement",
-            "name": "Monthly Budget Calculator",
-            "url": `${baseUrl}/tools/monthly-budget`
+            name: "Monthly Budget Calculator",
+            url: `${baseUrl}/tools/monthly-budget`,
           },
           {
             "@type": "SiteNavigationElement",
-            "name": "Take Home Pay Calculator",
-            "url": `${baseUrl}/tools/take-home-pay-calculator`
-          }
-        ]
-      }
-    ]
+            name: "Take Home Pay Calculator",
+            url: `${baseUrl}/tools/take-home-pay-calculator`,
+          },
+        ],
+      },
+    ],
   };
 
   // Structured Data - Website Schema
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "SteadySpend",
-    "url": baseUrl,
-    "description": "Free budgeting tools and guides to help you understand your money and spend with confidence.",
-    "logo": `${baseUrl}/logo-vertical.png`,
-    "sameAs": [
+    name: "SteadySpend",
+    url: baseUrl,
+    description:
+      "Free budgeting tools and guides to help you understand your money and spend with confidence.",
+    logo: `${baseUrl}/logo-vertical.png`,
+    sameAs: [
       "https://www.facebook.com/steadyspend",
       "https://twitter.com/steadyspend",
       "https://www.instagram.com/steadyspend",
       "https://www.linkedin.com/company/steadyspend",
-      "https://www.youtube.com/@steadyspend"
+      "https://www.youtube.com/@steadyspend",
     ],
-    "contactPoint": {
+    contactPoint: {
       "@type": "ContactPoint",
-      "contactType": "Customer Service",
-      "availableLanguage": "English"
+      contactType: "Customer Service",
+      availableLanguage: "English",
     },
-    "potentialAction": {
+    potentialAction: {
       "@type": "SearchAction",
-      "target": {
+      target: {
         "@type": "EntryPoint",
-        "urlTemplate": `${baseUrl}/blog?search={search_term_string}`
+        urlTemplate: `${baseUrl}/blog?search={search_term_string}`,
       },
-      "query-input": "required name=search_term_string"
-    }
+      "query-input": "required name=search_term_string",
+    },
   };
 
   return (
@@ -128,23 +130,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body
-        className={`${plusJakartaSans.variable} ${spaceGrotesk.variable} antialiased`}
-      >
+      <body className={`${plusJakartaSans.variable} ${spaceGrotesk.variable} antialiased`}>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-KVZ8VQQS"
             height="0"
             width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
+            style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
         <Analytics />
         <div className="min-h-screen flex flex-col">
           <Navbar />
-          <main className="flex-1 pt-16 lg:pt-20 bg-background">
-            {children}
-          </main>
+          <main className="flex-1 pt-16 lg:pt-20 bg-background">{children}</main>
           <Footer />
         </div>
         <Toaster />

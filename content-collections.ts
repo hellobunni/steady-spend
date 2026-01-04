@@ -9,14 +9,7 @@ import { z } from "zod";
  */
 function isPostDatePassed(postDate: string): boolean {
   const now = new Date();
-  const today5am = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate(),
-    5,
-    0,
-    0
-  );
+  const today5am = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 5, 0, 0);
 
   // Parse post date and set to 5am on that date
   const postDateObj = new Date(postDate);
@@ -80,10 +73,7 @@ const posts = defineCollection({
   transform: async (document, context) => {
     // Extract slug from filename if not in frontmatter
     const slug =
-      document.slug ||
-      document._meta.path
-        .replace(/^content\/posts\//, "")
-        .replace(/\.mdx$/, "");
+      document.slug || document._meta.path.replace(/^content\/posts\//, "").replace(/\.mdx$/, "");
 
     // Compile MDX with Prose-UI remark plugins
     const mdx = await compileMDX(context, document, {
@@ -105,4 +95,3 @@ const posts = defineCollection({
 export default defineConfig({
   collections: [posts],
 });
-

@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { DollarSign } from 'lucide-react'
+import { DollarSign } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 type IncomeCardProps = {
-  income: string
-  setIncome: (value: string) => void
-}
+  income: string;
+  setIncome: (value: string) => void;
+};
 
 export default function IncomeCard({ income, setIncome }: IncomeCardProps) {
   return (
@@ -39,10 +39,10 @@ export default function IncomeCard({ income, setIncome }: IncomeCardProps) {
           />
         </div>
         <p className="text-xs text-gray-500 mt-1">
-        Include your take-home pay from your job, freelance work, or any other regular income you receive each month.
-              </p>
+          Include your take-home pay from your job, freelance work, or any other regular income you
+          receive each month.
+        </p>
       </CardContent>
     </Card>
-  )
+  );
 }
-

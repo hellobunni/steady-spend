@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { ChevronRight, Home } from 'lucide-react';
+import { ChevronRight, Home } from "lucide-react";
+import Link from "next/link";
 
 type BreadcrumbItem = {
   label: string;
@@ -11,17 +11,17 @@ type BreadcrumbsProps = {
 };
 
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.steadyspend.com";
 
   // Build breadcrumb schema
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": items.map((item, index) => ({
+    itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
-      "position": index + 1,
-      "name": item.label,
-      "item": `${baseUrl}${item.href}`,
+      position: index + 1,
+      name: item.label,
+      item: `${baseUrl}${item.href}`,
     })),
   };
 
@@ -54,10 +54,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
                   {item.label}
                 </span>
               ) : (
-                <Link
-                  href={item.href}
-                  className="hover:text-emerald-600 transition-colors"
-                >
+                <Link href={item.href} className="hover:text-emerald-600 transition-colors">
                   {item.label}
                 </Link>
               )}

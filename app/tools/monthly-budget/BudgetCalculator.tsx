@@ -1,68 +1,68 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { PieChart, PiggyBank } from 'lucide-react'
-import { calculateBudget, type BudgetResults } from '@/lib/calculations/budget'
-import { saveBudgetData, loadBudgetData, clearBudgetData } from '@/lib/storage/budget'
-import { CurrencyInput } from '@/components/forms/CurrencyInput'
-import { ActionButtonGroup } from '@/components/tools/ActionButtonGroup'
-import { PrivacyNotice } from '@/components/tools/PrivacyNotice'
-import { LoadingState } from '@/components/tools/LoadingState'
-import { ResultsSection } from '@/components/tools/ResultsSection'
-import { formatCurrency } from '@/lib/accessibility/formatCurrency'
+import { PieChart, PiggyBank } from "lucide-react";
+import { useEffect, useState } from "react";
+import { CurrencyInput } from "@/components/forms/CurrencyInput";
+import { ActionButtonGroup } from "@/components/tools/ActionButtonGroup";
+import { LoadingState } from "@/components/tools/LoadingState";
+import { PrivacyNotice } from "@/components/tools/PrivacyNotice";
+import { ResultsSection } from "@/components/tools/ResultsSection";
+import { formatCurrency } from "@/lib/accessibility/formatCurrency";
+import { type BudgetResults, calculateBudget } from "@/lib/calculations/budget";
+import { clearBudgetData, loadBudgetData, saveBudgetData } from "@/lib/storage/budget";
 
 const initialExpenses = {
-  housing: '',
-  utilities: '',
-  transportation: '',
-  food: '',
-  insurance: '',
-  debt: '',
-  subscriptions: '',
-  miscellaneous: '',
-}
+  housing: "",
+  utilities: "",
+  transportation: "",
+  food: "",
+  insurance: "",
+  debt: "",
+  subscriptions: "",
+  miscellaneous: "",
+};
 
 export default function BudgetCalculator() {
   // Initialize state from localStorage using lazy initialization
   const [income, setIncome] = useState(() => {
-    const saved = loadBudgetData()
-    return saved.income
-  })
+    const saved = loadBudgetData();
+    return saved.income;
+  });
   const [expenses, setExpenses] = useState(() => {
-    const saved = loadBudgetData()
-    return saved.expenses || initialExpenses
-  })
-  const [showResults, setShowResults] = useState(false)
-  const [results, setResults] = useState<BudgetResults | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
+    const saved = loadBudgetData();
+    return saved.expenses || initialExpenses;
+  });
+  const [showResults, setShowResults] = useState(false);
+  const [results, setResults] = useState<BudgetResults | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Save data whenever it changes
   useEffect(() => {
     if (income || Object.values(expenses).some((val) => val)) {
-      saveBudgetData({ income, expenses })
+      saveBudgetData({ income, expenses });
     }
-  }, [income, expenses])
+  }, [income, expenses]);
 
   const handleCalculate = async () => {
-    setIsLoading(true)
-    setShowResults(false)
-    
+    setIsLoading(true);
+    setShowResults(false);
+
     // Simulate a brief calculation delay for a smoother UX
-    await new Promise((resolve) => setTimeout(resolve, 800))
-    
-    const calculated = calculateBudget(income, expenses)
-    setResults(calculated)
-    setShowResults(true)
-    setIsLoading(false)
-  }
+    await new Promise((resolve) => setTimeout(resolve, 800));
+
+    const calculated = calculateBudget(income, expenses);
+    setResults(calculated);
+    setShowResults(true);
+    setIsLoading(false);
+  };
 
   const handleReset = () => {
-    setIncome('')
-    setExpenses(initialExpenses)
-    setShowResults(false)
-    setResults(null)
-    clearBudgetData()
-  }
+    setIncome("");
+    setExpenses(initialExpenses);
+    setShowResults(false);
+    setResults(null);
+    clearBudgetData();
+  };
 
   return (
     <div className="space-y-6">
@@ -91,14 +91,22 @@ export default function BudgetCalculator() {
             <label className="block text-base font-medium mb-4">Monthly expenses</label>
             <div className="space-y-4">
               {[
-                { key: 'housing', label: 'Housing', desc: 'Rent, mortgage, HOA fees' },
-                { key: 'utilities', label: 'Utilities', desc: 'Electric, water, gas, internet' },
-                { key: 'transportation', label: 'Transportation', desc: 'Car payment, gas, public transit' },
-                { key: 'food', label: 'Food', desc: 'Groceries and dining out' },
-                { key: 'insurance', label: 'Insurance', desc: 'Health, auto, life insurance' },
-                { key: 'debt', label: 'Debt Payments', desc: 'Credit cards, student loans' },
-                { key: 'subscriptions', label: 'Subscriptions', desc: 'Streaming, software, memberships' },
-                { key: 'miscellaneous', label: 'Miscellaneous', desc: 'Other monthly expenses' },
+                { key: "housing", label: "Housing", desc: "Rent, mortgage, HOA fees" },
+                { key: "utilities", label: "Utilities", desc: "Electric, water, gas, internet" },
+                {
+                  key: "transportation",
+                  label: "Transportation",
+                  desc: "Car payment, gas, public transit",
+                },
+                { key: "food", label: "Food", desc: "Groceries and dining out" },
+                { key: "insurance", label: "Insurance", desc: "Health, auto, life insurance" },
+                { key: "debt", label: "Debt Payments", desc: "Credit cards, student loans" },
+                {
+                  key: "subscriptions",
+                  label: "Subscriptions",
+                  desc: "Streaming, software, memberships",
+                },
+                { key: "miscellaneous", label: "Miscellaneous", desc: "Other monthly expenses" },
               ].map((field) => (
                 <CurrencyInput
                   key={field.key}
@@ -161,7 +169,7 @@ export default function BudgetCalculator() {
                   <span className="text-base font-medium text-gray-900">Remaining</span>
                   <span
                     className={`text-xl font-bold ${
-                      results.remaining >= 0 ? 'text-emerald-600' : 'text-red-600'
+                      results.remaining >= 0 ? "text-emerald-600" : "text-red-600"
                     }`}
                   >
                     {formatCurrency(results.remaining)}
@@ -189,10 +197,10 @@ export default function BudgetCalculator() {
                     <div
                       className={`h-2.5 rounded-full transition-all ${
                         results.savingsRate >= 20
-                          ? 'bg-emerald-600'
+                          ? "bg-emerald-600"
                           : results.savingsRate >= 10
-                            ? 'bg-amber-500'
-                            : 'bg-red-500'
+                            ? "bg-amber-500"
+                            : "bg-red-500"
                       }`}
                       style={{ width: `${Math.min(100, (results.savingsRate / 20) * 100)}%` }}
                     />
@@ -204,5 +212,5 @@ export default function BudgetCalculator() {
         </ResultsSection>
       )}
     </div>
-  )
+  );
 }

@@ -1,9 +1,8 @@
 "use client";
 
-import React from 'react';
+import { BookOpen, Clock, Sparkles } from "lucide-react";
+import { motion } from "motion/react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Sparkles, Clock } from 'lucide-react';
-import { motion } from 'motion/react';
 
 export default function GuidesClient() {
   const guides = [
@@ -11,19 +10,19 @@ export default function GuidesClient() {
       title: "Getting Started with Budgeting",
       description: "Learn the basics of creating a budget that actually works for your lifestyle.",
       readTime: "5 min",
-      category: "Budgeting"
+      category: "Budgeting",
     },
     {
       title: "Understanding Your Spending Habits",
       description: "Discover where your money goes and identify opportunities to save more.",
       readTime: "7 min",
-      category: "Spending"
+      category: "Spending",
     },
     {
       title: "Building an Emergency Fund",
       description: "Step-by-step guide to creating a safety net for unexpected expenses.",
       readTime: "6 min",
-      category: "Savings"
+      category: "Savings",
     },
   ];
 
@@ -42,7 +41,10 @@ export default function GuidesClient() {
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Learn at
-            <span className="bg-linear-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent"> Your Own Pace</span>
+            <span className="bg-linear-to-r from-emerald-600 to-emerald-700 bg-clip-text text-transparent">
+              {" "}
+              Your Own Pace
+            </span>
           </h1>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Simple, actionable guides to help you master your money without the jargon.
@@ -68,7 +70,9 @@ export default function GuidesClient() {
                       {guide.category}
                     </span>
                   </div>
-                  <CardTitle className="text-xl font-semibold text-gray-900">{guide.title}</CardTitle>
+                  <CardTitle className="text-xl font-semibold text-gray-900">
+                    {guide.title}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 mb-4 leading-relaxed">{guide.description}</p>
@@ -93,7 +97,8 @@ export default function GuidesClient() {
             <CardContent className="p-8">
               <h3 className="text-xl font-semibold text-gray-900 mb-2">More Guides Coming Soon</h3>
               <p className="text-gray-600">
-                We&apos;re creating more in-depth guides on topics like debt management, investing basics, retirement planning, and more.
+                We&apos;re creating more in-depth guides on topics like debt management, investing
+                basics, retirement planning, and more.
               </p>
             </CardContent>
           </Card>

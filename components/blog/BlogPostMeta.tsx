@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import { Calendar, Clock, User } from 'lucide-react';
-import { BlogPost } from '@/lib/blog/types';
+import { Calendar, Clock, User } from "lucide-react";
+import Link from "next/link";
+import type { BlogPost } from "@/lib/blog/types";
 
 type Props = {
   post: BlogPost;
@@ -12,23 +12,32 @@ type Props = {
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
   const months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
-  
+
   const month = months[date.getMonth()];
   const day = date.getDate();
   const year = date.getFullYear();
-  
+
   return `${month} ${day}, ${year}`;
 }
 
 export default function BlogPostMeta({ post }: Props) {
-  const isNamedAuthor = post.author && 
-    post.author !== 'SteadySpend Team' && 
-    post.author !== 'Lynae Thomas';
-  
-  const authorHref = isNamedAuthor ? '/about' : undefined;
+  const isNamedAuthor =
+    post.author && post.author !== "SteadySpend Team" && post.author !== "Lynae Thomas";
+
+  const authorHref = isNamedAuthor ? "/about" : undefined;
 
   return (
     <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600">
@@ -48,7 +57,7 @@ export default function BlogPostMeta({ post }: Props) {
         <div className="flex items-center gap-2">
           <User className="h-4 w-4 text-slate-500" />
           {authorHref ? (
-            <Link 
+            <Link
               href={authorHref}
               className="font-medium hover:text-slate-900 hover:underline transition-colors"
             >
@@ -62,4 +71,3 @@ export default function BlogPostMeta({ post }: Props) {
     </div>
   );
 }
-

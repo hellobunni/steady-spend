@@ -1,47 +1,47 @@
-'use client'
+"use client";
 
-import * as React from 'react'
-import { ChevronDown } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { ChevronDown } from "lucide-react";
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
 interface AccordionItemProps {
-  question: string
-  answer: string | React.ReactNode
-  defaultOpen?: boolean
+  question: string;
+  answer: string | React.ReactNode;
+  defaultOpen?: boolean;
 }
 
 function AccordionItem({ question, answer, defaultOpen = false }: AccordionItemProps) {
-  const [isOpen, setIsOpen] = React.useState(defaultOpen)
-  const itemRef = React.useRef<HTMLDivElement>(null)
-  const wasOpenRef = React.useRef(isOpen)
+  const [isOpen, setIsOpen] = React.useState(defaultOpen);
+  const itemRef = React.useRef<HTMLDivElement>(null);
+  const wasOpenRef = React.useRef(isOpen);
 
   // Generate a stable ID for accessibility
   const contentId = React.useMemo(
-    () => `accordion-content-${question.slice(0, 20).replace(/\s/g, '-').toLowerCase()}`,
+    () => `accordion-content-${question.slice(0, 20).replace(/\s/g, "-").toLowerCase()}`,
     [question]
-  )
+  );
 
   // Check if answer is a string or ReactNode
-  const isStringAnswer = typeof answer === 'string'
+  const isStringAnswer = typeof answer === "string";
 
   const handleToggle = () => {
-    const willBeOpen = !isOpen
-    setIsOpen(willBeOpen)
+    const willBeOpen = !isOpen;
+    setIsOpen(willBeOpen);
 
     // Scroll into view when opening (not when closing)
     if (willBeOpen && !wasOpenRef.current) {
       // Small delay to let the animation start
       setTimeout(() => {
         itemRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'nearest',
-        })
-      }, 100)
+          behavior: "smooth",
+          block: "nearest",
+          inline: "nearest",
+        });
+      }, 100);
     }
 
-    wasOpenRef.current = willBeOpen
-  }
+    wasOpenRef.current = willBeOpen;
+  };
 
   return (
     <div ref={itemRef} className="border-b border-gray-200 last:border-b-0">
@@ -55,8 +55,8 @@ function AccordionItem({ question, answer, defaultOpen = false }: AccordionItemP
         <h3 className="text-xl font-semibold text-gray-900 pr-4">{question}</h3>
         <ChevronDown
           className={cn(
-            'h-5 w-5 text-gray-600 shrink-0 transition-transform duration-300 ease-in-out',
-            isOpen && 'transform rotate-180'
+            "h-5 w-5 text-gray-600 shrink-0 transition-transform duration-300 ease-in-out",
+            isOpen && "transform rotate-180"
           )}
           aria-hidden="true"
         />
@@ -64,8 +64,8 @@ function AccordionItem({ question, answer, defaultOpen = false }: AccordionItemP
       <div
         id={contentId}
         className={cn(
-          'overflow-hidden transition-all duration-300 ease-in-out',
-          isOpen ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
+          "overflow-hidden transition-all duration-300 ease-in-out",
+          isOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
         )}
         aria-hidden={!isOpen}
       >
@@ -80,20 +80,20 @@ function AccordionItem({ question, answer, defaultOpen = false }: AccordionItemP
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 interface AccordionProps {
-  items: Array<{ question: string; answer: string | React.ReactNode }>
-  className?: string
+  items: Array<{ question: string; answer: string | React.ReactNode }>;
+  className?: string;
 }
 
 export function Accordion({ items, className }: AccordionProps) {
   return (
-    <div className={cn('space-y-0', className)}>
+    <div className={cn("space-y-0", className)}>
       {items.map((item, index) => (
         <AccordionItem key={index} question={item.question} answer={item.answer} />
       ))}
     </div>
-  )
+  );
 }

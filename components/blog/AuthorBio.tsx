@@ -1,23 +1,23 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { Award, Briefcase, GraduationCap } from 'lucide-react'
+import { Award, Briefcase, GraduationCap } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 type Credential = {
-  icon: typeof GraduationCap
-  label: string
-}
+  icon: typeof GraduationCap;
+  label: string;
+};
 
 type AuthorBioProps = {
-  name?: string
-  initials?: string
-  imageSrc?: string
-  bio?: string
-  credentials?: Credential[]
-  showDisclaimer?: boolean
-  showLearnMore?: boolean
-  aboutHref?: string
-  className?: string
-}
+  name?: string;
+  initials?: string;
+  imageSrc?: string;
+  bio?: string;
+  credentials?: Credential[];
+  showDisclaimer?: boolean;
+  showLearnMore?: boolean;
+  aboutHref?: string;
+  className?: string;
+};
 
 const defaultCredentials: Credential[] = [
   {
@@ -32,7 +32,7 @@ const defaultCredentials: Credential[] = [
     icon: Briefcase,
     label: "10+ Years Experience",
   },
-]
+];
 
 export default function AuthorBio({
   name = "Lynae Thomas",
@@ -65,7 +65,7 @@ export default function AuthorBio({
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>
-              
+
               {/* Author Info */}
               <div className="flex-1">
                 <p className="text-sm text-primary font-medium mb-1">Written & Reviewed By</p>
@@ -74,25 +74,22 @@ export default function AuthorBio({
                     {name}
                   </Link>
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {bio}
-                </p>
+                <p className="text-muted-foreground text-sm leading-relaxed">{bio}</p>
               </div>
             </div>
-
-
 
             {/* Disclaimer */}
             {showDisclaimer && (
               <div className="text-xs text-muted-foreground bg-muted/50 p-4 rounded-lg">
-                <strong className="text-foreground">Disclaimer:</strong> This tool is for educational purposes only and should not be considered professional financial advice. Always consult with a qualified professional for advice specific to your situation.
+                <strong className="text-foreground">Disclaimer:</strong> This tool is for
+                educational purposes only and should not be considered professional financial
+                advice. Always consult with a qualified professional for advice specific to your
+                situation.
               </div>
             )}
-
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
-

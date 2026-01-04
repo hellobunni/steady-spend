@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import { Calendar, Clock, ArrowRight, Sparkles } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
 import { allPosts } from "content-collections";
+import { ArrowRight, Calendar, Clock, Sparkles } from "lucide-react";
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.steadyspend.com';
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.steadyspend.com";
 
 export const metadata: Metadata = {
   title: "Money tips & budgeting blog | SteadySpend",
@@ -55,7 +55,10 @@ export default function BlogPage() {
               Gentle money guidance
             </div>
             <h1 className="font-display font-bold text-4xl sm:text-5xl mb-4">
-              Financial <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Insights</span>
+              Financial{" "}
+              <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                Insights
+              </span>
             </h1>
             <p className="text-lg text-slate-600">
               Tips, guides, and strategies to help you master your money.
@@ -82,7 +85,7 @@ export default function BlogPage() {
                         <div className="w-full h-full gradient-primary opacity-80" />
                       )}
                     </div>
-                    
+
                     {/* Content */}
                     <div className="p-8 flex flex-col justify-center">
                       <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full w-fit mb-4">
@@ -98,10 +101,10 @@ export default function BlogPage() {
                         <div className="flex items-center gap-4">
                           <span className="flex items-center gap-1.5">
                             <Calendar className="w-4 h-4" />
-                            {new Date(featuredPost.date).toLocaleDateString('en-US', {
-                              year: 'numeric',
-                              month: 'short',
-                              day: 'numeric',
+                            {new Date(featuredPost.date).toLocaleDateString("en-US", {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
                             })}
                           </span>
                           {featuredPost.readTime && (
@@ -140,7 +143,7 @@ export default function BlogPage() {
                         <div className="w-full h-full gradient-primary opacity-80" />
                       )}
                     </div>
-                    
+
                     {/* Content */}
                     <div className="p-6 flex flex-col flex-grow">
                       <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full w-fit mb-3">
@@ -149,17 +152,15 @@ export default function BlogPage() {
                       <h2 className="font-display font-semibold text-lg mb-2 group-hover:text-emerald-700 transition-colors flex-grow">
                         {post.title}
                       </h2>
-                      <p className="text-slate-600 text-sm mb-4 line-clamp-2">
-                        {post.description}
-                      </p>
+                      <p className="text-slate-600 text-sm mb-4 line-clamp-2">{post.description}</p>
                       <div className="flex items-center justify-between text-sm text-slate-500 mt-auto">
                         <div className="flex items-center gap-4">
                           <span className="flex items-center gap-1">
                             <Calendar className="w-4 h-4" />
-                            {new Date(post.date).toLocaleDateString('en-US', {
-                              year: 'numeric',
-                              month: 'short',
-                              day: 'numeric',
+                            {new Date(post.date).toLocaleDateString("en-US", {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
                             })}
                           </span>
                           {post.readTime && (
@@ -185,9 +186,8 @@ export default function BlogPage() {
                 More articles coming soon
               </h2>
               <p className="text-slate-600">
-                We&apos;re slowly adding more guides, stories, and calm
-                step-by-step walkthroughs to help you build a budget that feels
-                steady and sustainable.
+                We&apos;re slowly adding more guides, stories, and calm step-by-step walkthroughs to
+                help you build a budget that feels steady and sustainable.
               </p>
             </div>
           )}

@@ -1,57 +1,53 @@
-import { Resend } from 'resend'
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server";
+import { Resend } from "resend";
 
 export async function POST(request: Request) {
   try {
     // Validate environment variables first
-    const missingVars: string[] = []
-    
+    const missingVars: string[] = [];
+
     if (!process.env.RESEND_API) {
-      missingVars.push('RESEND_API')
+      missingVars.push("RESEND_API");
     }
     if (!process.env.CONTACT_EMAIL) {
-      missingVars.push('CONTACT_EMAIL')
+      missingVars.push("CONTACT_EMAIL");
     }
     if (!process.env.FROM_EMAIL) {
-      missingVars.push('FROM_EMAIL')
+      missingVars.push("FROM_EMAIL");
     }
 
     if (missingVars.length > 0) {
-      console.error(`Missing environment variables: ${missingVars.join(', ')}`)
+      console.error(`Missing environment variables: ${missingVars.join(", ")}`);
       return NextResponse.json(
-        { 
-          error: 'Email service is not configured. Please contact support.',
-          details: process.env.NODE_ENV === 'development' 
-            ? `Missing: ${missingVars.join(', ')}` 
-            : undefined
+        {
+          error: "Email service is not configured. Please contact support.",
+          details:
+            process.env.NODE_ENV === "development"
+              ? `Missing: ${missingVars.join(", ")}`
+              : undefined,
         },
         { status: 500 }
-      )
+      );
     }
 
-    const apiKey = process.env.RESEND_API!
-    const recipientEmail = process.env.CONTACT_EMAIL!
-    const fromEmail = process.env.FROM_EMAIL!
+    // These are safe to use since we validated them above
+    const apiKey = process.env.RESEND_API as string;
+    const recipientEmail = process.env.CONTACT_EMAIL as string;
+    const fromEmail = process.env.FROM_EMAIL as string;
 
-    const resend = new Resend(apiKey)
-    const body = await request.json()
-    const { name, email, message } = body
+    const resend = new Resend(apiKey);
+    const body = await request.json();
+    const { name, email, message } = body;
 
     // Validate required fields
     if (!name || !email || !message) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
     // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: 'Invalid email format' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: "Invalid email format" }, { status: 400 });
     }
 
     // Send email using ReSend
@@ -88,26 +84,20 @@ ${message}
 ---
 You can reply directly to this email to respond to ${name}.
       `,
-    })
+    });
 
     if (error) {
-      console.error('ReSend error:', error)
+      console.error("ReSend error:", error);
       return NextResponse.json(
-        { error: error.message || 'Failed to send email. Please try again later.' },
+        { error: error.message || "Failed to send email. Please try again later." },
         { status: 500 }
-      )
+      );
     }
 
-    return NextResponse.json(
-      { success: true, messageId: data?.id },
-      { status: 200 }
-    )
+    return NextResponse.json({ success: true, messageId: data?.id }, { status: 200 });
   } catch (error) {
-    console.error('Contact form error:', error)
-    const errorMessage = error instanceof Error ? error.message : 'Internal server error'
-    return NextResponse.json(
-      { error: errorMessage },
-      { status: 500 }
-    )
+    console.error("Contact form error:", error);
+    const errorMessage = error instanceof Error ? error.message : "Internal server error";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

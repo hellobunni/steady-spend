@@ -1,6 +1,14 @@
-'use client'
+"use client";
 
-import { Calculator, BookOpen, DollarSign, Lock, Sparkles, Heart, type LucideIcon } from "lucide-react";
+import {
+  BookOpen,
+  Calculator,
+  DollarSign,
+  Heart,
+  Lock,
+  type LucideIcon,
+  Sparkles,
+} from "lucide-react";
 import Link from "next/link";
 
 type Feature = {
@@ -16,7 +24,8 @@ const features: Feature[] = [
   {
     icon: Calculator,
     title: "Monthly Budget Calculator",
-    description: "Create a personalized budget based on your income and expenses. Track where your money goes and see how much you can save each month.",
+    description:
+      "Create a personalized budget based on your income and expenses. Track where your money goes and see how much you can save each month.",
     href: "/tools/monthly-budget",
     color: "from-primary to-accent",
     badge: "Live",
@@ -24,7 +33,8 @@ const features: Feature[] = [
   {
     icon: DollarSign,
     title: "Take-Home Pay Calculator",
-    description: "Calculate your actual take-home pay after taxes and deductions. Essential for accurate budgeting and financial planning.",
+    description:
+      "Calculate your actual take-home pay after taxes and deductions. Essential for accurate budgeting and financial planning.",
     href: "/tools/take-home-pay-calculator",
     color: "from-accent to-primary",
     badge: "Live",
@@ -32,28 +42,32 @@ const features: Feature[] = [
   {
     icon: BookOpen,
     title: "Financial Insights & Guides",
-    description: "Expert tips and guides to help you master budgeting, saving, smart spending, and debt-free living strategies.",
+    description:
+      "Expert tips and guides to help you master budgeting, saving, smart spending, and debt-free living strategies.",
     href: "/blog",
     color: "from-emerald-500 to-teal-600",
   },
   {
     icon: Lock,
     title: "Secure & Anonymous Budgeting",
-    description: "Your data stays on your device. No accounts, no tracking, no selling your info. Complete privacy guaranteed.",
+    description:
+      "Your data stays on your device. No accounts, no tracking, no selling your info. Complete privacy guaranteed.",
     href: "#",
     color: "from-teal-500 to-cyan-600",
   },
   {
     icon: Sparkles,
     title: "Free Forever",
-    description: "All our tools and content are completely free. No hidden fees, premium tiers, or subscription required.",
+    description:
+      "All our tools and content are completely free. No hidden fees, premium tiers, or subscription required.",
     href: "#",
     color: "from-green-500 to-emerald-600",
   },
   {
     icon: Heart,
     title: "Made for Everyone",
-    description: "Simple, jargon-free tools designed for real people learning money management, not finance experts.",
+    description:
+      "Simple, jargon-free tools designed for real people learning money management, not finance experts.",
     href: "#",
     color: "from-lime-500 to-green-600",
   },
@@ -72,10 +86,14 @@ export function FeaturesSection() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl mb-4">
-            <span className="text-transparent bg-clip-text gradient-primary">Free Financial Planning Tools</span> & Expense Trackers
+            <span className="text-transparent bg-clip-text gradient-primary">
+              Free Financial Planning Tools
+            </span>{" "}
+            & Expense Trackers
           </h2>
           <p className="text-lg text-muted-foreground">
-            Powerful tools designed to simplify your finances, track your spending, and help you build lasting wealth through better money management.
+            Powerful tools designed to simplify your finances, track your spending, and help you
+            build lasting wealth through better money management.
           </p>
         </div>
 
@@ -90,7 +108,9 @@ export function FeaturesSection() {
                 {feature.badge && (
                   <span
                     className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium mb-3 ${
-                      feature.badge === "Live" ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"
+                      feature.badge === "Live"
+                        ? "bg-primary/10 text-primary"
+                        : "bg-muted text-muted-foreground"
                     }`}
                   >
                     {feature.badge}
@@ -144,4 +164,3 @@ export function FeaturesSection() {
     </section>
   );
 }
-

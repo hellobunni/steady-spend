@@ -34,5 +34,4 @@ export type BlogPost = {
   mdx?: string; // Compiled MDX code from Content Collections
 };
 
-export type BlogPostFrontmatter = Omit<BlogPost, 'content'>;
-
+export type BlogPostFrontmatter = Omit<BlogPost, "content">;

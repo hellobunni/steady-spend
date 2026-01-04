@@ -5,14 +5,7 @@ import { remarkPlugins } from "@prose-ui/core";
 import { z } from "zod";
 function isPostDatePassed(postDate) {
   const now = /* @__PURE__ */ new Date();
-  const today5am = new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    now.getDate(),
-    5,
-    0,
-    0
-  );
+  const today5am = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 5, 0, 0);
   const postDateObj = new Date(postDate);
   const postDate5am = new Date(
     postDateObj.getFullYear(),

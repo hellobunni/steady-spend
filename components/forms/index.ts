@@ -1,3 +1,2 @@
-export { CurrencyInput } from './CurrencyInput'
-export { FormField } from './FormField'
-
+export { CurrencyInput } from "./CurrencyInput";
+export { FormField } from "./FormField";

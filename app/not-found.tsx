@@ -1,17 +1,17 @@
-'use client'
+"use client";
 
-import { usePathname } from 'next/navigation'
-import { useEffect } from 'react'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Home } from 'lucide-react'
+import { Home } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   useEffect(() => {
-    console.error('404 Error: User attempted to access non-existent route:', pathname)
-  }, [pathname])
+    console.error("404 Error: User attempted to access non-existent route:", pathname);
+  }, [pathname]);
 
   return (
     <div className="flex min-h-[calc(100vh-8rem)] items-center justify-center bg-background px-4">
@@ -29,6 +29,5 @@ export default function NotFound() {
         </Button>
       </div>
     </div>
-  )
+  );
 }
-
