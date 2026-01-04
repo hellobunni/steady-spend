@@ -2,7 +2,7 @@ import type { ComponentType } from 'react';
 
 // MDX components type (compatible with both MDX and React)
 type MDXComponents = {
-  [key: string]: ComponentType<any>;
+  [key: string]: ComponentType<Record<string, unknown>>;
 };
 
 /**
