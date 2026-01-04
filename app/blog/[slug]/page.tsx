@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Script from 'next/script';
-import { MDXRemote } from 'next-mdx-remote/rsc';
+import { MDXContent } from '@content-collections/mdx/react';
+import { mdxComponents } from '@prose-ui/next';
 import { getBlogPost } from '@/lib/blog/getBlogPost';
 import { getBlogPostSlugs } from '@/lib/blog/getBlogPosts';
 import { getRelatedPosts } from '@/lib/blog/getRelatedPosts';
@@ -189,115 +190,120 @@ export default async function BlogPostPage({ params }: Props) {
         />
       )}
 
-      <article className="py-8 sm:py-10 lg:py-12">
-      <div className="mx-auto max-w-4xl px-2 sm:px-4">
-        {/* Header */}
-        <header className="mb-8">
-          <div className="mb-4 inline-flex rounded-full bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-800">
-            {post.category}
-          </div>
-          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
-            {post.title}
-          </h1>
-          <BlogPostMeta post={post} />
-        </header>
-
-        {/* Post Image */}
-        {post.featuredImage && (
-          <div className="mb-8">
-            <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-sm">
-              <Image
-                src={post.featuredImage}
-                alt={post.imageAlt || post.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-                priority
-              />
+      <article className="py-8 sm:py-12 lg:py-16">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <header className="mb-10 sm:mb-12">
+            <div className="mb-4 inline-flex rounded-full bg-emerald-50 px-3 py-1.5 text-sm font-medium text-emerald-800">
+              {post.category}
             </div>
-            {post.imageCredit && (
-              <p className="mt-2 text-xs text-slate-500">
-                Image credit: {post.imageCredit}
-              </p>
-            )}
-          </div>
-        )}
+            <h1 className="mb-6 text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl md:text-5xl lg:text-6xl">
+              {post.title}
+            </h1>
+            <BlogPostMeta post={post} />
+          </header>
 
-        {/* Content */}
-        <div className="prose prose-slate prose-lg max-w-none">
-          <MDXRemote 
-            source={post.content || ''} 
-            components={{
-              ComparisonTable,
-              Accordion,
-              AuthorBio,
-              MathFormula,
-              img: (props: { src?: string; alt?: string; className?: string }) => {
-                if (!props.src) {
-                  return null;
-                }
-                
-                const className = props.className || '';
-                const isLogo = className.includes('logo-image');
-                const isScreenshot = className.includes('screenshot-image');
-                
-                if (isLogo) {
-                  // Logo: wrap in logo-image-wrapper div and convert to Next.js Image
+          {/* Post Image */}
+          {post.featuredImage && (
+            <div className="mb-10 sm:mb-12">
+              <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-md border border-slate-200">
+                <Image
+                  src={post.featuredImage}
+                  alt={post.imageAlt || post.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                  priority
+                />
+              </div>
+              {post.imageCredit && (
+                <p className="mt-3 text-xs text-slate-500">
+                  Image credit: {post.imageCredit}
+                </p>
+              )}
+            </div>
+          )}
+
+          {/* Content */}
+          <div className="prose-ui w-full max-w-none">
+          {post.mdx && (
+            <MDXContent
+              code={post.mdx}
+              components={{
+                ...mdxComponents,
+                // Merge custom components with Prose-UI components
+                ComparisonTable,
+                Accordion,
+                AuthorBio,
+                MathFormula,
+                // Override img component with custom image handling
+                img: (props: { src?: string; alt?: string; className?: string }) => {
+                  if (!props.src) {
+                    return null;
+                  }
+                  
+                  const className = props.className || '';
+                  const isLogo = className.includes('logo-image');
+                  const isScreenshot = className.includes('screenshot-image');
+                  
+                  if (isLogo) {
+                    // Logo: wrap in logo-image-wrapper div and convert to Next.js Image
+                    return (
+                      <div className="logo-image-wrapper">
+                        <Image
+                          src={props.src}
+                          alt={props.alt || ''}
+                          width={300}
+                          height={300}
+                          className="logo-image"
+                          style={{ 
+                            objectFit: 'contain', 
+                            width: 'auto',
+                            height: 'auto',
+                            maxWidth: '100%'
+                          }}
+                          unoptimized={props.src.includes('cloudinary.com') || props.src.includes('clearbit.com')}
+                        />
+                      </div>
+                    );
+                  } else if (isScreenshot) {
+                    // Screenshot: maintain aspect ratio, full width, no distortion
+                    return (
+                      <div className="mb-12 w-full">
+                        <Image
+                          src={props.src}
+                          alt={props.alt || ''}
+                          width={810}
+                          height={540}
+                          className="w-full h-auto rounded-lg shadow-sm"
+                          unoptimized={props.src.includes('cloudinary.com')}
+                        />
+                      </div>
+                    );
+                  }
+                  // Fallback for other images
                   return (
-                    <div className="logo-image-wrapper">
-                      <Image
-                        src={props.src}
-                        alt={props.alt || ''}
-                        width={300}
-                        height={300}
-                        className="logo-image"
-                        style={{ 
-                          objectFit: 'contain', 
-                          width: 'auto',
-                          height: 'auto',
-                          maxWidth: '100%'
-                        }}
-                        unoptimized={props.src.includes('cloudinary.com') || props.src.includes('clearbit.com')}
-                      />
-                    </div>
+                    <Image
+                      src={props.src}
+                      alt={props.alt || ''}
+                      width={800}
+                      height={500}
+                      className="w-full h-auto rounded-lg mb-4"
+                      unoptimized={props.src.includes('cloudinary.com')}
+                    />
                   );
-                } else if (isScreenshot) {
-                  // Screenshot: maintain aspect ratio, full width, no distortion
-                  return (
-                    <div className="mb-12 w-full">
-                      <Image
-                        src={props.src}
-                        alt={props.alt || ''}
-                        width={810}
-                        height={540}
-                        className="w-full h-auto rounded-lg shadow-sm"
-                        unoptimized={props.src.includes('cloudinary.com')}
-                      />
-                    </div>
-                  );
-                }
-                // Fallback for other images
-                return (
-                  <Image
-                    src={props.src}
-                    alt={props.alt || ''}
-                    width={800}
-                    height={500}
-                    className="w-full h-auto rounded-lg mb-4"
-                    unoptimized={props.src.includes('cloudinary.com')}
-                  />
-                );
-              },
-            }}
-          />
+                },
+              }}
+            />
+          )}
         </div>
 
-        {/* Related Posts */}
-        {relatedPosts.length > 0 && (
-          <RelatedPosts posts={relatedPosts} />
-        )}
-      </div>
-    </article>
+          {/* Related Posts */}
+          {relatedPosts.length > 0 && (
+            <RelatedPosts posts={relatedPosts} />
+          )}
+        </div>
+      </article>
     </>
   );
 }

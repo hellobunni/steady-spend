@@ -18,8 +18,9 @@
         "name": "next"
       }
     ],
-    "paths": {
-      "@/*": ["./*"]
+"paths": {
+      "@/*": ["./*"],
+      "content-collections": ["./.content-collections/generated"]
     }
   },
   "include": [
