@@ -1,6 +1,6 @@
 export function LoadingState({ message = "Calculating..." }: { message?: string }) {
   return (
-    <div className="space-y-6 pt-6 border-t border-gray-200" role="status" aria-live="polite">
+    <output className="space-y-6 pt-6 border-t border-gray-200 block" aria-live="polite">
       <div className="glass-card p-6 lg:p-8">
         <div className="flex flex-col items-center justify-center py-16 space-y-4">
           <div className="relative" aria-hidden="true">
@@ -13,6 +13,6 @@ export function LoadingState({ message = "Calculating..." }: { message?: string 
           </div>
         </div>
       </div>
-    </div>
+    </output>
   );
 }

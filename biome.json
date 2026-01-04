@@ -36,21 +36,21 @@
         "useArrayLiterals": "error",
         "useAsConstAssertion": "error"
       },
-			"suspicious": {
-				"noDocumentImportInPage": "error",
-				"noExplicitAny": "error",
-				"noExtraNonNullAssertion": "error",
-				"noHeadImportInDocument": "error",
-				"noMisleadingInstantiator": "error",
-				"noNonNullAssertedOptionalChain": "error",
-				"noUnsafeDeclarationMerging": "error",
-				"useGoogleFontDisplay": "warn",
-				"useNamespaceKeyword": "error",
-				"noArrayIndexKey": "warn"
-			},
-			"security": {
-				"noDangerouslySetInnerHtml": "warn"
-			}
+      "suspicious": {
+        "noDocumentImportInPage": "error",
+        "noExplicitAny": "error",
+        "noExtraNonNullAssertion": "error",
+        "noHeadImportInDocument": "error",
+        "noMisleadingInstantiator": "error",
+        "noNonNullAssertedOptionalChain": "error",
+        "noUnsafeDeclarationMerging": "error",
+        "useGoogleFontDisplay": "warn",
+        "useNamespaceKeyword": "error",
+        "noArrayIndexKey": "warn"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "warn"
+      }
     }
   },
   "javascript": {
@@ -85,10 +85,10 @@
             "noUnwantedPolyfillio": "warn",
             "useGoogleFontPreconnect": "warn"
           },
-					"security": {
-						"noDangerouslySetInnerHtmlWithChildren": "error",
-						"noDangerouslySetInnerHtml": "warn"
-					},
+          "security": {
+            "noDangerouslySetInnerHtmlWithChildren": "error",
+            "noDangerouslySetInnerHtml": "warn"
+          },
           "style": {
             "noHeadElement": "warn"
           },

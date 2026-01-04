@@ -51,7 +51,11 @@ export default function BudgetChart({ expenses }: BudgetChartProps) {
                   <div
                     className="h-2.5 rounded-full bg-emerald-600 transition-all"
                     style={{ width: `${barWidth}%` }}
+                    role="progressbar"
                     aria-label={`${category.name}: ${formatCurrency(category.value)}`}
+                    aria-valuenow={category.value}
+                    aria-valuemin={0}
+                    aria-valuemax={total}
                   />
                 </div>
               </div>

@@ -17,9 +17,11 @@ export default function MathFormula({ formula, display = true, className = "" }:
     if (typeof window !== "undefined" && containerRef.current) {
       // Dynamic import of KaTeX (install with: pnpm add katex)
       const loadKaTeX = async () => {
+        const container = containerRef.current;
+        if (!container) return;
         try {
           const katex = await import("katex");
-          katex.default.render(formula, containerRef.current!, {
+          katex.default.render(formula, container, {
             displayMode: display,
             throwOnError: false,
             errorColor: "#cc0000",

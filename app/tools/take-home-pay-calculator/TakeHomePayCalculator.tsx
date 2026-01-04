@@ -136,13 +136,17 @@ export default function TakeHomePayCalculator() {
         <CardContent className="space-y-4">
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="grossIncome"
+                className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+              >
                 Gross Income
                 <Tooltip content="Your total income before any taxes or deductions are taken out. This is your salary or wages before anything is withheld." />
               </label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
                 <Input
+                  id="grossIncome"
                   type="text"
                   value={inputs.grossIncome}
                   onChange={handleIncomeChange}
@@ -153,11 +157,15 @@ export default function TakeHomePayCalculator() {
             </div>
 
             <div>
-              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="payPeriod"
+                className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+              >
                 Pay Period
                 <Tooltip content="How often you get paid. Select yearly if you know your annual salary, monthly for monthly paychecks, or bi-weekly if you're paid every two weeks." />
               </label>
               <Select
+                id="payPeriod"
                 value={inputs.payPeriod}
                 onValueChange={(value) =>
                   updateInput("payPeriod", value as TakeHomePayInputs["payPeriod"])
@@ -177,11 +185,15 @@ export default function TakeHomePayCalculator() {
 
           <div className="grid md:grid-cols-3 gap-4">
             <div>
-              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="filingStatus"
+                className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+              >
                 Filing Status
                 <Tooltip content="Your tax filing status affects your tax brackets and standard deduction. Single is for unmarried individuals, Married is for married couples filing jointly." />
               </label>
               <Select
+                id="filingStatus"
                 value={inputs.filingStatus}
                 onValueChange={(value) =>
                   updateInput("filingStatus", value as TakeHomePayInputs["filingStatus"])
@@ -198,11 +210,18 @@ export default function TakeHomePayCalculator() {
             </div>
 
             <div>
-              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="state"
+                className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+              >
                 State
                 <Tooltip content="The state where you work and pay taxes. State income tax rates vary, and some states (like Florida, Texas, and Nevada) don't have state income tax." />
               </label>
-              <Select value={inputs.state} onValueChange={(value) => updateInput("state", value)}>
+              <Select
+                id="state"
+                value={inputs.state}
+                onValueChange={(value) => updateInput("state", value)}
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue />
                 </SelectTrigger>
@@ -219,11 +238,15 @@ export default function TakeHomePayCalculator() {
             </div>
 
             <div>
-              <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="dependents"
+                className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+              >
                 Dependents
                 <Tooltip content="The number of qualifying children or dependents you claim on your tax return. Each dependent can reduce your tax liability through the child tax credit." />
               </label>
               <Input
+                id="dependents"
                 type="number"
                 value={inputs.dependents}
                 onChange={(e) => updateInput("dependents", e.target.value)}
@@ -301,7 +324,10 @@ export default function TakeHomePayCalculator() {
               <CardContent className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="retirement401k"
+                      className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+                    >
                       401(k) / 403(b) Contribution
                       <Tooltip content="The amount you contribute to your retirement account. You can enter either a dollar amount per pay period or a percentage of your gross income. This reduces your taxable income, so you pay less in taxes now." />
                     </label>
@@ -317,6 +343,7 @@ export default function TakeHomePayCalculator() {
                           </span>
                         )}
                         <Input
+                          id="retirement401k"
                           type="text"
                           value={inputs.retirement401k}
                           onChange={(e) => handleNumberInput("retirement401k", e.target.value)}
@@ -342,7 +369,10 @@ export default function TakeHomePayCalculator() {
                   </div>
 
                   <div>
-                    <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="hsaContribution"
+                      className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+                    >
                       HSA / FSA Contribution
                       <Tooltip content="Health Savings Account (HSA) or Flexible Spending Account (FSA) contributions. These are pre-tax deductions used for medical expenses. You can enter either a dollar amount per pay period or a percentage of your gross income." />
                     </label>
@@ -358,6 +388,7 @@ export default function TakeHomePayCalculator() {
                           </span>
                         )}
                         <Input
+                          id="hsaContribution"
                           type="text"
                           value={inputs.hsaContribution}
                           onChange={(e) => handleNumberInput("hsaContribution", e.target.value)}
@@ -384,7 +415,10 @@ export default function TakeHomePayCalculator() {
                 </div>
 
                 <div>
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="preTaxHealthInsurance"
+                    className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+                  >
                     Pre-Tax Health Insurance Premium
                     <Tooltip content="Health insurance premiums that are deducted from your paycheck before taxes. This reduces your taxable income. You can enter either a dollar amount per pay period or a percentage of your gross income." />
                   </label>
@@ -400,6 +434,7 @@ export default function TakeHomePayCalculator() {
                         </span>
                       )}
                       <Input
+                        id="preTaxHealthInsurance"
                         type="text"
                         value={inputs.preTaxHealthInsurance}
                         onChange={(e) => handleNumberInput("preTaxHealthInsurance", e.target.value)}
@@ -462,7 +497,10 @@ export default function TakeHomePayCalculator() {
               <CardContent className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="postTaxHealthInsurance"
+                      className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+                    >
                       Post-Tax Health/Dental/Vision
                       <Tooltip content="Health, dental, or vision insurance premiums that are deducted after taxes are calculated. These don't reduce your taxable income. Enter the amount per pay period." />
                     </label>
@@ -471,6 +509,7 @@ export default function TakeHomePayCalculator() {
                         $
                       </span>
                       <Input
+                        id="postTaxHealthInsurance"
                         type="text"
                         value={inputs.postTaxHealthInsurance}
                         onChange={(e) =>
@@ -483,7 +522,10 @@ export default function TakeHomePayCalculator() {
                   </div>
 
                   <div>
-                    <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="lifeInsurance"
+                      className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+                    >
                       Life/Disability Insurance
                       <Tooltip content="Life insurance or disability insurance premiums deducted from your paycheck. These are typically post-tax deductions. Enter the amount per pay period." />
                     </label>
@@ -492,6 +534,7 @@ export default function TakeHomePayCalculator() {
                         $
                       </span>
                       <Input
+                        id="lifeInsurance"
                         type="text"
                         value={inputs.lifeInsurance}
                         onChange={(e) => handleNumberInput("lifeInsurance", e.target.value)}
@@ -503,7 +546,10 @@ export default function TakeHomePayCalculator() {
                 </div>
 
                 <div>
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="otherDeductions"
+                    className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+                  >
                     Other Deductions (Union Dues, Garnishments, etc.)
                     <Tooltip content="Any other deductions from your paycheck, like union dues, wage garnishments, or other post-tax deductions. Enter the total amount per pay period." />
                   </label>
@@ -512,6 +558,7 @@ export default function TakeHomePayCalculator() {
                       $
                     </span>
                     <Input
+                      id="otherDeductions"
                       type="text"
                       value={inputs.otherDeductions}
                       onChange={(e) => handleNumberInput("otherDeductions", e.target.value)}
@@ -557,7 +604,10 @@ export default function TakeHomePayCalculator() {
             >
               <CardContent className="space-y-4">
                 <div>
-                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="additionalWithholding"
+                    className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+                  >
                     Additional Withholding per Period
                     <Tooltip content="Extra federal tax you want withheld from each paycheck. You might do this if you expect to owe taxes at the end of the year or want a larger refund. Enter the amount per pay period." />
                   </label>
@@ -566,6 +616,7 @@ export default function TakeHomePayCalculator() {
                       $
                     </span>
                     <Input
+                      id="additionalWithholding"
                       type="text"
                       value={inputs.additionalWithholding}
                       onChange={(e) => handleNumberInput("additionalWithholding", e.target.value)}
@@ -601,11 +652,15 @@ export default function TakeHomePayCalculator() {
                         style={{ overflow: "hidden" }}
                       >
                         <div>
-                          <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2">
+                          <label
+                            htmlFor="localTaxRate"
+                            className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-2"
+                          >
                             Local Tax Rate (%)
                             <Tooltip content="The percentage rate for your local or city income tax. This is usually a flat percentage of your taxable income. You can find this on your pay stub or by contacting your local tax office." />
                           </label>
                           <Input
+                            id="localTaxRate"
                             type="text"
                             value={inputs.localTaxRate}
                             onChange={(e) => handleNumberInput("localTaxRate", e.target.value)}

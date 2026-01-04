@@ -21,11 +21,8 @@ export function ActionButtonGroup({
   disabled = false,
 }: ActionButtonGroupProps) {
   return (
-    <div
-      className="flex flex-col sm:flex-row gap-3 pt-2"
-      role="group"
-      aria-label="Calculator actions"
-    >
+    <fieldset className="flex flex-col sm:flex-row gap-3 pt-2 border-0 p-0 m-0">
+      <legend className="sr-only">Calculator actions</legend>
       <Button
         onClick={onCalculate}
         disabled={isLoading || disabled}
@@ -57,6 +54,6 @@ export function ActionButtonGroup({
         <RotateCcw className="w-4 h-4" aria-hidden="true" />
         {resetLabel}
       </Button>
-    </div>
+    </fieldset>
   );
 }

@@ -99,6 +99,7 @@ export default function ToolsClient() {
                     <div className="flex items-center gap-4">
                       <div
                         className={`w-14 h-14 rounded-2xl bg-linear-to-br ${tool.gradient} flex items-center justify-center shrink-0`}
+                        role="img"
                         aria-label={`Icon for ${tool.title.toLowerCase()}`}
                       >
                         <Icon className="w-7 h-7 text-white" aria-hidden="true" />

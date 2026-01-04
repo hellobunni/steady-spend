@@ -88,7 +88,7 @@ export default function BudgetCalculator() {
 
           {/* Expenses Inputs */}
           <div>
-            <label className="block text-base font-medium mb-4">Monthly expenses</label>
+            <div className="block text-base font-medium mb-4">Monthly expenses</div>
             <div className="space-y-4">
               {[
                 { key: "housing", label: "Housing", desc: "Rent, mortgage, HOA fees" },
