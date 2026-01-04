@@ -258,6 +258,8 @@
   .prose-ui :where(blockquote):not(:where([class~="not-prose"] *)) {
     @apply my-8 border-l-4 border-emerald-200 pl-6 italic text-slate-600;
   }
+}
+
 /* Prose styles for MDX content */
 .prose {
   @apply text-slate-700 text-lg leading-relaxed;
