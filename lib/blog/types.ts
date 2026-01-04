@@ -30,7 +30,8 @@ export type BlogPost = {
   keywords?: string[];
   relatedPosts?: string[];
   howTo?: HowToConfig; // Optional HowTo structured data config
-  content?: string; // MDX content
+  content?: string; // MDX content (deprecated, use mdx instead)
+  mdx?: string; // Compiled MDX code from Content Collections
 };
 
 export type BlogPostFrontmatter = Omit<BlogPost, 'content'>;

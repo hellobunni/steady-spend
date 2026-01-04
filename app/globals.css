@@ -1,11 +1,16 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "@prose-ui/style/prose-ui.css";
+@import "@prose-ui/style/katex.min.css";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
   /* Core Green Palette */
   --background: hsl(150 30% 98%);
+  
+  /* Remove white background from Prose-UI */
+  --p-color-bg: transparent;
   --foreground: hsl(160 40% 10%);
 
   --card: hsl(0 0% 100%);
@@ -216,73 +221,75 @@
   }
 }
 
-/* Prose styles for MDX content */
-.prose {
-  @apply text-slate-700;
-}
+/* Prose-UI handles all blog post styling via the prose-ui class */
+/* Additional custom enhancements for blog post polish */
+@layer components {
+  .prose-ui {
+    @apply text-slate-700;
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
 
-.prose h2 {
-  @apply mt-8 mb-4 text-2xl font-semibold text-slate-900;
-}
+  .prose-ui :where(p):not(:where([class~="not-prose"] *)) {
+    @apply mb-6;
+    line-height: 1.5;
+  }
 
-.prose h3 {
-  @apply mt-6 mb-3 text-xl font-semibold text-slate-900;
-}
+  .prose-ui :where(h2):not(:where([class~="not-prose"] *)) {
+    @apply mt-12 mb-6 text-2xl font-semibold tracking-tight text-slate-900 first:mt-0;
+  }
 
-.prose h4 {
-  @apply mt-4 mb-2 text-lg font-semibold text-slate-900;
-}
+  .prose-ui :where(h3):not(:where([class~="not-prose"] *)) {
+    @apply mt-10 mb-4 text-xl font-semibold tracking-tight text-slate-900;
+  }
 
-.prose p {
-  @apply mb-4 leading-relaxed;
-}
+  .prose-ui :where(h4):not(:where([class~="not-prose"] *)) {
+    @apply mt-8 mb-3 text-lg font-semibold text-slate-900;
+  }
 
-.prose ul {
-  @apply mb-4 ml-8 list-disc;
-}
+  .prose-ui :where(ul, ol):not(:where([class~="not-prose"] *)) {
+    @apply mb-6 space-y-2;
+  }
 
-.prose ol {
-  @apply mb-4 ml-8 list-decimal;
-}
+  .prose-ui :where(li):not(:where([class~="not-prose"] *)) {
+    line-height: 1.5;
+  }
 
-.prose li {
-  @apply mb-2 pl-3;
-}
+  .prose-ui :where(blockquote):not(:where([class~="not-prose"] *)) {
+    @apply my-8 border-l-4 border-emerald-200 pl-6 italic text-slate-600;
+  }
 
-.prose li::marker {
-  @apply text-slate-600;
-}
+  .prose-ui :where(code):not(:where([class~="not-prose"] *)) {
+    @apply rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono text-slate-800;
+  }
 
-.prose a {
-  @apply text-emerald-700 underline hover:text-emerald-800;
-}
+  .prose-ui :where(pre):not(:where([class~="not-prose"] *)) {
+    @apply my-8 rounded-lg bg-slate-900 p-4 overflow-x-auto;
+  }
 
-.prose strong {
-  @apply font-semibold text-slate-900;
-}
+  .prose-ui :where(pre code):not(:where([class~="not-prose"] *)) {
+    @apply bg-transparent p-0 text-slate-100;
+  }
 
-.prose em {
-  @apply italic text-slate-800;
-}
+  .prose-ui :where(a):not(:where([class~="not-prose"] *)) {
+    @apply font-medium text-emerald-700 underline decoration-2 underline-offset-2 transition-colors hover:text-emerald-800;
+  }
 
-.prose code {
-  @apply rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono text-slate-800;
-}
+  .prose-ui :where(strong):not(:where([class~="not-prose"] *)) {
+    @apply font-semibold text-slate-900;
+  }
 
-.prose pre {
-  @apply mb-4 rounded-lg bg-slate-900 p-4 overflow-x-auto;
-}
+  .prose-ui :where(hr):not(:where([class~="not-prose"] *)) {
+    @apply my-12 border-t border-slate-200;
+  }
 
-.prose pre code {
-  @apply bg-transparent p-0 text-slate-100;
-}
+  .prose-ui :where(table):not(:where([class~="not-prose"] *)) {
+    @apply my-8 w-full border-collapse;
+  }
 
-.prose img {
-  @apply w-full rounded-lg shadow-sm my-6;
-}
-
-.prose .screenshot-image {
-  @apply mb-22 w-3xl;
+  .prose-ui :where(img):not(:where([class~="not-prose"] *)) {
+    @apply my-8 rounded-lg;
+  }
 }
 
 @layer components {
