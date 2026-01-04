@@ -258,6 +258,53 @@
   .prose-ui :where(blockquote):not(:where([class~="not-prose"] *)) {
     @apply my-8 border-l-4 border-emerald-200 pl-6 italic text-slate-600;
   }
+}
+
+/* Prose styles for MDX content */
+.prose {
+  @apply text-slate-700 text-lg leading-relaxed;
+  max-width: 65ch;
+}
+
+.prose h1 {
+  @apply mt-8 mb-4 text-4xl font-bold text-slate-900 leading-tight;
+}
+
+.prose h2 {
+  @apply mt-10 mb-4 text-3xl font-semibold text-slate-900 leading-tight;
+}
+
+.prose h3 {
+  @apply mt-8 mb-3 text-2xl font-semibold text-slate-900 leading-tight;
+}
+
+.prose h4 {
+  @apply mt-6 mb-2 text-xl font-semibold text-slate-900;
+}
+
+.prose h5 {
+  @apply mt-4 mb-2 text-lg font-semibold text-slate-900;
+}
+
+.prose h6 {
+  @apply mt-4 mb-2 text-base font-semibold text-slate-900;
+}
+
+.prose p {
+  @apply mb-6 leading-relaxed;
+}
+
+.prose ul {
+  @apply mb-6 ml-6 list-disc space-y-2;
+}
+
+.prose ol {
+  @apply mb-6 ml-6 list-decimal space-y-2;
+}
+
+.prose li {
+  @apply pl-2;
+}
 
   .prose-ui :where(code):not(:where([class~="not-prose"] *)) {
     @apply rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono text-slate-800;
@@ -266,6 +313,13 @@
   .prose-ui :where(pre):not(:where([class~="not-prose"] *)) {
     @apply my-8 rounded-lg bg-slate-900 p-4 overflow-x-auto;
   }
+.prose li p {
+  @apply mb-2;
+}
+
+.prose a {
+  @apply text-emerald-700 underline hover:text-emerald-800 font-medium;
+}
 
   .prose-ui :where(pre code):not(:where([class~="not-prose"] *)) {
     @apply bg-transparent p-0 text-slate-100;
@@ -282,6 +336,9 @@
   .prose-ui :where(hr):not(:where([class~="not-prose"] *)) {
     @apply my-12 border-t border-slate-200;
   }
+.prose pre {
+  @apply mb-6 rounded-lg bg-slate-900 p-4 overflow-x-auto;
+}
 
   .prose-ui :where(table):not(:where([class~="not-prose"] *)) {
     @apply my-8 w-full border-collapse;
@@ -290,6 +347,66 @@
   .prose-ui :where(img):not(:where([class~="not-prose"] *)) {
     @apply my-8 rounded-lg;
   }
+.prose blockquote {
+  @apply border-l-4 border-slate-300 pl-4 italic text-slate-600 my-6;
+}
+
+.prose hr {
+  @apply my-8 border-slate-200;
+}
+
+.prose table {
+  @apply w-full mb-6 border-collapse;
+}
+
+.prose thead {
+  @apply border-b border-slate-300;
+}
+
+.prose th {
+  @apply px-4 py-3 text-left font-semibold text-slate-900 bg-slate-50;
+}
+
+.prose td {
+  @apply px-4 py-3 border-b border-slate-200;
+}
+
+.prose tbody tr:hover {
+  @apply bg-slate-50;
+}
+
+.prose img {
+  @apply w-full rounded-lg shadow-sm my-8;
+}
+
+.prose .screenshot-image {
+  @apply mb-12;
+}
+
+/* Prose size variants */
+.prose-sm {
+  @apply text-base;
+}
+
+.prose-sm h1 {
+  @apply text-2xl;
+}
+
+.prose-sm h2 {
+  @apply text-xl;
+}
+
+.prose-sm h3 {
+  @apply text-lg;
+}
+
+.prose-sm h4 {
+  @apply text-base;
+}
+
+/* Nested prose elements */
+.prose .prose {
+  @apply text-base;
 }
 
 @layer components {
