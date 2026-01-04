@@ -91,8 +91,8 @@ interface AccordionProps {
 export function Accordion({ items, className }: AccordionProps) {
   return (
     <div className={cn("space-y-0", className)}>
-      {items.map((item, index) => (
-        <AccordionItem key={index} question={item.question} answer={item.answer} />
+      {items.map((item) => (
+        <AccordionItem key={item.question} question={item.question} answer={item.answer} />
       ))}
     </div>
   );

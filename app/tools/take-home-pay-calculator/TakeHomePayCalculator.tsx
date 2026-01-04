@@ -165,13 +165,12 @@ export default function TakeHomePayCalculator() {
                 <Tooltip content="How often you get paid. Select yearly if you know your annual salary, monthly for monthly paychecks, or bi-weekly if you're paid every two weeks." />
               </label>
               <Select
-                id="payPeriod"
                 value={inputs.payPeriod}
                 onValueChange={(value) =>
                   updateInput("payPeriod", value as TakeHomePayInputs["payPeriod"])
                 }
               >
-                <SelectTrigger className="w-full">
+                <SelectTrigger id="payPeriod" className="w-full">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -193,13 +192,12 @@ export default function TakeHomePayCalculator() {
                 <Tooltip content="Your tax filing status affects your tax brackets and standard deduction. Single is for unmarried individuals, Married is for married couples filing jointly." />
               </label>
               <Select
-                id="filingStatus"
                 value={inputs.filingStatus}
                 onValueChange={(value) =>
                   updateInput("filingStatus", value as TakeHomePayInputs["filingStatus"])
                 }
               >
-                <SelectTrigger className="w-full">
+                <SelectTrigger id="filingStatus" className="w-full">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -217,12 +215,8 @@ export default function TakeHomePayCalculator() {
                 State
                 <Tooltip content="The state where you work and pay taxes. State income tax rates vary, and some states (like Florida, Texas, and Nevada) don't have state income tax." />
               </label>
-              <Select
-                id="state"
-                value={inputs.state}
-                onValueChange={(value) => updateInput("state", value)}
-              >
-                <SelectTrigger className="w-full">
+              <Select value={inputs.state} onValueChange={(value) => updateInput("state", value)}>
+                <SelectTrigger id="state" className="w-full">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="max-h-[300px]">

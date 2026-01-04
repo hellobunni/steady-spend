@@ -24,7 +24,7 @@ export const FormField = forwardRef<HTMLDivElement, FormFieldProps>(
         <Label htmlFor={fieldId} className="text-sm font-medium text-gray-700">
           {label}
           {required && (
-            <span className="text-destructive ml-1" aria-label="required">
+            <span className="text-destructive ml-1" aria-hidden="true">
               *
             </span>
           )}
