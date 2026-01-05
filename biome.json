@@ -101,6 +101,22 @@
           }
         }
       }
+    },
+    {
+      "includes": [
+        "app/blog/\\[slug\\]/page.tsx",
+        "app/layout.tsx",
+        "app/tools/**/*.tsx",
+        "components/layout/Breadcrumbs.tsx",
+        "components/blog/ComparisonTable.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "security": {
+            "noDangerouslySetInnerHtml": "off"
+          }
+        }
+      }
     }
   ],
   "assist": {

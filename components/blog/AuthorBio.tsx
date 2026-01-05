@@ -1,51 +1,20 @@
-import { Award, Briefcase, GraduationCap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-type Credential = {
-  icon: typeof GraduationCap;
-  label: string;
-};
-
 type AuthorBioProps = {
   name?: string;
-  initials?: string;
   imageSrc?: string;
   bio?: string;
-  credentials?: Credential[];
   showDisclaimer?: boolean;
-  showLearnMore?: boolean;
   aboutHref?: string;
   className?: string;
 };
 
-const defaultCredentials: Credential[] = [
-  {
-    icon: GraduationCap,
-    label: "B.S. in Finance",
-  },
-  {
-    icon: Award,
-    label: "Certified Financial Educator",
-  },
-  {
-    icon: Briefcase,
-    label: "10+ Years Experience",
-  },
-];
-
 export default function AuthorBio({
   name = "Lynae Thomas",
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  initials = "LT",
   imageSrc = "/headshot-v2.png",
-  bio =
-    "I’m the creator of SteadySpend and a software engineer learning my way through personal finance in real time. After paying off $28,000 in debt and rebuilding my financial foundation, I started sharing what helped me—simple tools, honest lessons, and practical ways to feel more in control of your money without shame or overwhelm.",
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  credentials = defaultCredentials,
+  bio = "I’m the creator of SteadySpend and a software engineer learning my way through personal finance in real time. After paying off $28,000 in debt and rebuilding my financial foundation, I started sharing what helped me—simple tools, honest lessons, and practical ways to feel more in control of your money without shame or overwhelm.",
   showDisclaimer = true,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  showLearnMore = true,
   aboutHref = "/about",
   className = "",
 }: AuthorBioProps) {
