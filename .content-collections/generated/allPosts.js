@@ -166,8 +166,8 @@ export default [
     "title": "How Much Should I Save Each Month? (And Why I Stopped Obsessing Over the 'Right' Answer)",
     "description": "Feeling behind on savings? Software engineer Lynae Thomas shares the mindset shifts and simple frameworks that help beginners save money without the guilt.",
     "slug": "how-much-should-i-save-each-month",
-    "date": "2026-01-05",
-    "lastModified": "2026-01-05",
+    "date": "2026-01-06",
+    "lastModified": "2026-01-06",
     "category": "Saving Money",
     "tags": [
       "how much to save",
