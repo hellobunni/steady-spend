@@ -1,2 +1,1 @@
-export { ContentSection } from './ContentSection'
-
+export { ContentSection } from "./ContentSection";

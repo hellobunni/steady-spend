@@ -1,68 +1,59 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { motion } from 'motion/react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Card, CardContent } from '@/components/ui/card'
-import {
-  Calculator,
-  RotateCcw,
-  Shield,
-  Home,
-  Heart,
-  PiggyBank,
-} from 'lucide-react'
+import { Calculator, Heart, Home, PiggyBank, RotateCcw, Shield } from "lucide-react";
+import { motion } from "motion/react";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import {
   calculateFiftyThirtyTwenty,
   type FiftyThirtyTwentyResults,
-} from '@/lib/calculations/fifty-thirty-twenty'
+} from "@/lib/calculations/fifty-thirty-twenty";
 import {
-  saveFiftyThirtyTwentyData,
-  loadFiftyThirtyTwentyData,
   clearFiftyThirtyTwentyData,
-} from '@/lib/storage/fifty-thirty-twenty'
+  loadFiftyThirtyTwentyData,
+  saveFiftyThirtyTwentyData,
+} from "@/lib/storage/fifty-thirty-twenty";
 
 export default function FiftyThirtyTwentyCalculator() {
   // Load data from localStorage using lazy initialization
   const [income, setIncome] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const savedData = loadFiftyThirtyTwentyData()
-      return savedData.income
+    if (typeof window !== "undefined") {
+      const savedData = loadFiftyThirtyTwentyData();
+      return savedData.income;
     }
-    return ''
-  })
-  const [showResults, setShowResults] = useState(false)
-  const [results, setResults] = useState<FiftyThirtyTwentyResults | null>(
-    null
-  )
+    return "";
+  });
+  const [showResults, setShowResults] = useState(false);
+  const [results, setResults] = useState<FiftyThirtyTwentyResults | null>(null);
 
   // Save data whenever it changes
   useEffect(() => {
     if (income) {
-      saveFiftyThirtyTwentyData({ income })
+      saveFiftyThirtyTwentyData({ income });
     }
-  }, [income])
+  }, [income]);
 
   const handleIncomeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/[^0-9.]/g, '')
-    setIncome(value)
-  }
+    const value = e.target.value.replace(/[^0-9.]/g, "");
+    setIncome(value);
+  };
 
   const calculateBudget = () => {
     if (income && parseFloat(income) > 0) {
-      const calculated = calculateFiftyThirtyTwenty(income)
-      setResults(calculated)
-      setShowResults(true)
+      const calculated = calculateFiftyThirtyTwenty(income);
+      setResults(calculated);
+      setShowResults(true);
     }
-  }
+  };
 
   const resetCalculator = () => {
-    setIncome('')
-    setShowResults(false)
-    setResults(null)
-    clearFiftyThirtyTwentyData()
-  }
+    setIncome("");
+    setShowResults(false);
+    setResults(null);
+    clearFiftyThirtyTwentyData();
+  };
 
   return (
     <div className="space-y-6">
@@ -73,9 +64,7 @@ export default function FiftyThirtyTwentyCalculator() {
             <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center">
               <Calculator className="w-6 h-6 text-emerald-600" />
             </div>
-            <h2 className="text-xl font-semibold text-gray-900">
-              Monthly After-Tax Income
-            </h2>
+            <h2 className="text-xl font-semibold text-gray-900">Monthly After-Tax Income</h2>
           </div>
           <div className="relative">
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-lg">
@@ -124,14 +113,12 @@ export default function FiftyThirtyTwentyCalculator() {
       {showResults && results && results.income > 0 && (
         <motion.div
           initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
+          animate={{ opacity: 1, height: "auto" }}
           className="space-y-6 pt-6 border-t border-gray-200"
         >
           <div className="flex items-center gap-3 mb-2">
             <div className="h-px flex-1 bg-gray-200" />
-            <h2 className="text-lg font-semibold text-gray-800">
-              Your 50/30/20 Budget
-            </h2>
+            <h2 className="text-lg font-semibold text-gray-800">Your 50/30/20 Budget</h2>
             <div className="h-px flex-1 bg-gray-200" />
           </div>
 
@@ -151,22 +138,20 @@ export default function FiftyThirtyTwentyCalculator() {
                         <Home className="w-7 h-7 text-blue-600" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                          Needs (50%)
-                        </h3>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-1">Needs (50%)</h3>
                         <p className="text-sm text-gray-600 mb-3">
                           Essential expenses you can&apos;t avoid
                         </p>
                         <p className="text-xs text-gray-500">
-                          Rent/mortgage, utilities, groceries, insurance,
-                          minimum debt payments, transportation
+                          Rent/mortgage, utilities, groceries, insurance, minimum debt payments,
+                          transportation
                         </p>
                       </div>
                     </div>
                     <div className="text-right">
                       <div className="text-3xl font-bold text-blue-600">
                         $
-                        {results.needs.toLocaleString('en-US', {
+                        {results.needs.toLocaleString("en-US", {
                           minimumFractionDigits: 0,
                           maximumFractionDigits: 0,
                         })}
@@ -192,22 +177,19 @@ export default function FiftyThirtyTwentyCalculator() {
                         <Heart className="w-7 h-7 text-purple-600" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                          Wants (30%)
-                        </h3>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-1">Wants (30%)</h3>
                         <p className="text-sm text-gray-600 mb-3">
                           Things that make life enjoyable
                         </p>
                         <p className="text-xs text-gray-500">
-                          Dining out, entertainment, hobbies, subscriptions,
-                          shopping, vacations
+                          Dining out, entertainment, hobbies, subscriptions, shopping, vacations
                         </p>
                       </div>
                     </div>
                     <div className="text-right">
                       <div className="text-3xl font-bold text-purple-600">
                         $
-                        {results.wants.toLocaleString('en-US', {
+                        {results.wants.toLocaleString("en-US", {
                           minimumFractionDigits: 0,
                           maximumFractionDigits: 0,
                         })}
@@ -236,19 +218,17 @@ export default function FiftyThirtyTwentyCalculator() {
                         <h3 className="text-lg font-semibold text-gray-900 mb-1">
                           Savings & Debt (20%)
                         </h3>
-                        <p className="text-sm text-gray-600 mb-3">
-                          Building your financial future
-                        </p>
+                        <p className="text-sm text-gray-600 mb-3">Building your financial future</p>
                         <p className="text-xs text-gray-500">
-                          Emergency fund, retirement, investments, extra debt
-                          payments beyond minimums
+                          Emergency fund, retirement, investments, extra debt payments beyond
+                          minimums
                         </p>
                       </div>
                     </div>
                     <div className="text-right">
                       <div className="text-3xl font-bold text-emerald-600">
                         $
-                        {results.savings.toLocaleString('en-US', {
+                        {results.savings.toLocaleString("en-US", {
                           minimumFractionDigits: 0,
                           maximumFractionDigits: 0,
                         })}
@@ -263,5 +243,5 @@ export default function FiftyThirtyTwentyCalculator() {
         </motion.div>
       )}
     </div>
-  )
+  );
 }

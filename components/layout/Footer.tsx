@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import { Mail, Instagram, Facebook } from 'lucide-react'
+import { Facebook, Instagram, Mail } from "lucide-react";
+import Link from "next/link";
 import { ImPinterest2 } from "react-icons/im";
 import { RiTwitterXFill } from "react-icons/ri";
 
@@ -18,7 +18,7 @@ const footerLinks = {
     { label: "Contact", href: "/contact" },
     { label: "Privacy", href: "/privacy-policy" },
   ],
-}
+};
 
 const socialLinks = [
   { icon: Instagram, href: "https://instagram.com/steadyspend", label: "Instagram" },
@@ -26,7 +26,7 @@ const socialLinks = [
   { icon: Facebook, href: "https://facebook.com/steadyspend", label: "Facebook" },
   { icon: RiTwitterXFill, href: "https://x.com/SteadySpend", label: "X (Twitter)" },
   { icon: Mail, href: "/contact", label: "Email" },
-]
+];
 
 export function Footer() {
   return (
@@ -42,23 +42,24 @@ export function Footer() {
               <span>SteadySpend</span>
             </Link>
             <p className="text-muted-foreground mb-6 max-w-sm">
-              Take control of your finances with modern budgeting tools and insights that help you spend smarter.
+              Take control of your finances with modern budgeting tools and insights that help you
+              spend smarter.
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social) => {
-                const Icon = social.icon
+                const Icon = social.icon;
                 return (
                   <a
                     key={social.label}
                     href={social.href}
                     className="w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-200"
                     aria-label={social.label}
-                    target={social.href.startsWith('http') ? '_blank' : undefined}
-                    rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    target={social.href.startsWith("http") ? "_blank" : undefined}
+                    rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   >
                     <Icon className="w-5 h-5" />
                   </a>
-                )
+                );
               })}
             </div>
           </div>
@@ -119,17 +120,21 @@ export function Footer() {
             © {new Date().getFullYear()} SteadySpend. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
-            <Link href="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">
+            <Link
+              href="/privacy-policy"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
               Privacy Policy
             </Link>
-            <Link href="/disclaimer" className="text-muted-foreground hover:text-primary transition-colors">
+            <Link
+              href="/disclaimer"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
               Terms of Service
             </Link>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }
-
-

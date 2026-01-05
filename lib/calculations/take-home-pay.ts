@@ -55,101 +55,98 @@ export const STATE_TAX_RATES: Record<string, number> = {
   WV: 0.065,
   WI: 0.0765,
   WY: 0,
-}
+};
 
-export type PayPeriod = 'yearly' | 'monthly' | 'biweekly'
-export type FilingStatus = 'single' | 'married'
+export type PayPeriod = "yearly" | "monthly" | "biweekly";
+export type FilingStatus = "single" | "married";
 
-export type DeductionMode = 'dollar' | 'percentage'
+export type DeductionMode = "dollar" | "percentage";
 
 export type TakeHomePayInputs = {
-  grossIncome: string
-  payPeriod: PayPeriod
-  filingStatus: FilingStatus
-  state: string
-  dependents: string
-  includeSocialSecurity: boolean
-  includeMedicare: boolean
-  retirement401k: string
-  retirement401kMode: DeductionMode
-  hsaContribution: string
-  hsaContributionMode: DeductionMode
-  preTaxHealthInsurance: string
-  preTaxHealthInsuranceMode: DeductionMode
-  postTaxHealthInsurance: string
-  lifeInsurance: string
-  otherDeductions: string
-  additionalWithholding: string
-  hasLocalTax: boolean
-  localTaxRate: string
-}
+  grossIncome: string;
+  payPeriod: PayPeriod;
+  filingStatus: FilingStatus;
+  state: string;
+  dependents: string;
+  includeSocialSecurity: boolean;
+  includeMedicare: boolean;
+  retirement401k: string;
+  retirement401kMode: DeductionMode;
+  hsaContribution: string;
+  hsaContributionMode: DeductionMode;
+  preTaxHealthInsurance: string;
+  preTaxHealthInsuranceMode: DeductionMode;
+  postTaxHealthInsurance: string;
+  lifeInsurance: string;
+  otherDeductions: string;
+  additionalWithholding: string;
+  hasLocalTax: boolean;
+  localTaxRate: string;
+};
 
 export type TakeHomePayResults = {
-  annualGross: number
-  totalPreTaxDeductions: number
-  taxableIncome: number
-  federalTax: number
-  socialSecurity: number
-  medicare: number
-  additionalMedicare: number
-  totalFICA: number
-  stateTax: number
-  localTax: number
-  totalTaxes: number
-  totalPostTaxDeductions: number
-  annualTakeHome: number
-  monthlyTakeHome: number
-  biweeklyTakeHome: number
-  effectiveTaxRate: number
-}
+  annualGross: number;
+  totalPreTaxDeductions: number;
+  taxableIncome: number;
+  federalTax: number;
+  socialSecurity: number;
+  medicare: number;
+  additionalMedicare: number;
+  totalFICA: number;
+  stateTax: number;
+  localTax: number;
+  totalTaxes: number;
+  totalPostTaxDeductions: number;
+  annualTakeHome: number;
+  monthlyTakeHome: number;
+  biweeklyTakeHome: number;
+  effectiveTaxRate: number;
+};
 
 /**
  * Convert income to annual based on pay period
  */
 function convertToAnnual(amount: number, payPeriod: PayPeriod): number {
-  if (payPeriod === 'yearly') return amount
-  if (payPeriod === 'monthly') return amount * 12
-  return amount * 26 // biweekly
+  if (payPeriod === "yearly") return amount;
+  if (payPeriod === "monthly") return amount * 12;
+  return amount * 26; // biweekly
 }
 
 /**
  * Calculate federal income tax based on 2025 brackets
  */
-function calculateFederalTax(
-  taxableIncome: number,
-  filingStatus: FilingStatus
-): number {
-  const standardDeduction = filingStatus === 'single' ? 14600 : 29200
-  const federalTaxableIncome = Math.max(0, taxableIncome - standardDeduction)
+function calculateFederalTax(taxableIncome: number, filingStatus: FilingStatus): number {
+  const standardDeduction = filingStatus === "single" ? 14600 : 29200;
+  const federalTaxableIncome = Math.max(0, taxableIncome - standardDeduction);
 
-  if (filingStatus === 'single') {
+  if (filingStatus === "single") {
     if (federalTaxableIncome <= 11600) {
-      return federalTaxableIncome * 0.1
+      return federalTaxableIncome * 0.1;
     } else if (federalTaxableIncome <= 47150) {
-      return 1160 + (federalTaxableIncome - 11600) * 0.12
+      return 1160 + (federalTaxableIncome - 11600) * 0.12;
     } else if (federalTaxableIncome <= 100525) {
-      return 5426 + (federalTaxableIncome - 47150) * 0.22
+      return 5426 + (federalTaxableIncome - 47150) * 0.22;
     } else if (federalTaxableIncome <= 191950) {
-      return 17168.5 + (federalTaxableIncome - 100525) * 0.24
+      return 17168.5 + (federalTaxableIncome - 100525) * 0.24;
     } else if (federalTaxableIncome <= 243725) {
-      return 39110.5 + (federalTaxableIncome - 191950) * 0.32
+      return 39110.5 + (federalTaxableIncome - 191950) * 0.32;
     } else if (federalTaxableIncome <= 609350) {
-      return 55678.5 + (federalTaxableIncome - 243725) * 0.35
+      return 55678.5 + (federalTaxableIncome - 243725) * 0.35;
     } else {
-      return 183647.25 + (federalTaxableIncome - 609350) * 0.37
+      return 183647.25 + (federalTaxableIncome - 609350) * 0.37;
     }
   } else {
     // married filing jointly
     if (federalTaxableIncome <= 23200) {
-      return federalTaxableIncome * 0.1
+      return federalTaxableIncome * 0.1;
     } else if (federalTaxableIncome <= 94300) {
-      return 2320 + (federalTaxableIncome - 23200) * 0.12
+      return 2320 + (federalTaxableIncome - 23200) * 0.12;
     } else if (federalTaxableIncome <= 201050) {
-      return 10852 + (federalTaxableIncome - 94300) * 0.22
+      return 10852 + (federalTaxableIncome - 94300) * 0.22;
     } else if (federalTaxableIncome <= 383900) {
-      return 34337 + (federalTaxableIncome - 201050) * 0.24
+      return 34337 + (federalTaxableIncome - 201050) * 0.24;
     } else {
-      return 78221 + (federalTaxableIncome - 383900) * 0.32
+      return 78221 + (federalTaxableIncome - 383900) * 0.32;
     }
   }
 }
@@ -157,118 +154,90 @@ function calculateFederalTax(
 /**
  * Calculate take-home pay based on inputs
  */
-export function calculateTakeHomePay(
-  inputs: TakeHomePayInputs
-): TakeHomePayResults {
+export function calculateTakeHomePay(inputs: TakeHomePayInputs): TakeHomePayResults {
   // Convert to annual for calculations
-  const annualGross = convertToAnnual(
-    parseFloat(inputs.grossIncome) || 0,
-    inputs.payPeriod
-  )
+  const annualGross = convertToAnnual(parseFloat(inputs.grossIncome) || 0, inputs.payPeriod);
 
   // Pre-tax deductions (annual)
   // Handle percentage vs dollar amount for each deduction
-  let annual401k = 0
-  if (inputs.retirement401kMode === 'percentage') {
-    const percentage = parseFloat(inputs.retirement401k) || 0
-    annual401k = annualGross * (percentage / 100)
+  let annual401k = 0;
+  if (inputs.retirement401kMode === "percentage") {
+    const percentage = parseFloat(inputs.retirement401k) || 0;
+    annual401k = annualGross * (percentage / 100);
   } else {
-    annual401k = convertToAnnual(
-      parseFloat(inputs.retirement401k) || 0,
-      inputs.payPeriod
-    )
+    annual401k = convertToAnnual(parseFloat(inputs.retirement401k) || 0, inputs.payPeriod);
   }
 
-  let annualHSA = 0
-  if (inputs.hsaContributionMode === 'percentage') {
-    const percentage = parseFloat(inputs.hsaContribution) || 0
-    annualHSA = annualGross * (percentage / 100)
+  let annualHSA = 0;
+  if (inputs.hsaContributionMode === "percentage") {
+    const percentage = parseFloat(inputs.hsaContribution) || 0;
+    annualHSA = annualGross * (percentage / 100);
   } else {
-    annualHSA = convertToAnnual(
-      parseFloat(inputs.hsaContribution) || 0,
-      inputs.payPeriod
-    )
+    annualHSA = convertToAnnual(parseFloat(inputs.hsaContribution) || 0, inputs.payPeriod);
   }
 
-  let annualPreTaxHealth = 0
-  if (inputs.preTaxHealthInsuranceMode === 'percentage') {
-    const percentage = parseFloat(inputs.preTaxHealthInsurance) || 0
-    annualPreTaxHealth = annualGross * (percentage / 100)
+  let annualPreTaxHealth = 0;
+  if (inputs.preTaxHealthInsuranceMode === "percentage") {
+    const percentage = parseFloat(inputs.preTaxHealthInsurance) || 0;
+    annualPreTaxHealth = annualGross * (percentage / 100);
   } else {
     annualPreTaxHealth = convertToAnnual(
       parseFloat(inputs.preTaxHealthInsurance) || 0,
       inputs.payPeriod
-    )
+    );
   }
 
-  const totalPreTaxDeductions =
-    annual401k + annualHSA + annualPreTaxHealth
-  const taxableIncome = annualGross - totalPreTaxDeductions
+  const totalPreTaxDeductions = annual401k + annualHSA + annualPreTaxHealth;
+  const taxableIncome = annualGross - totalPreTaxDeductions;
 
   // FICA calculations
   const socialSecurity = inputs.includeSocialSecurity
     ? Math.min(taxableIncome * 0.062, 10453.2)
-    : 0
-  const medicare = inputs.includeMedicare ? taxableIncome * 0.0145 : 0
+    : 0;
+  const medicare = inputs.includeMedicare ? taxableIncome * 0.0145 : 0;
   const additionalMedicare =
-    inputs.includeMedicare && taxableIncome > 200000
-      ? (taxableIncome - 200000) * 0.009
-      : 0
-  const totalFICA = socialSecurity + medicare + additionalMedicare
+    inputs.includeMedicare && taxableIncome > 200000 ? (taxableIncome - 200000) * 0.009 : 0;
+  const totalFICA = socialSecurity + medicare + additionalMedicare;
 
   // Federal tax calculation
-  let federalTax = calculateFederalTax(taxableIncome, inputs.filingStatus)
+  let federalTax = calculateFederalTax(taxableIncome, inputs.filingStatus);
 
   // Child tax credit (simplified)
-  const numDependents = parseInt(inputs.dependents) || 0
-  const childTaxCredit = numDependents * 2000
-  federalTax = Math.max(0, federalTax - childTaxCredit)
+  const numDependents = parseInt(inputs.dependents, 10) || 0;
+  const childTaxCredit = numDependents * 2000;
+  federalTax = Math.max(0, federalTax - childTaxCredit);
 
   // State and local taxes
-  const stateTaxRate = STATE_TAX_RATES[inputs.state] || 0
-  const stateTax = taxableIncome * stateTaxRate
+  const stateTaxRate = STATE_TAX_RATES[inputs.state] || 0;
+  const stateTax = taxableIncome * stateTaxRate;
   const localTax = inputs.hasLocalTax
     ? taxableIncome * (parseFloat(inputs.localTaxRate) / 100 || 0)
-    : 0
+    : 0;
 
   // Additional withholding
   const annualAdditionalWithholding = convertToAnnual(
     parseFloat(inputs.additionalWithholding) || 0,
     inputs.payPeriod
-  )
+  );
 
   // Total taxes
-  const totalTaxes =
-    federalTax +
-    totalFICA +
-    stateTax +
-    localTax +
-    annualAdditionalWithholding
+  const totalTaxes = federalTax + totalFICA + stateTax + localTax + annualAdditionalWithholding;
 
   // Post-tax deductions (annual)
   const annualPostTaxHealth = convertToAnnual(
     parseFloat(inputs.postTaxHealthInsurance) || 0,
     inputs.payPeriod
-  )
-  const annualLifeIns = convertToAnnual(
-    parseFloat(inputs.lifeInsurance) || 0,
-    inputs.payPeriod
-  )
-  const annualOtherDed = convertToAnnual(
-    parseFloat(inputs.otherDeductions) || 0,
-    inputs.payPeriod
-  )
+  );
+  const annualLifeIns = convertToAnnual(parseFloat(inputs.lifeInsurance) || 0, inputs.payPeriod);
+  const annualOtherDed = convertToAnnual(parseFloat(inputs.otherDeductions) || 0, inputs.payPeriod);
 
-  const totalPostTaxDeductions =
-    annualPostTaxHealth + annualLifeIns + annualOtherDed
+  const totalPostTaxDeductions = annualPostTaxHealth + annualLifeIns + annualOtherDed;
 
   // Final calculations
-  const annualTakeHome =
-    annualGross - totalTaxes - totalPreTaxDeductions - totalPostTaxDeductions
-  const monthlyTakeHome = annualTakeHome / 12
-  const biweeklyTakeHome = annualTakeHome / 26
-  const effectiveTaxRate =
-    annualGross > 0 ? (totalTaxes / annualGross) * 100 : 0
+  const annualTakeHome = annualGross - totalTaxes - totalPreTaxDeductions - totalPostTaxDeductions;
+  const monthlyTakeHome = annualTakeHome / 12;
+  const biweeklyTakeHome = annualTakeHome / 26;
+  const effectiveTaxRate = annualGross > 0 ? (totalTaxes / annualGross) * 100 : 0;
 
   return {
     annualGross,
@@ -287,6 +256,5 @@ export function calculateTakeHomePay(
     monthlyTakeHome,
     biweeklyTakeHome,
     effectiveTaxRate,
-  }
+  };
 }
-

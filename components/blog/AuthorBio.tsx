@@ -1,59 +1,28 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import { Award, Briefcase, GraduationCap } from 'lucide-react'
-
-type Credential = {
-  icon: typeof GraduationCap
-  label: string
-}
+import Image from "next/image";
+import Link from "next/link";
 
 type AuthorBioProps = {
-  name?: string
-  initials?: string
-  imageSrc?: string
-  bio?: string
-  credentials?: Credential[]
-  showDisclaimer?: boolean
-  showLearnMore?: boolean
-  aboutHref?: string
-  className?: string
-}
-
-const defaultCredentials: Credential[] = [
-  {
-    icon: GraduationCap,
-    label: "B.S. in Finance",
-  },
-  {
-    icon: Award,
-    label: "Certified Financial Educator",
-  },
-  {
-    icon: Briefcase,
-    label: "10+ Years Experience",
-  },
-]
+  name?: string;
+  imageSrc?: string;
+  bio?: string;
+  showDisclaimer?: boolean;
+  aboutHref?: string;
+  className?: string;
+};
 
 export default function AuthorBio({
   name = "Lynae Thomas",
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  initials = "LT",
   imageSrc = "/headshot-v2.png",
-  bio =
-    "I’m the creator of SteadySpend and a software engineer learning my way through personal finance in real time. After paying off $28,000 in debt and rebuilding my financial foundation, I started sharing what helped me—simple tools, honest lessons, and practical ways to feel more in control of your money without shame or overwhelm.",
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  credentials = defaultCredentials,
+  bio = "I’m Lynae, the creator of SteadySpend and a software engineer learning personal finance the same way I learn code: by experimenting, making mistakes, and iterating. After navigating my own path through debt and rebuilding my financial foundation, I started sharing what actually worked for me. I’m here to provide the simple tools and judgment-free reflections I wish I’d had when I was first trying to feel calm and capable with my money.",
   showDisclaimer = true,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  showLearnMore = true,
   aboutHref = "/about",
   className = "",
 }: AuthorBioProps) {
   return (
-    <section className={`py-12 lg:py-18  bg-transparent ${className}`}>
+    <section className={`mt-8 -mb-4 bg-transparent ${className}`}>
       <div className="container-4xl mx-auto">
         <div className="max-w-7xl mx-auto">
-          <div className="glass-card p-8 lg:p-10 rounded-2xl">
+          <div className="glass-card p-6 lg:p-8 rounded-2xl">
             {/* Header */}
             <div className="flex flex-col sm:flex-row gap-6 items-start mb-6">
               {/* Author Avatar */}
@@ -66,7 +35,7 @@ export default function AuthorBio({
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>
-              
+
               {/* Author Info */}
               <div className="flex-1">
                 <p className="text-sm text-primary font-medium mb-1">Written & Reviewed By</p>
@@ -75,25 +44,23 @@ export default function AuthorBio({
                     {name}
                   </Link>
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {bio}
-                </p>
+                <p className="text-muted-foreground text-sm leading-relaxed">{bio}</p>
               </div>
             </div>
-
-
 
             {/* Disclaimer */}
             {showDisclaimer && (
               <div className="text-xs text-muted-foreground bg-muted/50 p-4 rounded-lg">
-                <strong className="text-foreground">Disclaimer:</strong> This tool is for educational purposes only and should not be considered professional financial advice. Always consult with a qualified professional for advice specific to your situation.
+                <strong className="text-foreground">Disclaimer:</strong> I am not a financial
+                advisor. Content on SteadySpend is for educational and informational purposes based
+                on my personal experiences. It is not professional financial advice, a promise of
+                outcomes, or a substitute for a CPA or CFP. Please consult a qualified professional
+                for guidance specific to your unique situation.
               </div>
             )}
-
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
-

@@ -1,18 +1,18 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Info } from 'lucide-react'
-import { motion, AnimatePresence } from 'motion/react'
-import { cn } from '@/lib/utils'
+import { Info } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 type TooltipProps = {
-  content: string
-  children?: React.ReactNode
-  className?: string
-}
+  content: string;
+  children?: React.ReactNode;
+  className?: string;
+};
 
 export function Tooltip({ content, children, className }: TooltipProps) {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
     <div className="relative inline-flex items-center">
@@ -51,5 +51,5 @@ export function Tooltip({ content, children, className }: TooltipProps) {
         )}
       </AnimatePresence>
     </div>
-  )
+  );
 }
