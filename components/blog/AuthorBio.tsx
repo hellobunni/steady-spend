@@ -13,10 +13,7 @@ type AuthorBioProps = {
 export default function AuthorBio({
   name = "Lynae Thomas",
   imageSrc = "/headshot-v2.png",
-bio =
-  "I’m Lynae, the creator of SteadySpend and a software engineer learning personal finance the same way I learn code: by experimenting, making mistakes, and iterating. After navigating my own path through debt and rebuilding my financial foundation, I started sharing what actually worked for me. I’m here to provide the simple tools and judgment-free reflections I wish I’d had when I was first trying to feel calm and capable with my money.",
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  credentials = defaultCredentials,
+  bio = "I’m Lynae, the creator of SteadySpend and a software engineer learning personal finance the same way I learn code: by experimenting, making mistakes, and iterating. After navigating my own path through debt and rebuilding my financial foundation, I started sharing what actually worked for me. I’m here to provide the simple tools and judgment-free reflections I wish I’d had when I was first trying to feel calm and capable with my money.",
   showDisclaimer = true,
   aboutHref = "/about",
   className = "",
@@ -54,7 +51,11 @@ bio =
             {/* Disclaimer */}
             {showDisclaimer && (
               <div className="text-xs text-muted-foreground bg-muted/50 p-4 rounded-lg">
-               <strong className="text-foreground">Disclaimer:</strong> I am not a financial advisor. Content on SteadySpend is for educational and informational purposes based on my personal experiences. It is not professional financial advice, a promise of outcomes, or a substitute for a CPA or CFP. Please consult a qualified professional for guidance specific to your unique situation.
+                <strong className="text-foreground">Disclaimer:</strong> I am not a financial
+                advisor. Content on SteadySpend is for educational and informational purposes based
+                on my personal experiences. It is not professional financial advice, a promise of
+                outcomes, or a substitute for a CPA or CFP. Please consult a qualified professional
+                for guidance specific to your unique situation.
               </div>
             )}
           </div>

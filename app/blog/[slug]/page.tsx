@@ -293,7 +293,7 @@ export default async function BlogPostPage({ params }: Props) {
             )}
           </div>
 
-        <AuthorBio />
+          <AuthorBio />
 
           {/* Related Posts */}
           {relatedPosts.length > 0 && <RelatedPosts posts={relatedPosts} />}
