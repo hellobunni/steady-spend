@@ -1,27 +1,28 @@
-'use client'
+"use client";
 
-import { Button } from '@/components/ui/button'
-import { Calculator, RotateCcw } from 'lucide-react'
+import { Calculator, RotateCcw } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface ActionButtonGroupProps {
-  onCalculate: () => void
-  onReset: () => void
-  isLoading?: boolean
-  calculateLabel?: string
-  resetLabel?: string
-  disabled?: boolean
+  onCalculate: () => void;
+  onReset: () => void;
+  isLoading?: boolean;
+  calculateLabel?: string;
+  resetLabel?: string;
+  disabled?: boolean;
 }
 
 export function ActionButtonGroup({
   onCalculate,
   onReset,
   isLoading = false,
-  calculateLabel = 'Calculate',
-  resetLabel = 'Reset',
+  calculateLabel = "Calculate",
+  resetLabel = "Reset",
   disabled = false,
 }: ActionButtonGroupProps) {
   return (
-    <div className="flex flex-col sm:flex-row gap-3 pt-2" role="group" aria-label="Calculator actions">
+    <fieldset className="flex flex-col sm:flex-row gap-3 pt-2 border-0 p-0 m-0">
+      <legend className="sr-only">Calculator actions</legend>
       <Button
         onClick={onCalculate}
         disabled={isLoading || disabled}
@@ -30,7 +31,10 @@ export function ActionButtonGroup({
       >
         {isLoading ? (
           <>
-            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" aria-hidden="true" />
+            <div
+              className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"
+              aria-hidden="true"
+            />
             <span>Calculating...</span>
           </>
         ) : (
@@ -50,7 +54,6 @@ export function ActionButtonGroup({
         <RotateCcw className="w-4 h-4" aria-hidden="true" />
         {resetLabel}
       </Button>
-    </div>
-  )
+    </fieldset>
+  );
 }
-

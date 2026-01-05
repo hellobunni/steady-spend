@@ -1,41 +1,39 @@
-'use client'
+"use client";
 
-import { Input } from '@/components/ui/input'
-import { cn } from '@/lib/utils'
-import React, { forwardRef, useId } from 'react'
+import type React from "react";
+import { forwardRef, useId } from "react";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 
-interface CurrencyInputProps extends Omit<React.ComponentProps<'input'>, 'type' | 'size'> {
-  label?: string
-  helperText?: string
-  error?: string
-  size?: 'sm' | 'md' | 'lg'
+interface CurrencyInputProps extends Omit<React.ComponentProps<"input">, "type" | "size"> {
+  label?: string;
+  helperText?: string;
+  error?: string;
+  size?: "sm" | "md" | "lg";
 }
 
 export const CurrencyInput = forwardRef<HTMLInputElement, CurrencyInputProps>(
-  ({ label, helperText, error, size = 'md', className, id, ...props }, ref) => {
-    const generatedId = useId()
-    const inputId = id || `currency-${generatedId}`
-    const helperId = helperText ? `${inputId}-helper` : undefined
-    const errorId = error ? `${inputId}-error` : undefined
-    
+  ({ label, helperText, error, size = "md", className, id, ...props }, ref) => {
+    const generatedId = useId();
+    const inputId = id || `currency-${generatedId}`;
+    const helperId = helperText ? `${inputId}-helper` : undefined;
+    const errorId = error ? `${inputId}-error` : undefined;
+
     const sizeClasses = {
-      sm: 'h-10 text-base',
-      md: 'h-12 text-lg',
-      lg: 'h-14 text-xl'
-    }
+      sm: "h-10 text-base",
+      md: "h-12 text-lg",
+      lg: "h-14 text-xl",
+    };
 
     return (
       <div>
         {label && (
-          <label
-            htmlFor={inputId}
-            className="block text-sm font-medium text-gray-700 mb-1.5"
-          >
+          <label htmlFor={inputId} className="block text-sm font-medium text-gray-700 mb-1.5">
             {label}
           </label>
         )}
         <div className="relative">
-          <span 
+          <span
             className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-base font-medium"
             aria-hidden="true"
           >
@@ -47,12 +45,12 @@ export const CurrencyInput = forwardRef<HTMLInputElement, CurrencyInputProps>(
             type="number"
             inputMode="decimal"
             className={cn(
-              'pl-8 rounded-lg',
+              "pl-8 rounded-lg",
               sizeClasses[size],
-              error && 'border-destructive aria-invalid',
+              error && "border-destructive aria-invalid",
               className
             )}
-            aria-invalid={error ? 'true' : 'false'}
+            aria-invalid={error ? "true" : "false"}
             aria-describedby={errorId || helperId}
             {...props}
           />
@@ -68,8 +66,7 @@ export const CurrencyInput = forwardRef<HTMLInputElement, CurrencyInputProps>(
           </p>
         )}
       </div>
-    )
+    );
   }
-)
-CurrencyInput.displayName = 'CurrencyInput'
-
+);
+CurrencyInput.displayName = "CurrencyInput";

@@ -12,21 +12,23 @@ type ComparisonTableProps = {
 export default function ComparisonTable({
   headers,
   rows,
-  className = '',
+  className = "",
   source,
   lastUpdated,
 }: ComparisonTableProps) {
   return (
     <>
-      <div className={`mt-8 mb-3 overflow-x-auto rounded-lg border border-slate-200 shadow-sm ${className}`}>
+      <div
+        className={`mt-8 mb-3 overflow-x-auto rounded-lg border border-slate-200 shadow-sm ${className}`}
+      >
         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b-2 border-slate-200 bg-slate-50">
               {headers.map((header, index) => (
                 <th
-                  key={index}
+                  key={header}
                   className={`px-4 py-3 text-sm font-semibold text-slate-900 first:pl-6 last:pr-6 ${
-                    index === 0 ? 'text-left' : 'text-center'
+                    index === 0 ? "text-left" : "text-center"
                   }`}
                 >
                   {header}
@@ -37,14 +39,14 @@ export default function ComparisonTable({
           <tbody>
             {rows.map((row, rowIndex) => (
               <tr
-                key={rowIndex}
+                key={`row-${rowIndex}-${row[0] || ""}`}
                 className="border-b border-slate-100 last:border-b-0 hover:bg-slate-50/50 transition-colors"
               >
                 {row.map((cell, cellIndex) => (
                   <td
-                    key={cellIndex}
+                    key={`cell-${rowIndex}-${cellIndex}-${cell.substring(0, 20)}`}
                     className={`px-4 py-3 text-sm text-slate-700 first:pl-6 last:pr-6 ${
-                      cellIndex === 0 ? 'text-left' : 'text-center'
+                      cellIndex === 0 ? "text-left" : "text-center"
                     }`}
                     dangerouslySetInnerHTML={{ __html: cell }}
                   />
@@ -56,9 +58,9 @@ export default function ComparisonTable({
       </div>
       {(source || lastUpdated) && (
         <div className="space-y-1">
-          {source && source.link && source.title && (
+          {source?.link && source.title && (
             <p className="text-xs text-slate-500">
-              <span className="font-medium">Source:</span>{' '}
+              <span className="font-medium">Source:</span>{" "}
               <a
                 href={source.link}
                 target="_blank"
