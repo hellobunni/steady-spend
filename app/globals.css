@@ -8,7 +8,7 @@
 :root {
   /* Core Green Palette */
   --background: hsl(150 30% 98%);
-  
+
   /* Remove white background from Prose-UI */
   --p-color-bg: transparent;
   --foreground: hsl(160 40% 10%);
@@ -204,7 +204,7 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: "Plus Jakarta Sans", var(--font-plus-jakarta-sans), sans-serif;
+    font-family: "Plus Jakarta Sans", var(--font-plus-jakarta-sans), sans-serif !important;
   }
 
   h1,
@@ -213,7 +213,7 @@
   h4,
   h5,
   h6 {
-    font-family: "Space Grotesk", var(--font-space-grotesk), sans-serif;
+    font-family: "Space Grotesk", var(--font-space-grotesk), sans-serif !important;
   }
 
   a {
@@ -225,128 +225,158 @@
 /* Additional custom enhancements for blog post polish */
 @layer components {
   .prose-ui {
-    @apply text-slate-700;
     font-size: 0.75rem;
     line-height: 1.5;
+    color: var(--color-slate-700) !important;
   }
 
   .prose-ui :where(p):not(:where([class~="not-prose"] *)) {
     @apply mb-6;
     line-height: 1.5;
+    color: var(--color-slate-700) !important;
   }
 
   .prose-ui :where(h2):not(:where([class~="not-prose"] *)) {
-    @apply mt-12 mb-6 text-2xl font-semibold tracking-tight text-slate-900 first:mt-0;
+    @apply text-2xl font-semibold tracking-tight;
+    color: var(--color-slate-900) !important;
   }
 
   .prose-ui :where(h3):not(:where([class~="not-prose"] *)) {
-    @apply mt-10 mb-4 text-xl font-semibold tracking-tight text-slate-900;
+    @apply mb-4 text-xl font-semibold tracking-tight;
+    color: var(--color-slate-900) !important;
+    margin: 10px 0 4px 0;
   }
 
   .prose-ui :where(h4):not(:where([class~="not-prose"] *)) {
-    @apply mt-8 mb-3 text-lg font-semibold text-slate-900;
+    @apply mt-8 mb-3 text-lg font-semibold;
+    color: var(--color-slate-900) !important;
   }
 
   .prose-ui :where(ul, ol):not(:where([class~="not-prose"] *)) {
     @apply mb-6 space-y-2;
+    color: var(--color-slate-900) !important;
   }
 
   .prose-ui :where(li):not(:where([class~="not-prose"] *)) {
     line-height: 1.5;
+    color: var(--color-slate-900) !important;
   }
 
   .prose-ui :where(blockquote):not(:where([class~="not-prose"] *)) {
-    @apply my-8 border-l-4 border-emerald-200 pl-6 italic text-slate-600;
+    @apply my-8 border-l-4 border-emerald-200 pl-6 italic;
+    color: var(--color-slate-600);
   }
 }
 
 /* Prose styles for MDX content */
 .prose {
-  @apply text-slate-700 text-lg leading-relaxed;
+  @apply text-lg leading-relaxed;
   max-width: 65ch;
+  color: var(--color-slate-700);
 }
 
 .prose h1 {
-  @apply mt-8 mb-4 text-4xl font-bold text-slate-900 leading-tight;
+  @apply mt-8 mb-4 text-4xl font-bold leading-tight;
+  color: var(--color-slate-900);
 }
 
 .prose h2 {
-  @apply mt-10 mb-4 text-3xl font-semibold text-slate-900 leading-tight;
+  @apply mt-10 mb-4 text-3xl font-semibold leading-tight;
+  color: var(--color-slate-900);
 }
 
 .prose h3 {
-  @apply mt-8 mb-3 text-2xl font-semibold text-slate-900 leading-tight;
+  @apply mt-8 mb-3 text-2xl font-semibold leading-tight;
+  color: var(--color-slate-900);
 }
 
 .prose h4 {
-  @apply mt-6 mb-2 text-xl font-semibold text-slate-900;
+  @apply mt-6 mb-2 text-xl font-semibold;
+  color: var(--color-slate-900);
 }
 
 .prose h5 {
-  @apply mt-4 mb-2 text-lg font-semibold text-slate-900;
+  @apply mt-4 mb-2 text-lg font-semibold;
+  color: var(--color-slate-900);
 }
 
 .prose h6 {
-  @apply mt-4 mb-2 text-base font-semibold text-slate-900;
+  @apply mt-4 mb-2 text-base font-semibold;
+  color: var(--color-slate-900);
 }
 
 .prose p {
   @apply mb-6 leading-relaxed;
+  color: var(--color-slate-700);
 }
 
 .prose ul {
   @apply mb-6 ml-6 list-disc space-y-2;
+  color: var(--color-slate-700);
 }
 
 .prose ol {
   @apply mb-6 ml-6 list-decimal space-y-2;
+  color: var(--color-slate-700);
 }
 
 .prose li {
   @apply pl-2;
+  color: var(--color-slate-700);
 }
 
-  .prose-ui :where(code):not(:where([class~="not-prose"] *)) {
-    @apply rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono text-slate-800;
-  }
+.prose-ui :where(code):not(:where([class~="not-prose"] *)) {
+  @apply rounded bg-slate-100 px-1.5 py-0.5 text-sm font-mono;
+  color: var(--color-slate-800);
+}
 
-  .prose-ui :where(pre):not(:where([class~="not-prose"] *)) {
-    @apply my-8 rounded-lg bg-slate-900 p-4 overflow-x-auto;
-  }
+.prose-ui :where(pre):not(:where([class~="not-prose"] *)) {
+  @apply my-8 rounded-lg bg-slate-900 p-4 overflow-x-auto;
+}
 .prose li p {
   @apply mb-2;
 }
 
 .prose a {
-  @apply text-emerald-700 underline hover:text-emerald-800 font-medium;
+  @apply underline font-medium;
+  color: var(--color-primary);
+  &:hover {
+    color: var(--color-primary-hover);
+  }
 }
 
-  .prose-ui :where(pre code):not(:where([class~="not-prose"] *)) {
-    @apply bg-transparent p-0 text-slate-100;
-  }
+.prose-ui :where(pre code):not(:where([class~="not-prose"] *)) {
+  @apply bg-transparent p-0 text-slate-100;
+  color: var(--color-slate-800);
+}
 
-  .prose-ui :where(a):not(:where([class~="not-prose"] *)) {
-    @apply font-medium text-emerald-700 underline decoration-2 underline-offset-2 transition-colors hover:text-emerald-800;
+.prose-ui :where(a):not(:where([class~="not-prose"] *)) {
+  @apply font-medium underline decoration-2 underline-offset-2 transition-colors;
+  color: var(--color-emerald-700);
+  &:hover {
+    color: var(--color-emerald-800);
   }
+}
 
-  .prose-ui :where(strong):not(:where([class~="not-prose"] *)) {
-    @apply font-semibold text-slate-900;
-  }
+.prose-ui :where(strong):not(:where([class~="not-prose"] *)) {
+  @apply font-semibold text-slate-900;
+  color: var(--color-slate-900);
+}
 
-  .prose-ui :where(hr):not(:where([class~="not-prose"] *)) {
-    @apply my-12 border-t border-slate-200;
-  }
+.prose-ui :where(hr):not(:where([class~="not-prose"] *)) {
+  @apply my-12 border-t border-slate-200;
+}
 .prose pre {
   @apply mb-6 rounded-lg bg-slate-900 p-4 overflow-x-auto;
 }
 
-  .prose-ui :where(table):not(:where([class~="not-prose"] *)) {
-    @apply my-8 w-full border-collapse;
-  }
+.prose-ui :where(table):not(:where([class~="not-prose"] *)) {
+  @apply my-8 w-full border-collapse;
+}
 
-  .prose-ui :where(img):not(:where([class~="not-prose"] *)) {
-    @apply my-8 rounded-lg;
-  }
+.prose-ui :where(img):not(:where([class~="not-prose"] *)) {
+  @apply my-8 rounded-lg;
+}
 .prose blockquote {
   @apply border-l-4 border-slate-300 pl-4 italic text-slate-600 my-6;
 }
