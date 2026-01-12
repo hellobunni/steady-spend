@@ -231,13 +231,14 @@
   }
 
   .prose-ui :where(p):not(:where([class~="not-prose"] *)) {
-    @apply mb-6;
     line-height: 1.5;
+    margin-bottom: 1rem;
     color: var(--color-slate-700) !important;
   }
 
   .prose-ui :where(h2):not(:where([class~="not-prose"] *)) {
     @apply text-2xl font-semibold tracking-tight;
+    margin-top: 0rem !important;
     color: var(--color-slate-900) !important;
   }
 
