@@ -4,16 +4,13 @@ import { ImPinterest2 } from "react-icons/im";
 import { RiTwitterXFill } from "react-icons/ri";
 
 const footerLinks = {
-  product: [
-    { label: "Tools", href: "/tools" },
+  tools: [
     { label: "Budget Calculator", href: "/tools/monthly-budget" },
-    { label: "Pricing", href: "/tools" },
+    { label: "50/30/20 Calculator", href: "/tools/50-30-20" },
+    { label: "Take-Home Pay Calculator", href: "/tools/take-home-pay-calculator" },
   ],
-  resources: [
-    { label: "Blog", href: "/blog" },
-    { label: "FAQ", href: "/contact" },
-  ],
-  company: [
+  blog: [{ label: "Blog", href: "/blog" }],
+  connect: [
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
     { label: "Privacy", href: "/privacy-policy" },
@@ -65,10 +62,12 @@ export function Footer() {
           </div>
 
           {/* Links */}
+
+          <div></div>
           <div>
-            <h4 className="font-display font-semibold text-foreground mb-4">Product</h4>
+            <h4 className="font-display font-semibold text-foreground mb-4">Connect</h4>
             <ul className="space-y-3">
-              {footerLinks.product.map((link) => (
+              {footerLinks.connect.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
@@ -80,27 +79,10 @@ export function Footer() {
               ))}
             </ul>
           </div>
-
           <div>
-            <h4 className="font-display font-semibold text-foreground mb-4">Resources</h4>
+            <h4 className="font-display font-semibold text-foreground mb-4">Tools</h4>
             <ul className="space-y-3">
-              {footerLinks.resources.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-display font-semibold text-foreground mb-4">Company</h4>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
+              {footerLinks.tools.map((link) => (
                 <li key={link.label}>
                   <Link
                     href={link.href}
@@ -125,12 +107,6 @@ export function Footer() {
               className="text-muted-foreground hover:text-primary transition-colors"
             >
               Privacy Policy
-            </Link>
-            <Link
-              href="/disclaimer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              Terms of Service
             </Link>
           </div>
         </div>
