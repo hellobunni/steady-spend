@@ -1,17 +1,37 @@
 "use client";
 
-import { CheckCircle, Mail, Shield } from "lucide-react";
+import { Mail, Shield } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 const trustSignals = [
-  "All advice is educational, not financial advice",
-  "No affiliate links without disclosure",
-  "Fact-checked and regularly updated content",
-  "Transparent about personal experiences",
-  "Easy to contact with questions",
+  {
+    emoji: "💡",
+    title: "Education, not advice",
+    description: "Everything I share is meant to help you learn and think through your options, not tell you what to do.",
+  },
+  {
+    emoji: "🔍",
+    title: "Clear disclosures",
+    description: "If I ever use affiliate links, you'll always know—no hidden incentives, ever.",
+  },
+  {
+    emoji: "📚",
+    title: "Fact-checked & refreshed",
+    description: "Content is carefully researched and reviewed regularly so it stays accurate and relevant.",
+  },
+  {
+    emoji: "🧠",
+    title: "Real experiences, shared openly",
+    description: "When I talk about my own money journey, I'm transparent about what worked, what didn't, and what I'm still learning.",
+  },
+  {
+    emoji: "💬",
+    title: "Open communication",
+    description: "Questions are always welcome. SteadySpend is a conversation, not a lecture.",
+  },
 ];
 
 const fadeInUp = {
@@ -63,20 +83,21 @@ export default function AboutClient() {
               transition={{ ...springTransition, delay: 0.1 }}
               className="order-1 lg:order-2"
             >
-              <p className="text-primary font-medium mb-2">Meet Your Guide</p>
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-                Hi, I&apos;m Lynae Thomas
+              <p className="text-primary font-medium mb-2">Meet Your Guide ✨</p>
+              <h1 className="font-display text-4xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-6">
+                Hi, I&apos;m Lynae👋🏽
               </h1>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                I&apos;m a personal finance educator and the creator of SteadySpend. After
-                struggling with my own finances in my 20s—living paycheck to paycheck despite a
-                decent income—I became obsessed with understanding where money goes and how to make
-                it work better.
+              <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+                In my 20s, I was earning decent money but still living paycheck to paycheck. Bills felt confusing, spending felt emotional, and budgeting advice online felt… not made for real life. So I did what I always do when something doesn&apos;t make sense—I got curious 🔍
               </p>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Today, I help everyday people take control of their spending without complicated
-                spreadsheets or restrictive budgets. My approach is practical, judgment-free, and
-                based on real experience.
+              <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+                I started tracking where my money was actually going, questioning my habits without shame, and building systems that worked with my life instead of against it.
+              </p>
+              <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+                Today, I help everyday people take control of their spending without complicated spreadsheets, guilt-driven rules, or restrictive budgets. My approach is practical, judgment-free, and rooted in real experience—not perfection 💫
+              </p>
+              <p className="text-sm text-muted-foreground mb-8 leading-relaxed">
+                SteadySpend is here to help you understand your money, feel confident about your choices, and build habits that actually stick.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button asChild className="gradient-primary text-primary-foreground shadow-glow">
@@ -102,13 +123,13 @@ export default function AboutClient() {
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-medium text-sm mb-4">
                 <Shield className="w-4 h-4" />
-                My Promise to You
+                My Promise to You 🤍
               </div>
               <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
                 Transparency & Trust
               </h2>
               <p className="text-muted-foreground">
-                I believe in being completely honest about what I share and why.
+                I believe financial education should feel honest, supportive, and empowering—not confusing or salesy.
               </p>
             </motion.div>
 
@@ -118,22 +139,30 @@ export default function AboutClient() {
               transition={{ ...springTransition, delay: 0.1 }}
               className="glass-card p-8 rounded-2xl"
             >
-              <ul className="space-y-4">
+              <h3 className="font-semibold text-foreground mb-6">
+                Here&apos;s what you can always expect from me:
+              </h3>
+              <ul className="space-y-5">
                 {trustSignals.map((signal) => (
-                  <li key={signal} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                    <span className="text-foreground">{signal}</span>
+                  <li key={signal.title} className="flex items-start gap-3">
+                    <span className="text-xl shrink-0 mt-0.5">{signal.emoji}</span>
+                    <div>
+                      <span className="font-medium text-foreground">{signal.title}</span>
+                      <p className="text-sm text-muted-foreground mt-1">{signal.description}</p>
+                    </div>
                   </li>
                 ))}
               </ul>
 
               <div className="mt-8 pt-8 border-t border-border">
-                <p className="text-sm text-muted-foreground mb-4">
-                  <strong className="text-foreground">Disclaimer:</strong> The content on
+                <div className="text-center mb-4">
+                  <span className="text-muted-foreground">⸻</span>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  <strong className="text-foreground">Friendly Disclaimer ✨</strong> The content on
                   SteadySpend is for educational purposes only and should not be considered
                   professional financial advice. I&apos;m a financial educator, not a licensed
-                  financial advisor. Always consult with a qualified professional for advice
-                  specific to your situation.
+                  financial advisor. Always consult a qualified professional for guidance specific to your personal situation.
                 </p>
               </div>
             </motion.div>
