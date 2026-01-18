@@ -63,7 +63,7 @@ export function Footer() {
 
           {/* Links */}
 
-          <div></div>
+          <div className="hidden md:block"></div>
           <div>
             <h4 className="font-display font-semibold text-foreground mb-4">Connect</h4>
             <ul className="space-y-3">
