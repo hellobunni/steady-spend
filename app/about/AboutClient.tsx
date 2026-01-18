@@ -10,7 +10,8 @@ const trustSignals = [
   {
     emoji: "💡",
     title: "Education, not advice",
-    description: "Everything I share is meant to help you learn and think through your options, not tell you what to do.",
+    description:
+      "Everything I share is meant to help you learn and think through your options, not tell you what to do.",
   },
   {
     emoji: "🔍",
@@ -20,12 +21,14 @@ const trustSignals = [
   {
     emoji: "📚",
     title: "Fact-checked & refreshed",
-    description: "Content is carefully researched and reviewed regularly so it stays accurate and relevant.",
+    description:
+      "Content is carefully researched and reviewed regularly so it stays accurate and relevant.",
   },
   {
     emoji: "🧠",
     title: "Real experiences, shared openly",
-    description: "When I talk about my own money journey, I'm transparent about what worked, what didn't, and what I'm still learning.",
+    description:
+      "When I talk about my own money journey, I'm transparent about what worked, what didn't, and what I'm still learning.",
   },
   {
     emoji: "💬",
@@ -88,16 +91,23 @@ export default function AboutClient() {
                 Hi, I&apos;m Lynae👋🏽
               </h1>
               <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-                In my 20s, I was earning decent money but still living paycheck to paycheck. Bills felt confusing, spending felt emotional, and budgeting advice online felt… not made for real life. So I did what I always do when something doesn&apos;t make sense—I got curious 🔍
+                In my 20s, I was earning decent money but still living paycheck to paycheck. Bills
+                felt confusing, spending felt emotional, and budgeting advice online felt… not made
+                for real life. So I did what I always do when something doesn&apos;t make sense—I
+                got curious 🔍
               </p>
               <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-                I started tracking where my money was actually going, questioning my habits without shame, and building systems that worked with my life instead of against it.
+                I started tracking where my money was actually going, questioning my habits without
+                shame, and building systems that worked with my life instead of against it.
               </p>
               <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-                Today, I help everyday people take control of their spending without complicated spreadsheets, guilt-driven rules, or restrictive budgets. My approach is practical, judgment-free, and rooted in real experience—not perfection 💫
+                Today, I help everyday people take control of their spending without complicated
+                spreadsheets, guilt-driven rules, or restrictive budgets. My approach is practical,
+                judgment-free, and rooted in real experience—not perfection 💫
               </p>
               <p className="text-sm text-muted-foreground mb-8 leading-relaxed">
-                SteadySpend is here to help you understand your money, feel confident about your choices, and build habits that actually stick.
+                SteadySpend is here to help you understand your money, feel confident about your
+                choices, and build habits that actually stick.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button asChild className="gradient-primary text-primary-foreground shadow-glow">
@@ -129,7 +139,8 @@ export default function AboutClient() {
                 Transparency & Trust
               </h2>
               <p className="text-muted-foreground">
-                I believe financial education should feel honest, supportive, and empowering—not confusing or salesy.
+                I believe financial education should feel honest, supportive, and empowering—not
+                confusing or salesy.
               </p>
             </motion.div>
 
@@ -162,7 +173,8 @@ export default function AboutClient() {
                   <strong className="text-foreground">Friendly Disclaimer ✨</strong> The content on
                   SteadySpend is for educational purposes only and should not be considered
                   professional financial advice. I&apos;m a financial educator, not a licensed
-                  financial advisor. Always consult a qualified professional for guidance specific to your personal situation.
+                  financial advisor. Always consult a qualified professional for guidance specific
+                  to your personal situation.
                 </p>
               </div>
             </motion.div>

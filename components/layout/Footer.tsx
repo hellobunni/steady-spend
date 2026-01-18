@@ -9,9 +9,7 @@ const footerLinks = {
     { label: "50/30/20 Calculator", href: "/tools/50-30-20" },
     { label: "Take-Home Pay Calculator", href: "/tools/take-home-pay-calculator" },
   ],
-  blog: [
-    { label: "Blog", href: "/blog" },
-  ],
+  blog: [{ label: "Blog", href: "/blog" }],
   connect: [
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
@@ -64,11 +62,8 @@ export function Footer() {
           </div>
 
           {/* Links */}
-       
 
-          <div>
-           
-          </div>
+          <div></div>
           <div>
             <h4 className="font-display font-semibold text-foreground mb-4">Connect</h4>
             <ul className="space-y-3">
@@ -113,7 +108,6 @@ export function Footer() {
             >
               Privacy Policy
             </Link>
-         
           </div>
         </div>
       </div>
