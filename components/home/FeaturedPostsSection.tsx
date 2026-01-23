@@ -54,10 +54,15 @@ export function FeaturedPostsSection() {
                         className="h-40 bg-cover bg-center"
                         style={{ backgroundImage: `url(${post.featuredImage})` }}
                         role="img"
-                        aria-label={`${post.title} - Monthly Budgeting Guide for 2026`}
+                        aria-label={`${post.title}`}
                       />
                     ) : (
-                      <div className="h-40 gradient-primary opacity-80" />
+                      <div
+                        className="h-40 bg-cover bg-center"
+                        style={{ backgroundImage: `url(${`post_placeholder_2.png`})` }}
+                        role="img"
+                        aria-label={`${post.title}`}
+                      />
                     )}
 
                     <div className="p-6">
