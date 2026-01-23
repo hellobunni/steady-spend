@@ -4,6 +4,8 @@ import { getBlogPosts } from "@/lib/blog/getBlogPosts";
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.steadyspend.com";
 
+  // Dynamically include all published blog posts
+  // New posts are automatically included when they're published
   const blogPosts = getBlogPosts().map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: post.lastModified ? new Date(post.lastModified) : new Date(post.date),
