@@ -4,8 +4,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://www.steadyspend.com";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.steadyspend.com";
 
 export const metadata: Metadata = {
   title: "Money tips & budgeting blog | SteadySpend",
@@ -108,14 +107,11 @@ export default function BlogPage() {
                         <div className="flex items-center gap-4">
                           <span className="flex items-center gap-1.5">
                             <Calendar className="w-4 h-4" />
-                            {new Date(featuredPost.date).toLocaleDateString(
-                              "en-US",
-                              {
-                                year: "numeric",
-                                month: "short",
-                                day: "numeric",
-                              },
-                            )}
+                            {new Date(featuredPost.date).toLocaleDateString("en-US", {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                            })}
                           </span>
                           {featuredPost.readTime && (
                             <span className="flex items-center gap-1.5">
@@ -162,9 +158,7 @@ export default function BlogPage() {
                       <h2 className="font-display font-semibold text-lg mb-2 group-hover:text-emerald-700 transition-colors flex-grow">
                         {post.title}
                       </h2>
-                      <p className="text-slate-600 text-sm mb-4 line-clamp-2">
-                        {post.description}
-                      </p>
+                      <p className="text-slate-600 text-sm mb-4 line-clamp-2">{post.description}</p>
                       <div className="flex items-center justify-between text-sm text-slate-500 mt-auto">
                         <div className="flex items-center gap-4">
                           <span className="flex items-center gap-1">
@@ -198,9 +192,8 @@ export default function BlogPage() {
                 More articles coming soon
               </h2>
               <p className="text-slate-600">
-                We&apos;re slowly adding more guides, stories, and calm
-                step-by-step walkthroughs to help you build a budget that feels
-                steady and sustainable.
+                We&apos;re slowly adding more guides, stories, and calm step-by-step walkthroughs to
+                help you build a budget that feels steady and sustainable.
               </p>
             </div>
           )}
