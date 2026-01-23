@@ -33,8 +33,8 @@ export function FeaturedPostsSection() {
             & 2026 Budgeting Tips
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Expert guides and practical tips to help you make smarter financial decisions and build
-            lasting wealth
+            Expert guides and practical tips to help you make smarter financial
+            decisions and build lasting wealth
           </p>
         </div>
 
@@ -43,7 +43,11 @@ export function FeaturedPostsSection() {
           <>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
               {posts.map((post, index) => (
-                <Link key={post.slug} href={`/blog/${post.slug}`} className="block group">
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="block group"
+                >
                   <article
                     className="glass-card overflow-hidden h-full hover:shadow-glow transition-all duration-300 hover:-translate-y-1 opacity-0 animate-fade-in-up"
                     style={{ animationDelay: `${0.1 + index * 0.1}s` }}
@@ -52,14 +56,18 @@ export function FeaturedPostsSection() {
                     {post.featuredImage ? (
                       <div
                         className="h-40 bg-cover bg-center"
-                        style={{ backgroundImage: `url(${post.featuredImage})` }}
+                        style={{
+                          backgroundImage: `url(${post.featuredImage})`,
+                        }}
                         role="img"
                         aria-label={`${post.title}`}
                       />
                     ) : (
                       <div
                         className="h-40 bg-cover bg-center"
-                        style={{ backgroundImage: `url(${`post_placeholder_2.png`})` }}
+                        style={{
+                          backgroundImage: `url(${`https://res.cloudinary.com/bytebeardigital/image/upload/v1769179390/SteadySpend/Post_placeholder_2_srphlm.png`})`,
+                        }}
                         role="img"
                         aria-label={`${post.title}`}
                       />
